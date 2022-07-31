@@ -78,5 +78,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
         source: "./cheek-app/dist/cheek-app"
         target: "/home/lkqr2580/cheek"
