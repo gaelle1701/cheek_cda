@@ -3,8 +3,6 @@ on:
   push:
     branches: [ ci/add_ci_for_cheekapp ]
 
-  workflow_dispatch:
-
 jobs:
 
   test:
