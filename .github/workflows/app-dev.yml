@@ -10,6 +10,9 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cheek-app
     
     steps:
  
@@ -21,9 +24,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: |
-        cd cheek-app
-        npm install
+      run: npm install
     
 
     #- name: lint
@@ -35,6 +36,9 @@ jobs:
   build: 
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cheek-app
 
     steps:
     - name: Use Node.js
