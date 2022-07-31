@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with: 
         name: cheek_app-${{ github.run_id }}-${{ github.run_number }}
-        path: ./dist/cheek-app
+        path: ./cheek-app/dist/cheek-app
 
   deploy: 
     needs: build
