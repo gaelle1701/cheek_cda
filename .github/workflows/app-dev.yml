@@ -72,7 +72,7 @@ jobs:
       uses: actions/download-artifact@v2
       with: 
         name: cheek_app-${{ github.run_id }}-${{ github.run_number }} 
-        path: './cheek-app'
+        path: './dist/cheek-app'
 
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
