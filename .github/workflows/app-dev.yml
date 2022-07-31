@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     
-    working_directory: ./cheek-app
+    working-directory: ./cheek-app
     #- name: lint
       #run: npm run lint
     
