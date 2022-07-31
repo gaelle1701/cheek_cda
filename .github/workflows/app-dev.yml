@@ -74,11 +74,9 @@ jobs:
 
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
-      env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.KEY }}
       with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
         source: "./cheek-app/dist/cheek-app"
-        target: "/home/cheek/"
+        target: "/home/lkqr2580/cheek"
