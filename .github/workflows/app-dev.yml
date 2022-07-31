@@ -82,5 +82,5 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.KEY }}
       with:
-        source: "./cheek-app/"
+        source: "./cheek-app/dist/cheek-app"
         target: "/home/cheek/"
