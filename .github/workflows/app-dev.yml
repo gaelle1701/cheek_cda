@@ -80,4 +80,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "./cheek-app/dist/cheek-app"
-        target: "/home/vvade/cheek-static"
+        target: "/home/vvade/cheek-sta
+        tic"
