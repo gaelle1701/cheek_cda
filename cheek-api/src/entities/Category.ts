@@ -6,10 +6,10 @@ import { Product } from "./Product";
 @Entity()
 export class Category extends BaseEntity{
 
-    @Column({nullable: false})
+    @Column({length: 45})
     name: string;
 
-    @Column({nullable: false})
+    @Column({length: 45, unique: true})
     slug: string;
 
     @OneToMany(() => Product, product =>  product.category)

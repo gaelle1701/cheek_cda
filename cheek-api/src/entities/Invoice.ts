@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BeforeInsert, JoinColumn } from "typeorm";
 import { Order } from "./Order";
 
 export enum EPaymentMode{
@@ -12,13 +12,14 @@ export class Invoice {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column('enum', {enum: EPaymentMode, nullable: false})
+    @Column('enum', {enum: EPaymentMode})
     payment_mode: EPaymentMode;
 
-    @Column({type: 'date', nullable: false})
+    @Column({type: 'date'})
     created_at: Date;
 
     @OneToOne(() => Order)
+    @JoinColumn({name: "order_id"})
     order: Order;
 
     // created date & mode automatically

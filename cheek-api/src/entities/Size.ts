@@ -5,7 +5,7 @@ import { ProductAttribute } from "./ProductAttribute";
 @Entity()
 export class Size extends BaseEntity {
 
-    @Column({nullable: false, unique: true})
+    @Column({unique: true})
     label: string;
 
     @OneToMany(() => ProductAttribute, (attribute) => attribute.size)

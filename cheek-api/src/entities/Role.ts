@@ -10,7 +10,7 @@ export enum ERole {
 @Entity()
 export class Role extends BaseEntity{
 
-    @Column('enum', {enum: ERole, nullable: false})
+    @Column('enum', {enum: ERole})
     role: ERole;
     
     @OneToMany(() => User, (user) => user.role)

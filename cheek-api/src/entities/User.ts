@@ -12,19 +12,19 @@ export enum EAccountStatus {
 @Entity()
 export class User extends BaseEntity{
 
-    @Column({nullable: false})
+    @Column()
     firstName: string
 
-    @Column({nullable: false})
+    @Column()
     lastName: string
 
-    @Column({nullable: false, unique: true})
+    @Column({unique: true})
     phone: string
 
-    @Column({nullable: false, unique: true})
+    @Column({unique: true})
     email: string
 
-    @Column({nullable: false, unique: true})
+    @Column({unique: true})
     password: string
 
     @Column('enum', {enum: EAccountStatus, nullable: false})
@@ -39,6 +39,7 @@ export class User extends BaseEntity{
         role: Role;
 
     @OneToOne(() => Address)
+    @JoinColumn({name: "address_id"})
     addresse: Address;
 
     //use bcrypt to hashed password for security

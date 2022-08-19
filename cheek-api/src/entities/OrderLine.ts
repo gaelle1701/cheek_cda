@@ -8,10 +8,10 @@ export class OrderLine {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column({nullable: false})
+    @Column()
     quantity: number;
 
-    @Column({type: 'date', nullable: false})
+    @Column({type: 'date'})
     created_at: Date;
 
     @ManyToOne(() => Product, product => product.orderLines)

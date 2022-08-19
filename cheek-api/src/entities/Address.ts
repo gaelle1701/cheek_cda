@@ -5,16 +5,16 @@ import { BaseEntity } from "./BaseEntity";
 @Entity()
 export class Address extends BaseEntity{
 
-    @Column({nullable: false})
+    @Column()
     number: number;
 
-    @Column({nullable: false})
+    @Column()
     street: string;
 
-    @Column({nullable: false})
+    @Column()
     city: string;
 
-    @Column({nullable: false})
+    @Column()
     zip_code: number;
 
 }

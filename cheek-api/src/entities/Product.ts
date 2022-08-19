@@ -9,13 +9,13 @@ import { ProductAttribute } from "./ProductAttribute";
 @Entity()
 export class Product extends BaseEntity {
     
-    @Column({nullable: false, unique: true})
+    @Column({unique: true})
     name: string;
 
-    @Column({type: "text", nullable: false})
+    @Column({type: "text"})
     description: string;
 
-    @Column({nullable: false})
+    @Column()
     slug: string;
 
     @ManyToOne(() => Category, category => category.products)

@@ -14,13 +14,13 @@ export class Order {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column({type: "uuid", nullable: false, unique: true})
+    @Column({type: "uuid", unique: true})
     reference: string;
 
     @Column("enum", {enum: EOrderStatus})
     order_status: EOrderStatus;
 
-    @Column({type: 'date', nullable: false})
+    @Column({type: 'date'})
     created_at: Date;
 
     @OneToMany(() => OrderLine, (orderLine) => orderLine.order)

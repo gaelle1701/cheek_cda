@@ -9,7 +9,7 @@ export class Picture extends BaseEntity {
     @Column({unique: true})
     label: string
 
-    @Column({type: "text", unique: true})
+    @Column({unique: true})
     url: string
 
     @OneToMany(() => ProductAttribute, (attribute) => attribute.picture)
