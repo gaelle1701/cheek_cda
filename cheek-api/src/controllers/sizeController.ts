@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
-import { Price } from "../entities/Price";
+import { Size } from "../entities/Size";
 
-
-class PriceController {
-
+class SizeController {
     async create(req: Request, res: Response) { 
         try {
             if(!req.body) {
@@ -14,12 +12,10 @@ class PriceController {
                 return;
             }
             // get connection instance to db in app.ts
-            const priceRepository = AppDataSource.getRepository(Price);
-            const createPrice = priceRepository.create(
-                {price_ht: req.body.price_ht}
-            );
-            const savePrice = await priceRepository.save(createPrice);
-            return res.send(savePrice);
+            const sizeRepository = AppDataSource.getRepository(Size);
+            const createSize = sizeRepository.create(req.body);
+            const saveSize = await sizeRepository.save(createSize);
+            return res.send(saveSize);
 
         } catch (error) {
             return res.status(500).send({
@@ -28,29 +24,31 @@ class PriceController {
         };
     };
 
-    async getPrices(req: Request, res: Response) {
+    async getSizes(req: Request, res: Response) {
         try {
             // get connection instance to db in app.ts 
-            const priceRepository = AppDataSource.getRepository(Price);
-            const getPrices = await priceRepository.find();
-            return res.send(getPrices);
+            const sizeRepository = AppDataSource.getRepository(Size);
+            const getSizes = await sizeRepository.find();
+
+            return res.send(getSizes);
 
         } catch (error) {
             return res.status(500).send({
                 message: error.message
             });
         };
+
     };
 
     async getById(req: Request, res: Response) {
          try {
-            const priceRepository = AppDataSource.getRepository(Price);
-            const getById = await priceRepository.findOneBy(
+            const sizeRepository = AppDataSource.getRepository(Size);
+            const getById = await sizeRepository.findOneBy(
                 {id: parseInt(req.params.id, 10)}
             );
             if(!getById){
                 return res.status(400).send({
-                    message: "This price doesn't exist"
+                    message: "This size doesn't exist"
                 })
             }
             return res.send(getById);
@@ -64,14 +62,19 @@ class PriceController {
 
     async update(req: Request, res: Response) {
         try {
-            const priceRepository = AppDataSource.getRepository(Price);
-            const price = await priceRepository.findOneBy({ id: req.body.id });
-            const updatePrice = await priceRepository.save(
-                Object.assign(price, req.body)
+            const sizeId =  req.params.id;
+
+            const sizeRepository = AppDataSource.getRepository(Size);
+            const updateSize = await sizeRepository.update(
+                sizeId, req.body
             );
-                            
-            return res.status(200).send(
-                {message: "This price has been updated", updatePrice});
+           
+            if(updateSize.affected === 1){
+                return res.status(200).send({
+                message: "This size with id= " + sizeId + " has been updated" 
+                })
+            };
+            return res.send(updateSize);
 
         } catch(error) {
             return res.status(500).send({
@@ -81,34 +84,34 @@ class PriceController {
     };
 
     async destroy(req: Request, res: Response) {
-        const priceId =  req.params.id;
+        const sizeId =  req.params.id;
 
         try {
-            if(!priceId){
+            if(!sizeId){
                 return res.status(400).send({
-                    message: "This price doesn't exist"
+                    message: "This size doesn't exist"
                 })
             };
 
-            const priceRepository = AppDataSource.getRepository(Price);
-            const deletePrice = await priceRepository.delete(priceId);
+            const sizeRepository = AppDataSource.getRepository(Size);
+            const deleteSize = await sizeRepository.delete(sizeId);
 
-            if(deletePrice.affected === 1){
+            if(deleteSize.affected === 1){
                 return res.status(200).send({
-                message: "This price with id= " + priceId + " has been deleted" 
+                message: "This size with id= " + sizeId + " has been deleted" 
                 })
             };
 
-            return res.send(deletePrice);
+            return res.send(deleteSize);
             
         } catch(error) {
             return res.status(500).send({
-                message: "Could not delete price with id= " + priceId
+                message: "Could not delete Size with id= " + sizeId
             });
         };
     };
    
 };
 
-export default new PriceController()
+export default new SizeController()
 

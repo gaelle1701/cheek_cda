@@ -1,7 +1,7 @@
 import { Router } from "express";
 import AddressController from "../controllers/addressController";
 
-export const addressRoutes = Router();
+const addressRoutes = Router();
 
 addressRoutes.post('/addresses/new', AddressController.create);
 
@@ -13,3 +13,4 @@ addressRoutes.put('/addresses/edit/:id', AddressController.update);
 addressRoutes.delete('/addresses/delete/:id', AddressController.destroy);
 
 //permit(Role.Admin
+export default addressRoutes

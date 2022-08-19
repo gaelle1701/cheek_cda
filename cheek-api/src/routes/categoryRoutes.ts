@@ -1,7 +1,7 @@
 import { Router } from "express";
 import CategoryController from '../controllers/categoryController';
 
-export const categoryRoutes = Router();
+const categoryRoutes = Router();
 
 categoryRoutes.post('/categories/new', CategoryController.create);
 
@@ -13,3 +13,4 @@ categoryRoutes.put('/categories/edit/:id', CategoryController.update);
 categoryRoutes.delete('/categories/delete/:id', CategoryController.destroy);
 
 //permit(Role.Admin
+export default categoryRoutes

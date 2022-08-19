@@ -15,6 +15,7 @@ class AddressController {
             // get connection instance to db in app.ts
             const addressRepository = AppDataSource.getRepository(Address);
             const createAddress = addressRepository.create(req.body);
+            
             const saveAddress = await addressRepository.save(createAddress);
             return res.send(saveAddress);
 
@@ -30,7 +31,7 @@ class AddressController {
             // get connection instance to db in app.ts 
             const addressRepository = AppDataSource.getRepository(Address);
             const getAddresses = await addressRepository.find();
-             // map to Addresses and copy current category 
+
             return res.send(getAddresses);
 
         } catch (error) {
@@ -77,7 +78,7 @@ class AddressController {
            
             if(updateAddress.affected === 1){
                 return res.status(200).send({
-                message: "This address with id= " + addressId + " has been updated" 
+                message: "This address with id= " + addressId + " has been updated"
                 })
             };
             return res.send(updateAddress);

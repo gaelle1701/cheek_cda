@@ -12,13 +12,8 @@ export class Price extends BaseEntity {
 
     // calculed price_ttc automatically
     @BeforeInsert()
-    createPrice() {
-        this.price_ttc = this.price_ht + this.price_ht*0.20
-    }
-
     @BeforeUpdate()
-    updatePrice(){
-        this.price_ttc = this.price_ht + this.price_ht * 0.20;
-        
+    createPrice() {        
+        this.price_ttc = this.price_ht + this.price_ht*0.20
     }
 }

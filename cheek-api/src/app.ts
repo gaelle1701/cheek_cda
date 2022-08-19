@@ -3,10 +3,8 @@ import "reflect-metadata";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import { categoryRoutes } from "./routes/categoryRoutes";
 import { AppDataSource } from "./data-source";
-import { addressRoutes } from "./routes/addressRoutes";
-import { priceRoutes } from "./routes/priceRoutes";
+import { addRoutes} from "./routes";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -42,7 +40,7 @@ AppDataSource
 
 //app.use(authMiddleware)
 
-app.use(categoryRoutes, addressRoutes, priceRoutes);
+addRoutes(app)
 app.listen(port, () => {
     return console.log(`App listen on port, ${port}`);
 })
