@@ -66,7 +66,7 @@ class CategoryController {
 
     async update(req: Request, res: Response) {
         try {
-            const categoryId =  req.params.id;
+            const categoryId = req.params.id;
             const categoryRepository = AppDataSource.getRepository(Category);
 
             const updateCategory = await categoryRepository.update(

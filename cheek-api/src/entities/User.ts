@@ -1,8 +1,12 @@
 import * as bcrypt from "bcrypt"
-import { Entity, Column, BeforeInsert, OneToOne, ManyToOne, JoinColumn } from "typeorm"
+import { Entity, Column, BeforeInsert, OneToOne, ManyToOne, JoinColumn, BeforeUpdate } from "typeorm"
 import { Address } from "./Address"
 import { BaseEntity } from "./BaseEntity"
-import { Role } from "./Role"
+
+export enum ERole {
+    ADMIN = 'ADMIN',
+    CUSTOMER = 'CUSTOMER'
+}
 
 export enum EAccountStatus {
     PENDING = 'PENDING',
@@ -12,10 +16,13 @@ export enum EAccountStatus {
 @Entity()
 export class User extends BaseEntity{
 
-    @Column()
+    @Column('enum', {enum: ERole, default: ERole.CUSTOMER, nullable: false})
+    role: ERole;
+
+    @Column({nullable:false})
     firstName: string
 
-    @Column()
+    @Column({nullable:false})
     lastName: string
 
     @Column({unique: true})
@@ -27,20 +34,16 @@ export class User extends BaseEntity{
     @Column({unique: true})
     password: string
 
-    @Column('enum', {enum: EAccountStatus, nullable: false})
+    @Column('enum', {enum: EAccountStatus, default: EAccountStatus.PENDING})
     account_status: EAccountStatus;
 
     // @Column({nullable: true, unique: true})
     // unique_string: string;
 
 
-    @ManyToOne(() => Role, role => role.users)
-    @JoinColumn({name: "role_id"})
-        role: Role;
-
     @OneToOne(() => Address)
     @JoinColumn({name: "address_id"})
-    addresse: Address;
+    address: Address;
 
     //use bcrypt to hashed password for security
     @BeforeInsert()
