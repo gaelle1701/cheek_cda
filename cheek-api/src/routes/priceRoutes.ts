@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import PriceController from '../controllers/priceController';
 
 const priceRoutes = Router();
@@ -13,4 +13,4 @@ priceRoutes.put('/prices/edit/:id', PriceController.update);
 priceRoutes.delete('/prices/delete/:id', PriceController.destroy);
 
 //permit(Role.Admin
-export default priceRoutes
+export default priceRoutes;

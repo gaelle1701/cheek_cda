@@ -1,13 +1,12 @@
-import { Column, Entity, OneToMany } from "typeorm";
-import { BaseEntity } from "./BaseEntity";
-import { ProductAttribute } from "./ProductAttribute";
+import { Column, Entity, OneToMany } from 'typeorm';
+import { BaseEntity } from './BaseEntity';
+import { ProductAttribute } from './ProductAttribute';
 
 @Entity()
 export class Stock extends BaseEntity {
+  @Column()
+  count: number;
 
-    @Column()
-    count: number;
-
-    @OneToMany(() => ProductAttribute, (attribute) => attribute.stock)
-    attributes: ProductAttribute[];
+  @OneToMany(() => ProductAttribute, (attribute) => attribute.stock)
+  attributes: ProductAttribute[];
 }

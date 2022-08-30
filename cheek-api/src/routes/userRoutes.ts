@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import UserController from '../controllers/userController';
 
 const userRoutes = Router();
@@ -13,4 +13,4 @@ userRoutes.put('/users/edit/:id', UserController.update);
 userRoutes.delete('/users/delete/:id', UserController.destroy);
 
 //permit(Role.Admin
-export default userRoutes
+export default userRoutes;

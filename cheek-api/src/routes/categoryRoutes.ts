@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import CategoryController from '../controllers/categoryController';
 
 const categoryRoutes = Router();
@@ -13,4 +13,4 @@ categoryRoutes.put('/categories/edit/:id', CategoryController.update);
 categoryRoutes.delete('/categories/delete/:id', CategoryController.destroy);
 
 //permit(Role.Admin
-export default categoryRoutes
+export default categoryRoutes;

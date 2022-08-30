@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import StockController from '../controllers/stockController';
 
 const stockRoutes = Router();
@@ -13,4 +13,4 @@ stockRoutes.put('/stocks/edit/:id', StockController.update);
 stockRoutes.delete('/stocks/delete/:id', StockController.destroy);
 
 //permit(Role.Admin
-export default stockRoutes
+export default stockRoutes;
