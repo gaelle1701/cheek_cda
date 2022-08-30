@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
-import { Address } from '../entities/Address';
+import { addressRepository } from '../repository/address.repository';
 
 class AddressController {
   async create(req: Request, res: Response) {
@@ -11,12 +10,9 @@ class AddressController {
         });
         return;
       }
-      // get connection instance to db in app.ts
-      const addressRepository = AppDataSource.getRepository(Address);
-      const createAddress = addressRepository.create(req.body);
 
-      const saveAddress = await addressRepository.save(createAddress);
-      return res.send(saveAddress);
+      const savedAddress = await addressRepository.createAddress(req.body);
+      return res.send(savedAddress);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -26,10 +22,7 @@ class AddressController {
 
   async getAddresses(req: Request, res: Response) {
     try {
-      // get connection instance to db in app.ts
-      const addressRepository = AppDataSource.getRepository(Address);
       const getAddresses = await addressRepository.find();
-
       return res.send(getAddresses);
     } catch (error) {
       return res.status(500).send({
@@ -40,16 +33,13 @@ class AddressController {
 
   async getById(req: Request, res: Response) {
     try {
-      const addressRepository = AppDataSource.getRepository(Address);
-      const getById = await addressRepository.findOneBy({
-        id: parseInt(req.params.id, 10),
-      });
-      if (!getById) {
+      const address = await addressRepository.findById(+req.params.id);
+      if (!address) {
         return res.status(400).send({
           message: "This addresse doesn't exist",
         });
       }
-      return res.send(getById);
+      return res.send(address);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -59,22 +49,25 @@ class AddressController {
 
   async update(req: Request, res: Response) {
     try {
-      const addressId = req.params.id;
-
-      // if(!categoryId){
-      //     return res.status(400).send({
-      //         message: "This category doesn't exist"
-      //     })
-      // };
-
-      const addressRepository = AppDataSource.getRepository(Address);
-      const updateAddress = await addressRepository.update(addressId, req.body);
-
-      if (updateAddress.affected === 1) {
-        return res.status(200).send({
-          message: 'This address with id= ' + addressId + ' has been updated',
+      const address = await addressRepository.findById(+req.params.id);
+      if (!address) {
+        return res.status(400).send({
+          message: "This addressRepository doesn't exist !",
         });
       }
+
+      const updateAddress = await addressRepository.save(
+        Object.assign(address, req.body),
+      );
+      if (updateAddress.affected === 1) {
+        return res.status(200).send({
+          message:
+            'The addressRepository with id= ' +
+            address.id +
+            ' has been updated !',
+        });
+      }
+
       return res.send(updateAddress);
     } catch (error) {
       return res.status(500).send({
@@ -84,28 +77,25 @@ class AddressController {
   }
 
   async destroy(req: Request, res: Response) {
-    const addressId = req.params.id;
-
     try {
-      if (!addressId) {
+      const address = await addressRepository.findById(+req.params.id);
+      if (!address) {
         return res.status(400).send({
-          message: "This address doesn't exist",
+          message: "This addressRepository doesn't exist",
         });
       }
 
-      const addressRepository = AppDataSource.getRepository(Address);
-      const deleteAddress = await addressRepository.delete(addressId);
-
+      const deleteAddress = await addressRepository.delete(address.id);
       if (deleteAddress.affected === 1) {
         return res.status(200).send({
-          message: 'This address with id= ' + addressId + ' has been deleted',
+          message: `The address with id=${address.id} has been deleted successfully !`,
         });
       }
 
       return res.send(deleteAddress);
     } catch (error) {
       return res.status(500).send({
-        message: 'Could not delete address with id= ' + addressId,
+        message: `Could not delete address with id=${req.params.id}`,
       });
     }
   }

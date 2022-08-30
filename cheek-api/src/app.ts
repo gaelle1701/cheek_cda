@@ -1,8 +1,11 @@
-import * as compression from 'compression';
 import 'reflect-metadata';
+import 'dotenv/config';
+
 import * as express from 'express';
+import * as compression from 'compression';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+
 import { AppDataSource } from './data-source';
 import { addRoutes } from './routes';
 

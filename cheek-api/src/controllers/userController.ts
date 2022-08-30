@@ -1,7 +1,5 @@
-import bodyParser = require('body-parser');
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
-import { User } from '../entities/User';
+import { userRepository } from '../repository/user.repository';
 
 class UserController {
   async create(req: Request, res: Response) {
@@ -12,12 +10,7 @@ class UserController {
         });
         return;
       }
-      // get connection instance to db in app.ts
-      const userRepository = AppDataSource.getRepository(User);
-
-      const createUser = userRepository.create(req.body);
-
-      const saveUser = await userRepository.save(createUser);
+      const saveUser = await userRepository.createUser(req.body);
       return res.send(saveUser);
     } catch (error) {
       return res.status(500).send({
@@ -28,9 +21,9 @@ class UserController {
 
   async getUsers(req: Request, res: Response) {
     try {
-      // get connection instance to db in app.ts
-      const userRepository = AppDataSource.getRepository(User);
-      const getUsers = await userRepository.find();
+      const getUsers = await userRepository.find({
+        relations: { addresses: true },
+      });
       return res.send(getUsers);
     } catch (error) {
       return res.status(500).send({
@@ -41,16 +34,13 @@ class UserController {
 
   async getById(req: Request, res: Response) {
     try {
-      const userRepository = AppDataSource.getRepository(User);
-      const getById = await userRepository.findOneBy({
-        id: parseInt(req.params.id, 10),
-      });
-      if (!getById) {
+      const user = await userRepository.findById(+req.params.id);
+      if (!user) {
         return res.status(400).send({
-          message: "This category doesn't exist",
+          message: "The user doesn't exist",
         });
       }
-      return res.send(getById);
+      return res.send(user);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -61,8 +51,6 @@ class UserController {
   async update(req: Request, res: Response) {
     try {
       const userId = req.params.id;
-      const userRepository = AppDataSource.getRepository(User);
-
       const updateUser = await userRepository.update(userId, req.body);
 
       if (updateUser.affected === 1) {
@@ -79,25 +67,23 @@ class UserController {
   }
 
   async destroy(req: Request, res: Response) {
-    const userId = req.params.id;
+    const user = await userRepository.findById(+req.params.id);
     try {
-      if (!userId) {
+      if (!user) {
         return res.status(400).send({
           message: "This user doesn't exist",
         });
       }
 
-      const userRepository = AppDataSource.getRepository(User);
-      const deleteUser = await userRepository.delete(userId);
-
+      const deleteUser = await userRepository.delete(user.id);
       if (deleteUser.affected === 1) {
         return res.status(200).send({
-          message: 'This user with id= ' + userId + ' has been deleted',
+          message: 'This user with id= ' + user.id + ' has been deleted',
         });
       }
     } catch (error) {
       return res.status(500).send({
-        message: 'Could not delete User with id=' + userId,
+        message: 'Could not delete User with id=' + user.id,
       });
     }
   }
