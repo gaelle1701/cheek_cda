@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { categoryRepository } from '../repository/category.repository';
-import { addressRepository } from '../repository/address.repository';
 
 class CategoryController {
   async create(req: Request, res: Response) {
@@ -56,7 +55,7 @@ class CategoryController {
         });
       }
 
-      const updateCategory = await addressRepository.save(
+      const updateCategory = await categoryRepository.save(
         Object.assign(category, req.body),
       );
       if (updateCategory.affected === 1) {
@@ -98,4 +97,4 @@ class CategoryController {
   }
 }
 
-export default new CategoryController();
+export default CategoryController;

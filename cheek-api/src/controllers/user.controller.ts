@@ -5,11 +5,11 @@ class UserController {
   async create(req: Request, res: Response) {
     try {
       if (!req.body) {
-        res.status(400).send({
+        return res.status(400).send({
           message: 'Content can not be empty!',
         });
-        return;
       }
+
       const saveUser = await userRepository.createUser(req.body);
       return res.send(saveUser);
     } catch (error) {
@@ -89,4 +89,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default UserController;

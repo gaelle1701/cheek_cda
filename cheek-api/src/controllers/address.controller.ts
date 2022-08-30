@@ -5,10 +5,9 @@ class AddressController {
   async create(req: Request, res: Response) {
     try {
       if (!req.body) {
-        res.status(400).send({
+        return res.status(400).send({
           message: 'Content can not be empty!',
         });
-        return;
       }
 
       const savedAddress = await addressRepository.createAddress(req.body);
@@ -101,4 +100,4 @@ class AddressController {
   }
 }
 
-export default new AddressController();
+export default AddressController;
