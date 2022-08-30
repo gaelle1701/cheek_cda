@@ -9,7 +9,7 @@ export class Price extends BaseEntity {
   @Column({ type: 'float' })
   price_ttc: number;
 
-  // calculed price_ttc automatically
+  // calculated price_ttc automatically
   @BeforeInsert()
   @BeforeUpdate()
   createPrice() {

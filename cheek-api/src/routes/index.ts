@@ -3,7 +3,6 @@ import addressRoutes from './addressRoutes';
 import priceRoutes from './priceRoutes';
 import categoryRoutes from './categoryRoutes';
 import sizeRoutes from './sizeRoutes';
-import stockRoutes from './stockRoutes';
 import userRoutes from './userRoutes';
 
 const routes = [
@@ -11,7 +10,6 @@ const routes = [
   addressRoutes,
   categoryRoutes,
   sizeRoutes,
-  stockRoutes,
   userRoutes,
 ];
 

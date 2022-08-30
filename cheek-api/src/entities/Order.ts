@@ -1,14 +1,7 @@
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderLine } from './OrderLine';
+import { BaseEntity } from './BaseEntity';
 
 export enum EOrderStatus {
   AVAILABLE = 'AVAILABLE',
@@ -17,18 +10,12 @@ export enum EOrderStatus {
 }
 
 @Entity()
-export class Order {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Order extends BaseEntity {
   @Column({ type: 'uuid', unique: true })
   reference: string;
 
   @Column('enum', { enum: EOrderStatus })
   order_status: EOrderStatus;
-
-  @Column({ type: 'date' })
-  created_at: Date;
 
   @OneToMany(() => OrderLine, (orderLine) => orderLine.order)
   orderLines: OrderLine[];
@@ -36,7 +23,6 @@ export class Order {
   // created date & ref & status automatically
   @BeforeInsert()
   createOrder() {
-    this.created_at = new Date();
     this.reference = uuidv4();
     this.order_status = EOrderStatus.AVAILABLE;
   }

@@ -1,24 +1,12 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  BeforeInsert,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Order } from './Order';
 import { Product } from './Product';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class OrderLine {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class OrderLine extends BaseEntity {
   @Column()
   quantity: number;
-
-  @Column({ type: 'date' })
-  created_at: Date;
 
   @ManyToOne(() => Product, (product) => product.orderLines)
   @JoinColumn({ name: 'product_id' })
@@ -27,10 +15,4 @@ export class OrderLine {
   @ManyToOne(() => Order, (order) => order.orderLines)
   @JoinColumn({ name: 'order_id' })
   order: Order;
-
-  // created date automatically
-  @BeforeInsert()
-  createOrderLine() {
-    this.created_at = new Date();
-  }
 }

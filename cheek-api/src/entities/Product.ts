@@ -1,17 +1,20 @@
 import {
   Entity,
   Column,
-  BeforeInsert,
   ManyToOne,
   JoinColumn,
   OneToOne,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import slugify from 'slugify';
+
 import { BaseEntity } from './BaseEntity';
 import { Category } from './Category';
 import { OrderLine } from './OrderLine';
 import { Price } from './Price';
-import { ProductAttribute } from './ProductAttribute';
+import { ProductDetail } from './ProductDetail';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -32,17 +35,18 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'price_id' })
   price: Price;
 
-  @OneToMany(() => ProductAttribute, (attribute) => attribute.product)
-  attributes: ProductAttribute[];
+  @OneToMany(() => ProductDetail, (attribute) => attribute.product)
+  attributes: ProductDetail[];
 
   @OneToMany(() => OrderLine, (orderLine) => orderLine.product)
   orderLines: OrderLine[];
 
-  //  // created slug compared to name automatically
-  //     @BeforeInsert()
-  //     createProduct() {
-  //         this.slug = slugify(this.name, {
-  //             lower: true
-  //         })
-  //     }
+  // created slug compared to name automatically
+  @BeforeInsert()
+  @BeforeUpdate()
+  slugifyProductName() {
+    this.slug = slugify(this.name, {
+      lower: true,
+    });
+  }
 }

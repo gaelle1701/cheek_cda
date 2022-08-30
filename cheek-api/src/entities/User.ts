@@ -1,13 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import {
-  Entity,
-  Column,
-  BeforeInsert,
-  OneToOne,
-  ManyToOne,
-  JoinColumn,
-  BeforeUpdate,
-} from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { Address } from './Address';
 import { BaseEntity } from './BaseEntity';
 
@@ -44,25 +36,18 @@ export class User extends BaseEntity {
   @Column('enum', { enum: EAccountStatus, default: EAccountStatus.PENDING })
   account_status: EAccountStatus;
 
-  // @Column({nullable: true, unique: true})
-  // unique_string: string;
-
   @OneToOne(() => Address)
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
-  //use bcrypt to hashed password for security
-  @BeforeInsert()
-  async hashPassword() {
-    if (this.password) {
-      const hashedPassword = await bcrypt.hash(this.password, 10);
-      this.password = hashedPassword;
-    }
-  }
-
   // created status automatically
   @BeforeInsert()
-  createUser() {
+  async createUser() {
     this.account_status = EAccountStatus.PENDING;
+
+    if (this.password) {
+      //use bcrypt to hashed password for security
+      this.password = await bcrypt.hash(this.password, 10);
+    }
   }
 }
