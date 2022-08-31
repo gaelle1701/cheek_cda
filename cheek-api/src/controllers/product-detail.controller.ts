@@ -38,7 +38,7 @@ class ProductDetailController {
       );
       if (!productDetail) {
         return res.status(400).send({
-          message: "This addresse doesn't exist",
+          message: "This product detail doesn't exist",
         });
       }
       return res.send(productDetail);
@@ -56,7 +56,7 @@ class ProductDetailController {
       );
       if (!productDetail) {
         return res.status(400).send({
-          message: "This productDetailRepository doesn't exist !",
+          message: "This product detail doesn't exist !",
         });
       }
 
@@ -66,7 +66,7 @@ class ProductDetailController {
       if (updateProductDetail.affected === 1) {
         return res.status(200).send({
           message:
-            'The productDetail with id= ' +
+            'The product detail with id= ' +
             productDetail.id +
             ' has been updated !',
         });
@@ -87,7 +87,7 @@ class ProductDetailController {
     try {
       if (!productDetail) {
         return res.status(400).send({
-          message: "This productDetail doesn't exist",
+          message: "This product detail doesn't exist",
         });
       }
 
@@ -96,14 +96,14 @@ class ProductDetailController {
       );
       if (deleteAddress.affected === 1) {
         return res.status(200).send({
-          message: `The address with id=${productDetail.id} has been deleted successfully !`,
+          message: `The product detail with id=${productDetail.id} has been deleted successfully !`,
         });
       }
 
       return res.send(deleteAddress);
     } catch (error) {
       return res.status(500).send({
-        message: `Could not delete address with id=${productDetail.id}`,
+        message: `Could not delete product detail with id=${productDetail.id}`,
       });
     }
   }

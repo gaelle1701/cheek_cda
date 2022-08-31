@@ -1,6 +1,10 @@
 import 'reflect-metadata';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
 import * as express from 'express';
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
+});
 
 import { AppDataSource } from './data-source';
 import { addRoutes } from './routes';

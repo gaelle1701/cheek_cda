@@ -5,8 +5,8 @@ export const productDetailRepository = AppDataSource.getRepository(
   ProductDetail,
 ).extend({
   async createProductDetail(productDetail: ProductDetail) {
-    const createSize = productDetailRepository.create(productDetail);
-    return await productDetailRepository.save(createSize);
+    const createProductDetail = productDetailRepository.create(productDetail);
+    return await productDetailRepository.save(createProductDetail);
   },
   async findBydId(id: number) {
     return await productDetailRepository.findOneBy({

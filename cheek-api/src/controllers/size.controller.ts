@@ -89,7 +89,7 @@ class SizeController {
       return res.send(deleteSize);
     } catch (error) {
       return res.status(500).send({
-        message: 'Could not delete Size with id= ' + size.id,
+        message: 'Could not delete size with id= ' + size.id,
       });
     }
   }

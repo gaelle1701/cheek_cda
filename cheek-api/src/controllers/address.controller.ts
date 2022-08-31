@@ -35,7 +35,7 @@ class AddressController {
       const address = await addressRepository.findById(+req.params.id);
       if (!address) {
         return res.status(400).send({
-          message: "This addresse doesn't exist",
+          message: "This addresses doesn't exist",
         });
       }
       return res.send(address);
@@ -51,7 +51,7 @@ class AddressController {
       const address = await addressRepository.findById(+req.params.id);
       if (!address) {
         return res.status(400).send({
-          message: "This addressRepository doesn't exist !",
+          message: "This address doesn't exist !",
         });
       }
 
@@ -60,10 +60,7 @@ class AddressController {
       );
       if (updateAddress.affected === 1) {
         return res.status(200).send({
-          message:
-            'The addressRepository with id= ' +
-            address.id +
-            ' has been updated !',
+          message: 'The address with id= ' + address.id + ' has been updated !',
         });
       }
 
@@ -80,7 +77,7 @@ class AddressController {
       const address = await addressRepository.findById(+req.params.id);
       if (!address) {
         return res.status(400).send({
-          message: "This addressRepository doesn't exist",
+          message: "This address doesn't exist",
         });
       }
 

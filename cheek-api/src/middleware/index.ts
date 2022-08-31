@@ -2,19 +2,16 @@ import { Application } from 'express';
 
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
-import * as cors from 'cors';
+
+import morganMiddleware from './morgan.middleware';
+import corsMiddleware from './cors.middleware';
 
 export function addMiddlewares(app: Application) {
   // parse application/json
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use(
-    cors({
-      origin: [process.env.APP_URL],
-      header: ['Access-Control-Allow-Origin', process.env.APP_URL],
-    }),
-  );
-
+  app.use(corsMiddleware);
+  app.use(morganMiddleware);
   //app.use(authMiddleware)
 
   if (process.env.NODE_ENV === 'production') {
