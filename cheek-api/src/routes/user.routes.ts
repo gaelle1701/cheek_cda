@@ -1,14 +1,16 @@
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
+import permit from '../middleware/permit.middleware';
+import { ERole } from '../entities/User';
 
 const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.post('/', userController.create);
 userRoutes.get('/', userController.getUsers);
 userRoutes.get('/:id', userController.getById);
-userRoutes.put('/:id', userController.update);
-userRoutes.delete('/:id', userController.destroy);
 
-//permit(Role.Admin
+userRoutes.post('/', permit(ERole.ADMIN), userController.create);
+userRoutes.put('/:id', permit(ERole.ADMIN), userController.update);
+userRoutes.delete('/:id', permit(ERole.ADMIN), userController.destroy);
+
 export default userRoutes;

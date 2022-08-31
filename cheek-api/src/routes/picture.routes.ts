@@ -1,13 +1,27 @@
 import { Router } from 'express';
 import PictureController from '../controllers/picture.controller';
+import uploader from '../helpers/uploader';
+import permit from '../middleware/permit.middleware';
+import { ERole } from '../entities/User';
 
 const pictureRoutes = Router();
 const pictureController = new PictureController();
 
-pictureRoutes.post('/', pictureController.create);
 pictureRoutes.get('/', pictureController.getPictures);
 pictureRoutes.get('/:id', pictureController.getById);
-pictureRoutes.put('/:id', pictureController.update);
-pictureRoutes.delete('/:id', pictureController.destroy);
+
+pictureRoutes.post(
+  '/',
+  permit(ERole.ADMIN),
+  uploader.single('picture'),
+  pictureController.create,
+);
+pictureRoutes.put(
+  '/:id',
+  permit(ERole.ADMIN),
+  uploader.single('picture'),
+  pictureController.update,
+);
+pictureRoutes.delete('/:id', permit(ERole.ADMIN), pictureController.destroy);
 
 export default pictureRoutes;

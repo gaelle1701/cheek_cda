@@ -30,8 +30,11 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, select: false })
   password: string;
+
+  @Column({ nullable: true, unique: true })
+  token: string;
 
   @Column('enum', { enum: EAccountStatus, default: EAccountStatus.PENDING })
   account_status: EAccountStatus;

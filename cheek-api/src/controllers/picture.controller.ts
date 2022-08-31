@@ -10,7 +10,10 @@ class PictureController {
         });
       }
 
-      const savePicture = await pictureRepository.createPicture(req.body);
+      const savePicture = await pictureRepository.createPicture({
+        url: req.file.path,
+        label: req.body.label,
+      });
       return res.send(savePicture);
     } catch (error) {
       return res.status(500).send({
@@ -56,9 +59,9 @@ class PictureController {
       }
 
       const updatePicture = await pictureRepository.save(
-        Object.assign(picture, req.body),
+        Object.assign(picture, { url: req.file.path }),
       );
-      if (updatePicture.affected === 1) {
+      if (updatePicture) {
         return res.status(200).send({
           message: 'The picture with id= ' + picture.id + ' has been updated !',
         });

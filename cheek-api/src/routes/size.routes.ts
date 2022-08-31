@@ -1,13 +1,16 @@
 import { Router } from 'express';
 import SizeController from '../controllers/size.controller';
+import permit from '../middleware/permit.middleware';
+import { ERole } from '../entities/User';
 
 const sizeRoutes = Router();
 const sizeController = new SizeController();
 
-sizeRoutes.post('/', sizeController.create);
 sizeRoutes.get('/', sizeController.getSizes);
 sizeRoutes.get('/:id', sizeController.getById);
-sizeRoutes.put('/:id', sizeController.update);
-sizeRoutes.delete('/:id', sizeController.destroy);
+
+sizeRoutes.post('/', permit(ERole.ADMIN), sizeController.create);
+sizeRoutes.put('/:id', permit(ERole.ADMIN), sizeController.update);
+sizeRoutes.delete('/:id', permit(ERole.ADMIN), sizeController.destroy);
 
 export default sizeRoutes;
