@@ -9,6 +9,7 @@ dotenv.config({
 import { AppDataSource } from './config/data-source';
 import { addRoutes } from './routes';
 import { addMiddlewares } from './middleware';
+import logger from './config/winston';
 
 // self invoke
 (async () => {
@@ -17,7 +18,7 @@ import { addMiddlewares } from './middleware';
     const port = process.env.PORT || 3001;
 
     await AppDataSource.initialize();
-    console.log('Data Source has been initialized!');
+    logger.info('Data Source has been initialized!');
 
     addMiddlewares(app);
     addRoutes(app);
@@ -26,6 +27,6 @@ import { addMiddlewares } from './middleware';
       return console.log(`App listen on port, ${port}`);
     });
   } catch (err) {
-    console.error('Error during Data Source initialization:', err);
+    logger.error('Data Source has been initialized!', err);
   }
 })();

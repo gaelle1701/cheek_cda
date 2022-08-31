@@ -3,8 +3,8 @@ import * as winston from 'winston';
 const logger = winston.createLogger({
   level: 'http',
   format: winston.format.combine(
-    winston.format.timestamp({ format: 'YYYY-MM-DD hh:mm:ss.SSS A' }),
-    winston.format.json(),
+    winston.format.colorize(),
+    winston.format.simple(),
   ),
   transports: [new winston.transports.Console()],
   exceptionHandlers: [
