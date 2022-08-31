@@ -6,7 +6,7 @@ dotenv.config({
   path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
 });
 
-import { AppDataSource } from './data-source';
+import { AppDataSource } from './config/data-source';
 import { addRoutes } from './routes';
 import { addMiddlewares } from './middleware';
 

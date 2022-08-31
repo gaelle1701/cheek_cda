@@ -1,4 +1,4 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/data-source';
 import { ProductDetail } from '../entities/ProductDetail';
 
 export const productDetailRepository = AppDataSource.getRepository(

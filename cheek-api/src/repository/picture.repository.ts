@@ -1,4 +1,4 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/data-source';
 import { Picture } from '../entities/Picture';
 
 export const pictureRepository = AppDataSource.getRepository(Picture).extend({

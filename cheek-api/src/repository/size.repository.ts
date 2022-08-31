@@ -1,4 +1,4 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/data-source';
 import { Size } from '../entities/Size';
 
 export const sizeRepository = AppDataSource.getRepository(Size).extend({

@@ -1,5 +1,4 @@
-import { Repository } from 'typeorm';
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/data-source';
 import { Address } from '../entities/Address';
 
 export const addressRepository = AppDataSource.getRepository(Address).extend({

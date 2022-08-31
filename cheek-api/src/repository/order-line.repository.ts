@@ -1,4 +1,4 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../config/data-source';
 import { OrderLine } from '../entities/OrderLine';
 
 export const orderLineRepository = AppDataSource.getRepository(
