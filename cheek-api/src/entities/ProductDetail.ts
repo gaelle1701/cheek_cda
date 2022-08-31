@@ -3,6 +3,7 @@ import { BaseEntity } from './BaseEntity';
 import { Picture } from './Picture';
 import { Product } from './Product';
 import { Size } from './Size';
+import { Price } from './Price';
 
 @Entity()
 export class ProductDetail extends BaseEntity {
@@ -20,4 +21,8 @@ export class ProductDetail extends BaseEntity {
   @ManyToOne(() => Picture, (picture) => picture.attributes)
   @JoinColumn({ name: 'picture_id' })
   picture: Picture;
+
+  @ManyToOne(() => Price, (price) => price.attributes)
+  @JoinColumn({ name: 'price_id' })
+  price: Picture;
 }

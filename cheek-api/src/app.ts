@@ -24,7 +24,7 @@ import logger from './config/winston';
     addRoutes(app);
 
     app.listen(port, () => {
-      return console.log(`App listen on port, ${port}`);
+      logger.info(`App listen on port, http://localhost:${port}`);
     });
   } catch (err) {
     logger.error('Data Source has been initialized!', err);

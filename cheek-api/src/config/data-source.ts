@@ -12,4 +12,5 @@ export const AppDataSource = new DataSource({
   subscribers: [process.env.TYPEORM_SUBSCRIBERS],
   synchronize: true,
   logging: process.env.NODE_ENV === 'dev',
+  cache: true,
 });

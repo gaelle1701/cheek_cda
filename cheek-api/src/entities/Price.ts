@@ -1,5 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
+import { ProductDetail } from './ProductDetail';
 
 @Entity()
 export class Price extends BaseEntity {
@@ -8,6 +9,9 @@ export class Price extends BaseEntity {
 
   @Column({ type: 'float' })
   price_ttc: number;
+
+  @OneToMany(() => ProductDetail, (attribute) => attribute.price)
+  attributes: ProductDetail[];
 
   // calculated price_ttc automatically
   @BeforeInsert()

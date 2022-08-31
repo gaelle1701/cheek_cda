@@ -3,7 +3,6 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-  OneToOne,
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
@@ -13,7 +12,6 @@ import slugify from 'slugify';
 import { BaseEntity } from './BaseEntity';
 import { Category } from './Category';
 import { OrderLine } from './OrderLine';
-import { Price } from './Price';
 import { ProductDetail } from './ProductDetail';
 
 @Entity()
@@ -30,10 +28,6 @@ export class Product extends BaseEntity {
   @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id' })
   category: Category;
-
-  @OneToOne(() => Price)
-  @JoinColumn({ name: 'price_id' })
-  price: Price;
 
   @OneToMany(() => ProductDetail, (attribute) => attribute.product)
   attributes: ProductDetail[];

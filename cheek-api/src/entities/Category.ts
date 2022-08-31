@@ -1,4 +1,5 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
+import slugify from 'slugify';
 
 import { BaseEntity } from './BaseEntity';
 import { Product } from './Product';
@@ -13,4 +14,12 @@ export class Category extends BaseEntity {
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  slugifyCategoryName() {
+    this.slug = slugify(this.name, {
+      lower: true,
+    });
+  }
 }
