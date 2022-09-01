@@ -24,5 +24,5 @@ export class ProductDetail extends BaseEntity {
 
   @ManyToOne(() => Price, (price) => price.attributes)
   @JoinColumn({ name: 'price_id' })
-  price: Picture;
+  price: Price;
 }
