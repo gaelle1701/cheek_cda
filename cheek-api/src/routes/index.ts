@@ -14,6 +14,7 @@ import productRoutes from './product.routes';
 import productDetailsRoutes from './product-detail.routes';
 import authRoutes from './auth.routes';
 import mailerRoutes from './mailer.routes';
+import cartRoutes from './cart.routes';
 
 export function addRoutes(app: Application) {
   // serve static files(images, etc...)
@@ -21,6 +22,7 @@ export function addRoutes(app: Application) {
 
   app.use('/auth', authRoutes);
   app.use('/addresses', addressRoutes);
+  app.use('/cart', cartRoutes);
   app.use('/categories', categoryRoutes);
   app.use('/invoices', invoiceRoutes);
   app.use('/mailer', mailerRoutes);
