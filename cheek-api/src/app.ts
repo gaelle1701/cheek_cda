@@ -1,46 +1,32 @@
-import * as compression from "compression";
-import "reflect-metadata";
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
-import { AppDataSource } from "./data-source";
-import { addRoutes} from "./routes";
+import 'reflect-metadata';
+import * as dotenv from 'dotenv';
+import * as express from 'express';
 
-const app = express();
-const port = process.env.PORT || 3001;
+dotenv.config({
+  path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
+});
 
-// parse application/json
-// @ts-ignore
-app.use(bodyParser.urlencoded({ extended: false }));
-// @ts-ignore
-app.use(bodyParser.json())
+import { AppDataSource } from './config/data-source';
+import { addRoutes } from './routes';
+import { addMiddlewares } from './middleware';
+import logger from './config/winston';
 
+// self invoke
+(async () => {
+  try {
+    const app = express();
+    const port = process.env.PORT || 3001;
 
+    await AppDataSource.initialize();
+    logger.info('Data Source has been initialized!');
 
-//Connect to front
-app.use(cors( {
-    origin: [process.env.APP_URL],
-    header:["Access-Control-Allow-Origin", process.env.APP_URL]
+    addMiddlewares(app);
+    addRoutes(app);
 
-}));
-
-if (process.env.NODE_ENV === "production") {
-    app.disable('x-powered-by');
-    app.use(compression())
-};
-
-AppDataSource
-    .initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
-    })
-
-//app.use(authMiddleware)
-
-addRoutes(app)
-app.listen(port, () => {
-    return console.log(`App listen on port, ${port}`);
-})
+    app.listen(port, () => {
+      logger.info(`App listen on port, http://localhost:${port}`);
+    });
+  } catch (err) {
+    logger.error('Data Source has been initialized!', err);
+  }
+})();
