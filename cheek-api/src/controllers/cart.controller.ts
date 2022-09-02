@@ -21,6 +21,7 @@ class CartController {
 
       res.send({ msg: 'ok', cart: req.session.cart });
     } catch (error) {
+      console.log(error);
       res.status(500).send({
         message: error,
       });
@@ -28,10 +29,6 @@ class CartController {
   }
 
   async getCart(req: Request, res: Response) {
-    if (!req.session.cart.items.length) {
-      return res.send({ cart: req.session.cart });
-    }
-
     res.send({ cart: req.session.cart });
   }
 
