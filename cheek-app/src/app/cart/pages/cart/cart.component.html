@@ -1,0 +1,22 @@
+<div *ngIf='cart.items.length === 0'>
+  <p>The cart is empty!</p>
+  <a [routerLink]="['/products']">Products</a>
+</div>
+
+<div *ngIf='cart.items.length>0'>
+  <article *ngFor='let cartItem of cart.items'>
+    {{cartItem.quantity}}
+    {{cartItem.price}}
+    {{cartItem.id}}
+  </article>
+  <div>
+    <p>totalHt: {{cart.totalHt}}</p>
+    <p>totalTtc: {{cart.totalTtc}}</p>
+    <p *ngIf='cart.shippingFees'>Livraison offerte</p>
+    <button (click)='clearCart()'>Clear cart</button>
+  </div>
+</div>
+
+
+
+

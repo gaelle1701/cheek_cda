@@ -1,0 +1,7 @@
+<ng-container>
+  <div *ngFor='let product of products'>
+    <h4>{{product.name}}</h4>
+    <p>{{product.description}}</p>
+    <button (click)='addProduct(product.id)'>add product</button>
+  </div>
+</ng-container>
