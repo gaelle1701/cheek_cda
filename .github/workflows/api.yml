@@ -40,5 +40,5 @@ jobs:
             cd /home/vvade/cheek-static/
             git checkout .
             git pull
-            sudo npm run build
-            sudo pm2 restart MyApp
+            npm run build
+            pm2 restart MyApp
