@@ -24,9 +24,6 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./cheek-api
     strategy:
       matrix:
         node-version: [16.x]
@@ -43,5 +40,5 @@ jobs:
             cd /home/vvade/cheek-static/
             git checkout .
             git pull
-            npm run build
-            pm2 restart MyApp
+            sudo npm run build
+            sudo pm2 restart MyApp
