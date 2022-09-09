@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("~chota");
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gloria+Hallelujah&display=swap');
+
+:root {
+    --bg-color: #ffffff;
+    --color-lightGrey: #E2E2E2;
+    --color-grey: #BBB8AD;
+    --color-black: #000000;
+    --color-error: #FF3232;
+    --color-success: #28bd14;
+    --color-orange: #FA9223;
+
+    --grid-maxWidth: 120rem;
+    --grid-gutter: 2rem;
+
+    --font-size-small: 1rem;
+    --font-size: 1.6rem; 
+  
+
+
+    --font-family-courier: 'Courier Prime', monospace;
+    --font-family-gloria: 'Gloria Hallelujah', cursive;
+}
+
+/* __________________________general style____________________ */
+
+html, body {
+    position: relative; 
+    min-height: 100%;
+}
+svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img{
+    display: block;
+    margin: 0 auto;
+}
+main {
+    min-height: calc(100vh - 217px);
+}
+fa-icon {
+    color:var(--color-orange)
+}
+
+
+
+
+
+
