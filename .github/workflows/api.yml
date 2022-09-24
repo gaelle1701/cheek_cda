@@ -26,9 +26,4 @@ jobs:
             exec bash \-l
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd /home/gcoue/cheek/
-            git pull origin ci/add_ci_for_cheekapp
-            cd cheek-api
-            npm install
-            npm run build
-            npm run start
+            echo node -v
