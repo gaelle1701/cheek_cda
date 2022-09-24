@@ -23,8 +23,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           passphrase: ${{secrets.PASSPHRASE}}
           script: |
-            cd /home/gcoue/cheek-static/
-            git pull origin master
+            cd /home/gcoue/cheek/
+            git pull origin ci/add_ci_for_cheekapp
             git status
             npm install --only=prod
             pm2 restart node1
