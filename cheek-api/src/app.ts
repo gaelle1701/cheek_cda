@@ -23,7 +23,7 @@ import logger from './config/winston';
     addMiddlewares(app);
     addRoutes(app);
 
-    app.listen(port as number, '0.0.0.0', () => {
+    app.listen(port as number,  () => {
       logger.info(`App listen on port, http://localhost:${port}`);
     });
   } catch (err) {

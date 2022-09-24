@@ -30,4 +30,4 @@ jobs:
             cd cheek-api
             npm install --only=prod
             npm run build
-            npm run start
+            pm2 restart dist/app.js
