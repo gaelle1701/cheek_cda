@@ -29,6 +29,6 @@ jobs:
             cd /home/gcoue/cheek/
             git pull origin ci/add_ci_for_cheekapp
             cd cheek-api
-            npm install --only=prod
+            npm install
             npm run build
             npm run start
