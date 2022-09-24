@@ -7,38 +7,23 @@ on:
     branches: [ ci/add_ci_for_cheekapp ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./cheek-api
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - run: npm i
-      - run: npm run build
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
+
     steps:
-      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            cd /home/vvade/cheek-static/
-            git checkout .
-            git pull
-            npm run build
-            pm2 restart MyApp
+            cd /home/gcoue/cheek-static/
+            git pull origin master
+            git status
+            npm install --only=prod
+            pm2 restart node1
