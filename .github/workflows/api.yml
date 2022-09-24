@@ -9,11 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: appleboy/ssh-action@master
@@ -24,7 +22,7 @@ jobs:
           passphrase: ${{secrets.PASSPHRASE}}
           script: |
             cd /home/gcoue/cheek/
-            git pull origin ci/add_ci_for_cheekapp
+            git pull
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd cheek-api
