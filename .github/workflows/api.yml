@@ -28,6 +28,6 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd cheek-api
-            npm install
+            npm install --only=prod
             npm run build
             npm run start
