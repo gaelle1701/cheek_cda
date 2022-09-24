@@ -25,9 +25,10 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd /home/gcoue/cheek/
-            git pull origin ci/add_ci_for_cheekapp
-            git status
-            cd cheek-api
-            npm install --only=prod
-            pm2 restart node1
+            npm --help
+#            cd /home/gcoue/cheek/
+#            git pull origin ci/add_ci_for_cheekapp
+#            git status
+#            cd cheek-api
+#            npm install --only=prod
+#            pm2 restart node1
