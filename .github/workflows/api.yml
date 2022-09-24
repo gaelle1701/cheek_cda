@@ -21,6 +21,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{secrets.PASSPHRASE}}
           script: |
             cd /home/gcoue/cheek-static/
             git pull origin master
