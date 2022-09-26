@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import logger from '../config/winston';
 import { productDetailRepository } from '../repository/product-detail.repository';
 
 class ProductDetailController {
@@ -9,11 +10,13 @@ class ProductDetailController {
           message: 'Content can not be empty!',
         });
       }
-
+      logger.info(req.body)
       const savedProductDetail =
         await productDetailRepository.createProductDetail(req.body);
       return res.send(savedProductDetail);
     } catch (error) {
+      logger.error('Error in productdetail create!', error);
+      
       return res.status(500).send({
         message: error.message,
       });
@@ -22,9 +25,13 @@ class ProductDetailController {
 
   async getProductDetails(req: Request, res: Response) {
     try {
-      const getProductDetails = await productDetailRepository.find();
+      const getProductDetails = await productDetailRepository.find({
+        relations: ["product", "size"]
+      });
       return res.send(getProductDetails);
     } catch (error) {
+      console.log(error);
+      
       return res.status(500).send({
         message: error.message,
       });
@@ -33,7 +40,7 @@ class ProductDetailController {
 
   async getById(req: Request, res: Response) {
     try {
-      const productDetail = await productDetailRepository.findBydId(
+      const productDetail = await productDetailRepository.findById(
         +req.params.id,
       );
       if (!productDetail) {
@@ -51,7 +58,7 @@ class ProductDetailController {
 
   async update(req: Request, res: Response) {
     try {
-      const productDetail = await productDetailRepository.findBydId(
+      const productDetail = await productDetailRepository.findById(
         +req.params.id,
       );
       if (!productDetail) {
@@ -81,7 +88,7 @@ class ProductDetailController {
   }
 
   async destroy(req: Request, res: Response) {
-    const productDetail = await productDetailRepository.findBydId(
+    const productDetail = await productDetailRepository.findById(
       +req.params.id,
     );
     try {

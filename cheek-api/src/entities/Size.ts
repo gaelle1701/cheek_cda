@@ -7,6 +7,6 @@ export class Size extends BaseEntity {
   @Column({ unique: true })
   label: string;
 
-  @OneToMany(() => ProductDetail, (attribute) => attribute.size)
-  attributes: ProductDetail[];
+  @OneToMany(() => ProductDetail, (detail) => detail.size)
+  details: ProductDetail[];
 }

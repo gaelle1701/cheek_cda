@@ -6,6 +6,7 @@ import { ERole } from '../entities/User';
 const productRoutes = Router();
 const productController = new ProductController();
 
+
 productRoutes.get('/', productController.getProducts);
 productRoutes.get('/:id', productController.getById);
 

@@ -4,6 +4,8 @@ import * as bcrypt from 'bcrypt';
 import { EAccountStatus, User } from '../entities/User';
 import { userRepository } from '../repository/user.repository';
 import sendMail from '../helpers/mailer';
+import logger from '../config/winston';
+import { addressRepository } from '../repository/address.repository';
 
 class AuthController {
   async signup(req: Request, res: Response) {
@@ -20,11 +22,12 @@ class AuthController {
         { expiresIn: process.env.JWT_EXPIRES_IN },
       );
       await userRepository.createUser({
-        lastName: req.body.lastname,
-        firstName: req.body.firstname,
+        lastName: req.body.lastName,
+        firstName: req.body.firstName,
         email: req.body.email,
         password: req.body.password,
         phone: req.body.phone,
+        address: req.body.address,
         token,
       });
 
@@ -35,7 +38,7 @@ class AuthController {
           'Votre inscription a bien été enregistée! Vérrifiez vos mails pour confirmez votre inscription!',
       });
     } catch (error) {
-      console.log(error);
+      logger.error("signup user", error)
       return res.status(400).send({
         message: 'Cet email existe déjà!',
       });
@@ -100,11 +103,21 @@ class AuthController {
 
   async updateProfile(req: Request, res: Response) {
     try {
+      if(req.body.address) {
+        const createAddress = await addressRepository.createAddress(req.body.address)
+        if (createAddress) {
+          await userRepository.update(req.params.id, {
+            address: createAddress
+          })
+        }
+      }
+
       await userRepository.update(req.params.id, {
-        lastName: req.body.lastname,
-        firstName: req.body.firstname,
+        lastName: req.body.lastName,
+        firstName: req.body.firstName,
         email: req.body.email,
         phone: req.body.phone,
+      //  address: req.body.address
       });
 
       return res.status(200).send({

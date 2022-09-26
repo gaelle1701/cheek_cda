@@ -29,8 +29,8 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @OneToMany(() => ProductDetail, (attribute) => attribute.product)
-  attributes: ProductDetail[];
+  @OneToMany(() => ProductDetail, (detail) => detail.product)
+  details: ProductDetail[];
 
   @OneToMany(() => OrderLine, (orderLine) => orderLine.product)
   orderLines: OrderLine[];

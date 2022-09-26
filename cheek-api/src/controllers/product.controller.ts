@@ -13,6 +13,8 @@ class ProductController {
       const savedProduct = await productRepository.createProduct(req.body);
       return res.send(savedProduct);
     } catch (error) {
+      console.log(error);
+      
       return res.status(500).send({
         message: error.message,
       });

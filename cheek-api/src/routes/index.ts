@@ -2,7 +2,6 @@ import * as express from 'express';
 import type { Application } from 'express';
 
 import addressRoutes from './address.routes';
-import priceRoutes from './price.routes';
 import categoryRoutes from './category.routes';
 import sizeRoutes from './size.routes';
 import userRoutes from './user.routes';
@@ -29,7 +28,6 @@ export function addRoutes(app: Application) {
   app.use('/orders', orderRoutes);
   app.use('/order-lines', orderLineRoutes);
   app.use('/pictures', pictureRoutes);
-  app.use('/prices', priceRoutes);
   app.use('/products', productRoutes);
   app.use('/product-details', productDetailsRoutes);
   app.use('/sizes', sizeRoutes);

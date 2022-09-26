@@ -8,12 +8,12 @@ export const productRepository = AppDataSource.getRepository(Product).extend({
     const createProduct = productRepository.create(product);
     const savedProduct = await productRepository.save(createProduct);
 
-    if (product.attributes.length >= 0) {
+    if (product?.details?.length >= 0) {
       await Promise.all(
-        product.attributes.map(async (attribute) => {
+        product.details.map(async (detail) => {
           await productDetailRepository.createProductDetail({
             product: savedProduct.id,
-            ...attribute,
+            ...detail,
           });
         }),
       );
@@ -26,9 +26,8 @@ export const productRepository = AppDataSource.getRepository(Product).extend({
       where: { id },
       relations: [
         'category',
-        'attributes',
-        'attributes.price',
-        'attributes.size',
+        'details',
+        'details.size',
       ],
     });
   },

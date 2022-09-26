@@ -9,9 +9,22 @@ export const productDetailRepository = AppDataSource.getRepository(
     const createProductDetail = productDetailRepository.create(productDetail);
     return await productDetailRepository.save(createProductDetail);
   },
-  async findBydId(id: number) {
-    return await productDetailRepository.findOneBy({
-      id,
+  async findById(id: number) {
+    return await productDetailRepository.findOne({
+      where: { id },
+      relations: [
+        'product',
+        'size'
+      ]
     });
   },
+  // async createPrice(price: DeepPartial<Price>) {
+  //   const createPrice = priceRepository.create(price);
+  //   return await priceRepository.save(createPrice);
+  // },
+  // async findBydId(id: number) {
+  //   return await priceRepository.findOneBy({
+  //     id,
+  //   });
+  // },
 });

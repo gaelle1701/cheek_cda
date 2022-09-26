@@ -9,6 +9,7 @@ const productDetailsController = new ProductDetailController();
 productDetailsRoutes.get('/', productDetailsController.getProductDetails);
 productDetailsRoutes.get('/:id', productDetailsController.getById);
 
+
 productDetailsRoutes.post(
   '/',
   permit(ERole.ADMIN),

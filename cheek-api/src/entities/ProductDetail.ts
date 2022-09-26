@@ -1,28 +1,43 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 import { Picture } from './Picture';
 import { Product } from './Product';
 import { Size } from './Size';
-import { Price } from './Price';
 
 @Entity()
 export class ProductDetail extends BaseEntity {
   @Column({ type: 'int' })
   stock: number;
 
-  @ManyToOne(() => Product, (product) => product.attributes)
+  @Column({ type: 'float' })
+  price_ht: number;
+
+  @Column({ type: 'float' })
+  price_ttc: number;
+
+  @ManyToOne(() => Product, (product) => product.details)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @ManyToOne(() => Size, (size) => size.attributes)
+  @ManyToOne(() => Size, (size) => size.details)
   @JoinColumn({ name: 'size_id' })
   size: Size;
 
-  @ManyToOne(() => Picture, (picture) => picture.attributes)
-  @JoinColumn({ name: 'picture_id' })
-  picture: Picture;
+  // @ManyToOne(() => Picture, (picture) => picture.details)
+  // @JoinColumn({ name: 'picture_id' })
+  // picture: Picture;
 
-  @ManyToOne(() => Price, (price) => price.attributes)
-  @JoinColumn({ name: 'price_id' })
-  price: Price;
+  @OneToMany(() => Picture, (detail) => detail.picture)
+   details: ProductDetail[];
+
+
+   // calculated price_ttc automatically
+  @BeforeInsert()
+  @BeforeUpdate()
+  createPrice() {
+    this.price_ttc = this.price_ht + this.price_ht * 0.2;
+  }
 }
+
+
+
