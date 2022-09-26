@@ -20,8 +20,8 @@ class AuthController {
         { expiresIn: process.env.JWT_EXPIRES_IN },
       );
       await userRepository.createUser({
-        lastName: req.body.lastname,
-        firstName: req.body.firstname,
+        lastName: req.body.lastName,
+        firstName: req.body.firstName,
         email: req.body.email,
         password: req.body.password,
         phone: req.body.phone,
@@ -37,7 +37,7 @@ class AuthController {
     } catch (error) {
       console.log(error);
       return res.status(400).send({
-        message: 'Cet email existe déjà!',
+        message: 'Cet email ou numéro de téléphone existe déjà!',
       });
     }
   }
@@ -73,8 +73,8 @@ class AuthController {
         { expiresIn: process.env.JWT_EXPIRES_IN },
       );
       return res.status(200).send({
-        firstname: user.firstName,
-        lastname: user.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         role: user.role,
         accessToken,
@@ -101,8 +101,8 @@ class AuthController {
   async updateProfile(req: Request, res: Response) {
     try {
       await userRepository.update(req.params.id, {
-        lastName: req.body.lastname,
-        firstName: req.body.firstname,
+        lastName: req.body.lastName,
+        firstName: req.body.firstName,
         email: req.body.email,
         phone: req.body.phone,
       });

@@ -22,7 +22,11 @@ class ProductDetailController {
 
   async getProductDetails(req: Request, res: Response) {
     try {
-      const getProductDetails = await productDetailRepository.find();
+      const getProductDetails = await productDetailRepository.find(
+        { relations: [
+          "product","size", "price","picture"
+        ] }
+        );
       return res.send(getProductDetails);
     } catch (error) {
       return res.status(500).send({
@@ -34,7 +38,7 @@ class ProductDetailController {
   async getById(req: Request, res: Response) {
     try {
       const productDetail = await productDetailRepository.findBydId(
-        +req.params.id,
+        +req.params.id, 
       );
       if (!productDetail) {
         return res.status(400).send({

@@ -10,8 +10,14 @@ export const productDetailRepository = AppDataSource.getRepository(
     return await productDetailRepository.save(createProductDetail);
   },
   async findBydId(id: number) {
-    return await productDetailRepository.findOneBy({
-      id,
+    return await productDetailRepository.findOne({
+      where: {
+        id
+      },
+      relations: [
+        "product","size", "price","picture"
+      ] 
+    
     });
   },
 });
