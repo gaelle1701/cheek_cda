@@ -1,0 +1,31 @@
+name: Deploy api
+#on:
+#  push:
+#    branches: [main]
+on:
+  push:
+    branches: [ ci/add_ci_for_cheekapp ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{secrets.PASSPHRASE}}
+          script: |
+            cd /home/gcoue/cheek/
+            git pull
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd cheek-api
+            npm install --only=prod
+            npm run build
+            pm2 restart dist/app.js
