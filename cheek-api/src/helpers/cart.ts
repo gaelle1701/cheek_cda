@@ -1,29 +1,29 @@
 type CartItem = {
-  id: number;
+  id: number; // id de quoi ???
   quantity: number;
-  price: any;
+  price: any; // price_ht ou ttc ???
 };
 
 export interface ICart {
   items: CartItem[];
-  totalHt: number;
-  totalTtc: number;
+  total_ht: number;
+  total_ttc: number;
   shippingFees: boolean;
 }
 
 export const INITIAL_CART: ICart = {
   items: [],
-  totalHt: 0.0,
-  totalTtc: 0.0,
+  total_ht: 0.0,
+  total_ttc: 0.0,
   shippingFees: false,
 };
 
-const VAT_RATE = 0.2;
+const VAT_RATE = 0.2; // ????
 
 export class Cart implements ICart {
   items: CartItem[];
-  totalHt: number;
-  totalTtc: number;
+  total_ht: number;
+  total_ttc: number;
   shippingFees: boolean;
 
   addProductToCart(item: CartItem, cart: ICart) {
@@ -67,9 +67,9 @@ export class Cart implements ICart {
       (acc, val) => (acc + val.price * VAT_RATE) * val.quantity,
       0,
     );
-    cart.totalHt = totalHt;
-    cart.totalTtc = totalHt + totalTtc;
-    cart.shippingFees = cart.totalTtc >= 70;
+    cart.total_ht = this.total_ht;
+    cart.total_ttc = this.total_ht + this.total_ttc;
+    cart.shippingFees = cart.total_ttc >= 70;
 
     if (!cart.items.length) {
       this.resetCart(cart);
@@ -80,8 +80,8 @@ export class Cart implements ICart {
 
   resetCart(cart: ICart) {
     cart.items = [];
-    cart.totalHt = 0;
-    cart.totalTtc = 0;
+    cart.total_ht = 0;
+    cart.total_ttc = 0;
     cart.shippingFees = false;
     return cart;
   }

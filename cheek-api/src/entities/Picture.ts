@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 import { ProductDetail } from './ProductDetail';
 
@@ -10,6 +10,9 @@ export class Picture extends BaseEntity {
   @Column({ unique: true })
   url: string;
 
-  @OneToMany(() => ProductDetail, (attribute) => attribute.picture)
-  attributes: ProductDetail[];
+  // @OneToMany(() => ProductDetail, (detail) => detail.picture)
+  // details: ProductDetail[];
+  @ManyToOne(() => Picture, (picture) => picture)
+  @JoinColumn({ name: 'productDetail_id' })
+  picture: Picture;
 }

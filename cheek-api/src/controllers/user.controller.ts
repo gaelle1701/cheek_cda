@@ -22,7 +22,7 @@ class UserController {
   async getUsers(req: Request, res: Response) {
     try {
       const getUsers = await userRepository.find({
-        relations: { addresses: true },
+        relations: ["address"]
       });
       return res.send(getUsers);
     } catch (error) {

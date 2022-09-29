@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { BeforeInsert, Column, Entity, OneToMany } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { Address } from './Address';
 import { BaseEntity } from './BaseEntity';
 
@@ -39,8 +39,10 @@ export class User extends BaseEntity {
   @Column('enum', { enum: EAccountStatus, default: EAccountStatus.PENDING })
   account_status: EAccountStatus;
 
-  @OneToMany(() => Address, (address) => address.user)
-  addresses: Address[];
+  @OneToOne(() => Address)
+  @JoinColumn({ name: 'address_id' })
+  address: Address
+
 
   // created status automatically
   @BeforeInsert()

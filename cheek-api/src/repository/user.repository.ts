@@ -8,8 +8,13 @@ export const userRepository = AppDataSource.getRepository(User).extend({
     return await userRepository.save(createUser);
   },
   async findById(id: number) {
-    return await userRepository.findOneBy({
-      id,
+    return await userRepository.findOne({
+      where:{
+        id,
+      },
+      relations:{
+        address: true
+      }
     });
   },
 });
