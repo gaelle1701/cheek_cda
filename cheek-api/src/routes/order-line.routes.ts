@@ -11,10 +11,6 @@ orderLineRoutes.get('/:id', orderLineController.getById);
 
 orderLineRoutes.post('/', permit(ERole.ADMIN), orderLineController.create);
 orderLineRoutes.put('/:id', permit(ERole.ADMIN), orderLineController.update);
-orderLineRoutes.delete(
-  '/:id',
-  permit(ERole.ADMIN),
-  orderLineController.destroy,
-);
+orderLineRoutes.delete('/:id', permit(ERole.ADMIN), orderLineController.destroy);
 
 export default orderLineRoutes;

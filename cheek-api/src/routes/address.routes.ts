@@ -6,8 +6,8 @@ import { ERole } from '../entities/User';
 const addressRoutes = Router();
 const addressController = new AddressController();
 
-addressRoutes.get('/', addressController.getAddresses);
-addressRoutes.get('/:id', addressController.getById);
+addressRoutes.get('/', permit(ERole.ADMIN), addressController.getAddresses);
+addressRoutes.get('/:id', permit(ERole.ADMIN), addressController.getById);
 
 addressRoutes.post('/', permit(ERole.CUSTOMER), addressController.create);
 addressRoutes.put('/:id', permit(ERole.CUSTOMER), addressController.update);
