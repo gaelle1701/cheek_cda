@@ -1,2 +1,34 @@
-<p>footer works!</p>
-<fa-icon [icon]="faTimes"></fa-icon>
+<footer>
+    <section class="footer__container-icons">
+        <ul class="footer__icons">
+            <li>
+                <a href="https://www.instagram.com/cheekbrand" target="_blank">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#FA9223"/><path d="M15.5 5h-7A3.5 3.5 0 005 8.5v7A3.5 3.5 0 008.5 19h7a3.5 3.5 0 003.5-3.5v-7A3.5 3.5 0 0015.5 5z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.8 11.559a2.8 2.8 0 11-5.54.822 2.8 2.8 0 015.54-.822zM15.85 8.15h.007" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+            <li class="footer__icon">
+                <a href="https://www.facebook.com/cheekbrandparis" target="_blank">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#FA9223"/><path d="M15 5h-1.636c-.724 0-1.417.369-1.929 1.025-.511.656-.799 1.547-.799 2.475v2.1H9v2.8h1.636V19h2.182v-5.6h1.636L15 10.6h-2.182V8.5c0-.186.058-.364.16-.495a.493.493 0 01.386-.205H15V5z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+            <li class="footer__icon">
+                <a href="mailto:cheekbrand@gmail.com" target="_blank">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#FA9223"/><path d="M6.4 7h11.2c.77 0 1.4.563 1.4 1.25v7.5c0 .688-.63 1.25-1.4 1.25H6.4c-.77 0-1.4-.563-1.4-1.25v-7.5C5 7.562 5.63 7 6.4 7z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8.25l-7 4.375L5 8.25" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="footer__container-links">
+        <ul class="footer__links">
+            <li class="footer__link">
+                <a [href]="['/cgu']">CGU</a>
+            </li>
+            <li class="footer__link">
+                <a [href]="['/cgv']">CGV</a>
+            </li>
+            <li class="footer__link">
+                <a [href]="['/mentions-legales']">Mentions légales</a>
+            </li>
+        </ul>
+    </section>
+</footer>

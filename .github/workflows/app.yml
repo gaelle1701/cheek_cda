@@ -1,77 +1,55 @@
-name: Deploy
+name: Deploy front
 on: 
   push:
     branches: [ ci/add_ci_for_cheekapp ]
 
 jobs:
-
   test:
-
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./cheek-app
-    
     steps:
- 
     - name: Use Node.js
       uses: actions/setup-node@v2
       with: 
         node-version: '16.x'
-
     - uses: actions/checkout@v2
-
     - name: Install dependencies
       run: npm install
-    
-
-    #- name: lint
-      #run: npm run lint
-    
-    # - name: Unit tests
-    #   run: npm run test
-    
   build: 
     needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./cheek-app
-
     steps:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with: 
         node-version: '16.x'
-
     - uses: actions/checkout@v2
-
     - name: Install dependencies
       run: npm install
-      
     - name: Build app
-      run: npm run build 
-    
+      run: npm run build
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with: 
         name: cheek_app-${{ github.run_id }}-${{ github.run_number }}
         path: ./cheek-app/dist/cheek-app
-
   deploy: 
     needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./cheek-app
-
     steps: 
     - name: Dowload artifact
       uses: actions/download-artifact@v2
       with: 
         name: cheek_app-${{ github.run_id }}-${{ github.run_number }} 
         path: './cheek-app/dist/cheek-app'
-
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
       with:
@@ -81,3 +59,4 @@ jobs:
         port: ${{ secrets.PORT }}
         source: "./cheek-app/dist/cheek-app"
         target: "/home/vvade/cheek-static"
+

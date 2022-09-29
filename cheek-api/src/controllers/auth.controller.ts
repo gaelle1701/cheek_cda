@@ -40,7 +40,7 @@ class AuthController {
     } catch (error) {
       logger.error("signup user", error)
       return res.status(400).send({
-        message: 'Cet email existe déjà!',
+        message: 'Cet email ou numéro de téléphone existe déjà!',
       });
     }
   }
@@ -76,8 +76,8 @@ class AuthController {
         { expiresIn: process.env.JWT_EXPIRES_IN },
       );
       return res.status(200).send({
-        firstname: user.firstName,
-        lastname: user.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         role: user.role,
         accessToken,

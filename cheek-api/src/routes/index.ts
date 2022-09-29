@@ -20,8 +20,9 @@ export function addRoutes(app: Application) {
   app.use('/static', express.static('tmp'));
 
   app.use('/auth', authRoutes);
+
   app.use('/addresses', addressRoutes);
-  app.use('/cart', cartRoutes);
+  app.use('/carts', cartRoutes);
   app.use('/categories', categoryRoutes);
   app.use('/invoices', invoiceRoutes);
   app.use('/mailer', mailerRoutes);

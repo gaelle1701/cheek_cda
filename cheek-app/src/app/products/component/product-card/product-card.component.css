@@ -1,0 +1,28 @@
+.card {
+    margin: 10px 0;
+}
+h3{
+    font-family: var(--font-family-gloria);
+    color: var(--color-orange);
+    line-height: 100%;
+    margin: 0.7rem 0 0 0;
+    font-size: 1em;
+}
+p {
+    font-family: var(--font-family-courier);
+    color: var(--color-black); 
+}
+
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+    .card {
+        margin-bottom: 40px;
+    }  
+}
