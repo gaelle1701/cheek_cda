@@ -1,11 +1,9 @@
 <nav>
     <ul class="navBar__links">
         <li class="navBar__link" *ngFor="let navItem of navItems">
-            <a (click)="toggleNav()" *ngIf="navItem.title!=='Boutique'" routerLink="{{navItem.link}}" routerLinkActive="router-link-active" >{{ navItem.title }}</a>     
+            <a (click)="toggleNav()" *ngIf="navItem.title!=='Boutique'" routerLink="{{ navItem.link }}" routerLinkActive="router-link-active" >{{ navItem.title }}</a>     
             <button (click)="toggleSubNav()" *ngIf="navItem.title==='Boutique'">{{ navItem.title }}
-                <svg *ngIf="navItem.title==='Boutique'" width="18" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1l8 10 8-10" stroke="#FA9223" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <fa-icon *ngIf="navItem.title==='Boutique'" [icon]="faCaretDown"></fa-icon>
             </button>
             <div>
                 <ul *ngIf="navItem.title==='Boutique'" [@openClose]="isOpenSubNav ? 'open' : 'closed'" class="navBar__subLinks">

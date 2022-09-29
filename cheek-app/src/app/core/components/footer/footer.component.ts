@@ -9,7 +9,6 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 })
 export class FooterComponent implements OnInit {
 
-  faTimes = faTimes;
   constructor() { }
 
   ngOnInit(): void {

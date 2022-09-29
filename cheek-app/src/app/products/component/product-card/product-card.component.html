@@ -1,0 +1,13 @@
+<section class="col-6 col-4-md col-4-lg" *ngFor="let card of cards">
+    <a routerLink="/boutique/produit/{{ card.slug }}">
+        <section class="card">
+            <!-- <div *ngIf="card.pictures?.length > 0"> Image
+                <img src="{{ card.picture.url }}" alt="{{ card.picture.label }}">
+            </div> -->
+            <article>
+                <h3>Name : {{ card.name }}</h3>
+                <p>Price: {{ card.price.price_ttc }} €</p>
+            </article>
+        </section>
+    </a>
+</section>

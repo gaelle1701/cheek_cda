@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 interface INavItems {title: string; link: string; subNav?: this[]};
 
@@ -28,7 +29,12 @@ interface INavItems {title: string; link: string; subNav?: this[]};
 export class NavComponent implements OnInit {
 
   constructor() { }
+  //icons
+  faCaretDown = faCaretDown;
 
+
+
+  
   // callback function toggle from header(burger)
   @Input() toggle!: () => void;
 
