@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faArrowRightFromBracket, faBars, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,12 @@ import { Router } from '@angular/router';
 
 
 export class HeaderComponent implements OnInit {
+
+  //icons
+  faUser = faUser;
+  faLogout = faArrowRightFromBracket;
+  faCart = faCartShopping;
+  faBars = faBars;
 
   isOpen: boolean = false;
  

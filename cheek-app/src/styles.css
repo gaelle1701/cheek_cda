@@ -17,8 +17,6 @@
     --font-size-small: 1rem;
     --font-size: 1.6rem; 
   
-
-
     --font-family-courier: 'Courier Prime', monospace;
     --font-family-gloria: 'Gloria Hallelujah', cursive;
 }
@@ -42,7 +40,9 @@ main {
     min-height: calc(100vh - 217px);
 }
 fa-icon {
-    color:var(--color-orange)
+    color:var(--color-orange);
+    width: 26px;
+    height: 26px;
 }
 
 
