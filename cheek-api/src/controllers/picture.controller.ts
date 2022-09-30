@@ -13,13 +13,17 @@ class PictureController {
       const savePicture = await pictureRepository.createPicture({
         url: req.file.path,
         label: req.body.label,
+        productDetail: req.body.productDetailId
       });
+      console.log(req.file.path);
+      
       return res.send(savePicture);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
       });
     }
+
   }
 
   async getPictures(req: Request, res: Response) {

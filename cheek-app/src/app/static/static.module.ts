@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { StaticRoutingModule } from './static-routing.module';
 
 import { ProductsModule } from '../products/products.module';
-import { CoreModule } from '../core/core.module';
 import { HomeComponent } from './home/home.component';
 
 
@@ -14,8 +13,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    CommonModule,
-    StaticRoutingModule
+    StaticRoutingModule,
+    ProductsModule
     
   ],
   exports: [

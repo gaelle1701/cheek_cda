@@ -14,7 +14,8 @@ export const productDetailRepository = AppDataSource.getRepository(
       where: { id },
       relations: [
         'product',
-        'size'
+        'size',
+        'pictures'
       ]
     });
   },

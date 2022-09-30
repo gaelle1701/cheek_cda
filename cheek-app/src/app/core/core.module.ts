@@ -9,7 +9,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { StaticModule } from '../static/static.module';
 import { RouterModule } from '@angular/router';
-import { ProductsModule } from '../products/products.module';
 
 
 
@@ -22,13 +21,14 @@ import { ProductsModule } from '../products/products.module';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterModule
+    RouterModule,
+    
   ],
 
   // exports des modules voulus et utilisés au démarage de l'appli
 
   exports: [
-    AuthRoutingModule, HeaderComponent, NavComponent, FooterComponent, StaticModule, ProductsModule
+    AuthRoutingModule, HeaderComponent, NavComponent, FooterComponent, StaticModule
 
   ]
 })

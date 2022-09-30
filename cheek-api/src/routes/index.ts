@@ -19,19 +19,19 @@ import sizeRoutes from './size.routes';
 
 export function addRoutes(app: Application) {
   // serve static files(images, etc...)
-  app.use('/static', express.static('tmp'));
+  app.use('/static', express.static('uploads'));
 
-  app.use('/auth', authRoutes);
-  app.use('/addresses', addressRoutes);
-  app.use('/carts', cartRoutes);
-  app.use('/categories', categoryRoutes);
-  app.use('/invoices', invoiceRoutes);
-  app.use('/mailer', mailerRoutes);
-  app.use('/orders', orderRoutes);
-  app.use('/order-lines', orderLineRoutes);
-  app.use('/pictures', pictureRoutes);
-  app.use('/products', productRoutes);
-  app.use('/product-details', productDetailsRoutes);
-  app.use('/sizes', sizeRoutes);
-  app.use('/users', userRoutes);
+  app.use('/api/auth', authRoutes);
+  app.use('/api/addresses', addressRoutes);
+  app.use('/api/carts', cartRoutes);
+  app.use('/api/categories', categoryRoutes);
+  app.use('/api/invoices', invoiceRoutes);
+  app.use('/api/mailer', mailerRoutes);
+  app.use('/api/orders', orderRoutes);
+  app.use('/api/order-lines', orderLineRoutes);
+  app.use('/api/pictures', pictureRoutes);
+  app.use('/api/products', productRoutes);
+  app.use('/api/product-details', productDetailsRoutes);
+  app.use('/api/sizes', sizeRoutes);
+  app.use('/api/users', userRoutes);
 }

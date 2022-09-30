@@ -20,9 +20,24 @@ class CategoryController {
   }
 
   async getCategories(req: Request, res: Response) {
-    try {
-      const getCategories = await categoryRepository.find();
+    try { 
+      
+      let getCategories = null
+
+      if(req.query.slug) {
+        getCategories = await categoryRepository.findOne( {
+          where: {
+            slug: req.query.slug as string
+          },
+          relations: ["products"]
+        })
+      } else {
+        getCategories = await categoryRepository.find( {
+          relations: ["products"]
+        })
+      }
       return res.send(getCategories);
+
     } catch (error) {
       return res.status(500).send({
         message: error.message,
