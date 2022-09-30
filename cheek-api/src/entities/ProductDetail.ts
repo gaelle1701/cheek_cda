@@ -27,8 +27,8 @@ export class ProductDetail extends BaseEntity {
   // @JoinColumn({ name: 'picture_id' })
   // picture: Picture;
 
-  @OneToMany(() => Picture, (detail) => detail.picture)
-   details: ProductDetail[];
+  @OneToMany(() => Picture, (detail) => detail.productDetail)
+   pictures: Picture[];
 
 
    // calculated price_ttc automatically

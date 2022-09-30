@@ -23,8 +23,27 @@ class ProductController {
 
   async getProducts(req: Request, res: Response) {
     try {
-      const getProducts = await productRepository.find();
+
+      let getProducts = null
+
+      if(req.query.slug) {
+        getProducts = await productRepository.findOne( {
+          where: {
+            slug: req.query.slug as string
+          },
+          relations: [
+            'category',
+            'details',
+            'details.size',
+            'details.pictures'
+          ],
+        });
+      } else {
+          getProducts = await productRepository.find()
+        }
+      
       return res.send(getProducts);
+
     } catch (error) {
       return res.status(500).send({
         message: error.message,
