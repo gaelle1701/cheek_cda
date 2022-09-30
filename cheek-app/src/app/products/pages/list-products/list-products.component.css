@@ -1,0 +1,33 @@
+.main__title-category {
+    font-family: var(--font-family-courier);
+    font-weight: 800;
+    color: var(--color-orange);
+    margin: 0.7rem 0 0 0;
+    text-transform: uppercase;
+    margin: 4rem;
+}
+.main__container-card {
+    margin:20px;
+}
+
+
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .main__titles-category {
+        margin: 40px 0 80px;    
+    }
+   
+  
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+
+    .main__container-card {
+        margin: 20px 0;
+    }
+
+    
+}
