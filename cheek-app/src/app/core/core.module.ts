@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
@@ -22,6 +23,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FontAwesomeModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
     
   ],
 

@@ -1,5 +1,5 @@
 import { ICategory } from "./category";
-import { IProductDetail } from "./product-detail";
+import { IProductDetails } from "./product-detail";
 
 
 export interface IProduct {
@@ -10,7 +10,7 @@ export interface IProduct {
 
     category: ICategory;
   
-    details: IProductDetail[];
+    details: IProductDetails;
 
     // orderLines: OrderLines[];
 }

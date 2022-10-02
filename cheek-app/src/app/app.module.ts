@@ -7,20 +7,25 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SignupComponent } from './auth/pages/signup/signup.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    CoreModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
