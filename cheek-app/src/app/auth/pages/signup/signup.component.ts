@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -24,19 +25,6 @@ export class SignupComponent implements OnInit {
   msgError: string = '';
   showPassword: boolean = false;
 
-  constructor(private router: Router, private authService : AuthService, private formBuilder: FormBuilder) { 
-    // this.signupForm = new FormGroup({})
-  }
-
-  ngOnInit(): void {
-    this.signupForm = this.formBuilder.group({ 
-      firstName: ['', Validators.required, Validators.minLength(2)],
-      lastName: ['', Validators.required, Validators.minLength(2)],
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required, Validators.pattern(this.pswPattern)]
-    })
-  }
-
   // regex pattern
   // - at least 1 uppercase letter
   // - at least 1 lowercase letter
@@ -45,29 +33,44 @@ export class SignupComponent implements OnInit {
   // - at min 8
   pswPattern: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
-  get f() { return this.signupForm.controls; }
+  //icons
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
+  constructor(private router: Router, private authService : AuthService, private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.signupForm = this.formBuilder.group({ 
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(this.pswPattern)]]
+    })
+  }
+
+  get f() { return this.signupForm.controls; }
 
   onSubmit() {
     const formValues = this.signupForm.value;
 
     this.isExisting = false;
 
-    this.authService.signup(formValues).subscribe(
-      (res:any) => {
-        this.msgSuccess = res.message;
+    this.authService.signup(formValues).subscribe({
+      next: (res) => {
         this.isRegistered = true;
+        this.msgSuccess = res.message as string;
 
         setTimeout( ()=> {
           this.router.navigate(['/']);
-        }, 3000 );
+        }, 2000 )
       },
-      (error)=>{
-        this.msgError = error.message;
-        this.isExisting = true;
+      error: (res)=>{
+        console.log(res);
         
+        this.msgError = res.error.message;
+        this.isExisting = true;
       }
-    )
+    })
   }
 
 

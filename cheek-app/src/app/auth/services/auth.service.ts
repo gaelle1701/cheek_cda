@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IUser } from 'src/app/core/interfaces/user';
+import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
+import { IUser, LoginResponse, SignupResponse } from 'src/app/core/interfaces/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +17,16 @@ export class AuthService {
  
   constructor(private http: HttpClient) {}
 
-  signup({ lastName, firstName, email, password }: { roleAs: string, lastName: string, firstName: string, email: string, password: string }): Observable<IUser> {
+  signup({ lastName, firstName, email, password }: { roleAs: string, lastName: string, firstName: string, email: string, password: string }): Observable<SignupResponse> {
     return this.http.post<IUser>(this.signupUrl, {
       lastName,
       firstName,
       email,
       password
-    });
+    })
   }
 
-  login({ email, password }: { email: string, password: string }): Observable<IUser> {
+  login({ email, password }: { email: string, password: string }): Observable<LoginResponse> {
     return this.http.post<IUser>(this.loginUrl, {
       email,
       password
