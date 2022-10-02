@@ -12,6 +12,7 @@ export class AuthService {
   loginUrl = '/api/auth/login'
   profileUrl = '/api/auth/profile'
   editProfileUrl = '/api/auth/edit-profile'
+  confirmUrl = 'api/mailer/confirm'
 
   roleAs: string | null = '';
  
@@ -53,7 +54,7 @@ export class AuthService {
     return this.roleAs;
  }
 
-  // getUniqueString(uniqueString: string) {
-  //   return this.http.get(`${this.baseUrl}/confirm/${uniqueString}`)
-  // }
+  getUniqueString(uniqueString: string) {
+    return this.http.get(`${this.confirmUrl}/${uniqueString}`)
+  }
 }

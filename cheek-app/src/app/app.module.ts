@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignupComponent } from './auth/pages/signup/signup.component';
 import { LoginComponent } from './auth/pages/login/login.component';
+import { ConfirmationComponent } from './auth/pages/confirmation/confirmation.component';
 
 
 
@@ -17,7 +18,8 @@ import { LoginComponent } from './auth/pages/login/login.component';
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

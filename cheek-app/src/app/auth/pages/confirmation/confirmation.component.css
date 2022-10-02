@@ -1,0 +1,44 @@
+h1 {
+    font-family: var(--font-family-courier);
+    font-weight: 800;
+    color: var(--color-orange);
+}
+
+p {
+    margin: 5px;
+    font-family: var(--font-family-courier);
+    color: var(--color-black);
+}
+a {
+    color: var(--color-orange);
+    font-family: var(--font-family-courier);
+    margin-top: 20px;
+}
+.main__titles {
+    margin: 20px 0;
+}
+
+button {
+    background-color: var(--bg-color);
+    border: 2px solid var(--color-orange);
+    font-family:  var(--font-family-courier);
+    color: var(--color-orange);
+    margin: 20px 0;
+}
+
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .main__titles {
+        margin: 0;    
+    }
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+
+    .main__titles {
+        margin: 20px 0;    
+    }
+}
