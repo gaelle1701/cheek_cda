@@ -1,0 +1,50 @@
+<main class="container is-center">
+    <section class="col-10 col-8-md col-8-lg">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <section class="text-center">
+                <p>Modifier mes informations</p>
+            </section>
+        
+            <div *ngIf="isUpdated">
+                <p class="alertSuccess is-center">{{ msgSuccess }}</p>
+            </div>
+        
+            <section class="row">
+                <section class="form-input col-6 ">
+                    <label for="lastname-input">Nom*</label>
+                    <input type="text" id="lastname-input" formControlName="lastName" minlength="2">
+                    <div *ngIf="f['lastName']?.invalid && f['lastName']?.touched">
+                        <div *ngIf="f['lastName'].errors?.['required']">
+                            <p class="error">Le nom est requis!</p>
+                        </div>
+                        <div *ngIf="f['lastName'].errors?.['minlength']">
+                            <p class="error">Le nom doit comporter au minimun 2 lettres!</p>
+                        </div>
+                    </div>
+                </section>
+        
+                <section class="form-input col-6">
+                    <label for="firstname-input">Prénom*</label>
+                    <input type="text" id="firstname-input" formControlName="firstName" minlength="2">
+                    <div *ngIf="f['firstName']?.invalid && f['firstName']?.touched">
+                        <div *ngIf="f['firstName'].errors?.['required']">
+                            <p class="error">Le prénom est requis!</p>
+                        </div>
+                        <div *ngIf="f['firstName'].errors?.['minlength']">
+                            <p class="error">Le prénom doit comporter au minimun 2 lettres!</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        
+            <section class="form-input">
+                <label for="email-input">Email*</label>
+                <input type="email" id="email-input" [ngClass]="{'is-invalid' : f['email'].dirty || f['email'].touched && f['email'].invalid}" formControlName="email">
+            </section>
+        
+            <section class="is-center">
+                <button type="submit" [disabled]="profileForm.invalid">Valider</button>
+            </section>
+        </form>    
+    </section>
+</main>

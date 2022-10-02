@@ -16,10 +16,10 @@
                     <input type="text" id="lastname-input" formControlName="lastName" minlength="2">
                     <div *ngIf="f['lastName']?.invalid && f['lastName']?.touched">
                         <div *ngIf="f['lastName'].errors?.['required']">
-                            <p class="error">Votre nom est requis!</p>
+                            <p class="error">Le nom est requis!</p>
                         </div>
                         <div *ngIf="f['lastName'].errors?.['minlength']">
-                            <p class="error">Votre nom doit comporter au minimun 2 lettres!</p>
+                            <p class="error">Le nom doit comporter au minimun 2 lettres!</p>
                         </div>
                     </div>
                 </section>
@@ -29,10 +29,10 @@
                     <input type="text" id="firstname-input" formControlName="firstName" minlength="2">
                     <div *ngIf="f['firstName']?.invalid && f['firstName']?.touched">
                         <div *ngIf="f['firstName'].errors?.['required']">
-                            <p class="error">Votre prénom est requis!</p>
+                            <p class="error">Le prénom est requis!</p>
                         </div>
                         <div *ngIf="f['firstName'].errors?.['minlength']">
-                            <p class="error">Votre prénom doit comporter au minimun 2 lettres!</p>
+                            <p class="error">Le prénom doit comporter au minimun 2 lettres!</p>
                         </div>
                     </div>
                 </section>

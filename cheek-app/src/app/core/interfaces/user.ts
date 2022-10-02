@@ -25,3 +25,7 @@ export type LoginResponse = IUser & {
 export type SignupResponse = IUser & {
     message?: string
 }
+
+export type ProfileResponse = IUser & {
+    message?: string
+}

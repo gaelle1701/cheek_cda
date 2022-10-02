@@ -1,0 +1,20 @@
+@import url(../../../../assets/partials/forms.css);
+
+p {
+    font-family: var(--font-family-courier);
+    color: var(--color-black);
+    margin: 30px 0;
+}
+
+
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+
+}
