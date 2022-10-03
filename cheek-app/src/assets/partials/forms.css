@@ -51,4 +51,5 @@ button {
     font-family:  var(--font-family-courier);
     color: var(--color-error);
     font-size: var(--font-size-small);
+    margin: 0;
 }

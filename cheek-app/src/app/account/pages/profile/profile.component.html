@@ -37,10 +37,88 @@
                 </section>
             </section>
         
-            <section class="form-input">
-                <label for="email-input">Email*</label>
-                <input type="email" id="email-input" [ngClass]="{'is-invalid' : f['email'].dirty || f['email'].touched && f['email'].invalid}" formControlName="email">
+            <section class="row">
+                <section class="form-input col-6">
+                    <label for="email-input">Email*</label>
+                    <input type="text" id="email-input" formControlName="email">
+                    <div *ngIf="f['email']?.invalid && f['email']?.dirty || f['email']?.touched">
+                        <div *ngIf="f['email'].errors?.['required']">
+                            <p class="error">L'email est requis!</p>
+                        </div>
+                        <div *ngIf="f['email'].errors?.['email']">
+                            <p class="error">Le champs doit être une adresse email valide!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form-input col-6">
+                    <label for="phone-input">Téléphone*</label>
+                    <input (keypress)="keyPress($event)" type="text" id="phone-input" formControlName="phone" minlength="10" maxlength="10">
+                    <div *ngIf="f['phone']?.invalid && f['phone']?.touched">
+                        <div *ngIf="f['phone'].errors?.['required']">
+                            <p class="error">Le numéro de téléphone est requis!</p>
+                        </div>
+                        <div *ngIf="f['phone'].errors?.['minlength'] && f['phone'].errors?.['maxlength']">
+                            <p class="error">Le numéro de téléphone doit étre de type: 0699999999</p>
+                        </div>
+                    </div>
+                </section>
             </section>
+
+            <section class="text-center">
+                <p>Saisir ou modifier mon adresse de livraison</p>
+            </section>
+            <section class="row" formGroupName="address">
+                <section class="form-input col-4">
+                    <label for="number-input">N°*</label>
+                    <input type="text" id="number-input" formControlName="number">
+                    <div *ngIf="f['number']?.invalid && f['number']?.touched">
+                        <div *ngIf="f['number'].errors?.['required']">
+                            <p class="error">Le numéro de rue est requis!</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-input col-8">
+                    <label for="street-input">Rue*</label>
+                    <input type="text" id="street-input" formControlName="street" minlength="2">
+                    <div *ngIf="f['street']?.invalid && f['street']?.touched">
+                        <div *ngIf="f['street'].errors?.['required']">
+                            <p class="error">La rue est requise!</p>
+                        </div>
+                        <div *ngIf="f['street'].errors?.['minlength']">
+                            <p class="error">La rue doit contenir au minimun 2 lettres!</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section class="row" formGroupName="address">
+                <section class="form-input col-8">
+                    <label for="city-input">Ville*</label>
+                    <input type="text" id="city-input" formControlName="city" minlength="2">
+                    <div *ngIf="f['city']?.invalid && f['city']?.touched">
+                        <div *ngIf="f['city'].errors?.['required']">
+                            <p class="error">La ville est requise!</p>
+                        </div>
+                        <div *ngIf="f['city'].errors?.['minlength']">
+                            <p class="error">La ville doit contenir au minimun 2 lettres!</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-input col-4">
+                    <label for="zip_code-input">Code postal*</label>
+                    <input (keypress)="keyPressZipCode($event)" type="text" id="zip_code-input" formControlName="zip_code" minlength="5" maxlength="5">
+                    <div *ngIf="f['zip_code']?.invalid && f['zip_code']?.touched">
+                        <div *ngIf="f['zip_code'].errors?.['required']">
+                            <p class="error">Le code postal est requise!</p>
+                        </div>
+                        <div *ngIf="f['zip_code'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength'] && f['zip_code'].errors?.['pattern']">
+                            <p class="error">Le code postal doit être de type: 75001</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
         
             <section class="is-center">
                 <button type="submit" [disabled]="profileForm.invalid">Valider</button>

@@ -61,11 +61,12 @@ export class LoginComponent implements OnInit {
             }
             this.router.navigate(['/']);
           }, 3000 )
-
         } 
       },
       error: (res)=> {
         this.msgError = res.error.message;
+        console.log(this.msgError);
+        
         this.isInvalidPwd = true;
       }
     })

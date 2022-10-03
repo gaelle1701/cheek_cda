@@ -6,12 +6,11 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  { path: '',  component: AccountComponent },
-  { path: 'profil',  component: ProfileComponent },
-  { path: 'commande',  component: OrdersComponent }
-  // { path: '', canActivate: [AuthGuard] , children: [
-  //   { path: '',  component: AccountComponent }
-  // ]},
+  { path: '', canActivate: [AuthGuard] , children: [
+    { path: '',  component: AccountComponent },
+    { path: 'profil',  component: ProfileComponent },
+    { path: 'commande',  component: OrdersComponent }
+  ]},
 ];
 
 @NgModule({

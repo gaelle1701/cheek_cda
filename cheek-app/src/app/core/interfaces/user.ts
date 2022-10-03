@@ -3,6 +3,7 @@ import { ERole } from "../enums/role";
 import { IAddress } from "./address";
 
 export interface IUser {
+    user: {};
     id: number;
     firstName: string;
     lastName: string;
