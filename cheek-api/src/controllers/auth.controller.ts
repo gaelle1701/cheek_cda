@@ -26,8 +26,6 @@ class AuthController {
         firstName: req.body.firstName,
         email: req.body.email,
         password: req.body.password,
-        phone: req.body.phone,
-        address: req.body.address,
         token,
       });
 
@@ -40,7 +38,7 @@ class AuthController {
     } catch (error) {
       logger.error("signup user", error)
       return res.status(400).send({
-        message: 'Cet email ou numéro de téléphone existe déjà!',
+        message: 'Cet email existe déjà!',
       });
     }
   }

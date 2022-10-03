@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 
-import { CoreModule } from '../core/core.module';
 import { ProductCardComponent } from './component/product-card/product-card.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
@@ -28,8 +27,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   exports: [
     ProductCardComponent,
     ListProductsComponent,
-    ProductDetailComponent,
-  //   ManageProductsComponent
+    ProductDetailComponent
   ]
 })
+
 export class ProductsModule { }

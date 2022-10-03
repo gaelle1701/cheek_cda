@@ -1,0 +1,51 @@
+<main class="container is-center">
+    <section class="col-10 col-8-md col-8-lg">
+        <h3 class="text-center">{{ title }}</h3>
+        
+        <div *ngIf="isLoggedIn">
+            <p class="alertSuccess is-center">{{ msgSuccess }}</p>
+        </div>
+        <div *ngIf="isInvalidPwd">
+            <p class="alertError is-center">{{ msgError }}</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <section class="form-input">
+                <label for="emailLogin-input">Email*</label>
+                <input type="email" id="emailLogin-input" formControlName="email">
+                <div *ngIf="f['email']?.invalid && f['email']?.dirty || f['email']?.touched">
+                    <div *ngIf="f['email'].errors?.['required']">
+                        <p class="error">L'email est requis!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-input">
+                <label for="passwordLogin-input">Mot de passe*</label>
+                <div class="form-input-psw">
+                    <input class="is-marginless" [type]="showPassword ? 'text' : 'password'" id="passwordLogin-input"
+                    formControlName="password">
+                    <div (click)="showPassword = !this.showPassword" class="container-eye-icon" [class.hide]="showPassword">
+                       <fa-icon [icon]="faEyeSlash"></fa-icon>
+                    </div>
+                    <div (click)="showPassword = !this.showPassword" class="container-eye-icon" [class.hide]="!showPassword">
+                        <fa-icon [icon]="faEye"></fa-icon> 
+                    </div>
+                </div>
+                <div *ngIf="f['password']?.invalid && f['password']?.dirty || f['password']?.touched">
+                    <div *ngIf="f['password'].errors?.['required']">
+                        <p class="error">Le mot de passe est requis!</p>
+                    </div>
+                </div>   
+            </section>
+   
+            <section class="link-signup text-right">
+                <a [routerLink]="['/inscription']" routerLinkActive="router-link-active">Pas de compte? Inscris-toi!</a>
+            </section>
+
+            <section class="is-center">
+                <button type="submit">Valider</button>
+            </section>
+        </form>
+    </section>    
+</main>

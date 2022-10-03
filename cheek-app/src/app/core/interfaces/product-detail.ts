@@ -5,4 +5,4 @@ export interface IProductDetail {
     price_ttc: number;
     // size: Size[]
 }
-export type IProductDeatils = IProductDetail[]
+export type IProductDetails = IProductDetail[]

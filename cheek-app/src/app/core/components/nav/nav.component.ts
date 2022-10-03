@@ -26,15 +26,15 @@ interface INavItems {title: string; link: string; subNav?: this[]};
     ]),
   ],
 })
+
+
 export class NavComponent implements OnInit {
 
   constructor() { }
+  
   //icons
   faCaretDown = faCaretDown;
 
-
-
-  
   // callback function toggle from header(burger)
   @Input() toggle!: () => void;
 
@@ -45,16 +45,16 @@ export class NavComponent implements OnInit {
   }  
 
   navItems: INavItems[] = [
-    {title: "Boutique", link:"/boutique", 
+    { title: "Boutique", link:"/boutique", 
       subNav:[
-        {title: "T-shirts", link: "boutique/t-shirts"},
-        {title: "Sweats", link: "boutique/sweats"},
-        {title: "Accessoires", link: "boutique/accessoires"},
-        {title: "Autres", link: "boutique/autres"},
+        { title: "T-shirts", link: "boutique/t-shirts" },
+        { title: "Sweats", link: "boutique/sweats" },
+        { title: "Accessoires", link: "boutique/accessoires" },
+        { title: "Autres", link: "boutique/autres" },
       ]
     },
-    {title: "A propos", link:"a-propos"},
-    {title: "Mon compte", link:"compte"}
+    { title: "A propos", link:"a-propos" },
+    { title: "Mon compte", link:"compte" }
   ]
 
   isOpenSubNav: boolean = false;

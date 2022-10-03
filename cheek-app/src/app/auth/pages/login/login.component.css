@@ -1,0 +1,35 @@
+@import url(../../../../assets/partials/forms.css);
+
+h3 {
+    font-family: var(--font-family-courier);
+    font-weight: 800;
+    color: var(--color-orange);
+    margin: 4rem;
+    text-transform: uppercase;
+}
+
+.link-signup {
+    margin-top: 40px;
+}
+
+a {
+    color: var(--color-black);
+    font-family: var(--font-family-courier);
+}
+a:hover {
+    color: var(--color-orange);
+}
+.hide {
+    display: none;
+}
+
+
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+}

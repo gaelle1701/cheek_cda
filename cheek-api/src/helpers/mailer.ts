@@ -2,22 +2,18 @@ import * as nodemailer from 'nodemailer';
 
 const sendMail = (email: string, accessToken: string) => {
   const transport = nodemailer.createTransport({
-    // service: 'Gmail',
-    host: 'smtp.ethereal.email',
-    port: 587,
+    service: 'Gmail',
     auth: {
-      // user: 'cheekbrand@gmail.com',
-      //pass: 'ionjtcytoufzbtzs',
-      user: 'faustino81@ethereal.email',
-      pass: 'cujxME1vU72cGGbjFH',
+      user: 'cheekbrand@gmail.com',
+      pass: 'ionjtcytoufzbtzs',
     },
   });
 
   const mailOptions = {
     from: 'cheekbrand@gmail.com',
     to: email,
-    subject: "Email de confirmation d'inscription",
-    html: `<h1>Email de confirmation d'inscription.</h1>
+    subject: "Cheek-Paris.com: Email de confirmation d'inscription",
+    html: `<h1>Email de confirmation d'inscription</h1>
         <h2>Bonjour</h2>
         <p>Merci pour votre inscription au site Cheek-Paris.com.
         Veuillez confirmer votre email en cliquant sur le lien suivant.</p>

@@ -1,12 +1,12 @@
 <nav>
     <ul class="navBar__links">
         <li class="navBar__link" *ngFor="let navItem of navItems">
-            <a (click)="toggleNav()" *ngIf="navItem.title!=='Boutique'" routerLink="{{ navItem.link }}" routerLinkActive="router-link-active" >{{ navItem.title }}</a>     
+            <a (click)="toggleNav()" *ngIf="navItem.title !=='Boutique'" routerLink="{{ navItem.link }}" routerLinkActive="router-link-active" >{{ navItem.title }}</a>     
             <button (click)="toggleSubNav()" *ngIf="navItem.title==='Boutique'">{{ navItem.title }}
-                <fa-icon *ngIf="navItem.title==='Boutique'" [icon]="faCaretDown"></fa-icon>
+                <fa-icon *ngIf="navItem.title ==='Boutique'" [icon]="faCaretDown"></fa-icon>
             </button>
             <div>
-                <ul *ngIf="navItem.title==='Boutique'" [@openClose]="isOpenSubNav ? 'open' : 'closed'" class="navBar__subLinks">
+                <ul *ngIf="navItem.title ==='Boutique'" [@openClose]="isOpenSubNav ? 'open' : 'closed'" class="navBar__subLinks">
                     <li class="navBar__subLink" *ngFor="let subNavItem of navItem.subNav">
                         <a [href]="subNavItem.link">{{ subNavItem.title }}</a>
                     </li>
