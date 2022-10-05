@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
-import { EAccountStatus, User } from '../entities/User';
+import { EAccountStatus} from '../entities/User';
 import { userRepository } from '../repository/user.repository';
 import sendMail from '../helpers/mailer';
 import logger from '../config/winston';
@@ -38,7 +38,8 @@ class AuthController {
     } catch (error) {
       logger.error("signup user", error)
       return res.status(400).send({
-        message: 'Cet email existe déjà!',
+        // message: 'Cet email existe déjà!',
+        message: error.message
       });
     }
   }
@@ -69,7 +70,7 @@ class AuthController {
       }
 
       const accessToken = jwt.sign(
-        { id: user.id, role: user.role },
+        { id: user.id },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN },
       );

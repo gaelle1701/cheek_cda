@@ -9,7 +9,7 @@ export const sizeRepository = AppDataSource.getRepository(Size).extend({
   },
   async findBydId(id: number) {
     return await sizeRepository.findOneBy({
-      id,
+      id, 
     });
   },
 });

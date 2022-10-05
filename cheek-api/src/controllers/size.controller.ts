@@ -20,7 +20,7 @@ class SizeController {
 
   async getSizes(req: Request, res: Response) {
     try {
-      const getSizes = await sizeRepository.find();
+      const getSizes = await sizeRepository.find({ relations: ["details"] });
       return res.send(getSizes);
     } catch (error) {
       return res.status(500).send({
