@@ -27,7 +27,6 @@ export class ProductDetailComponent implements OnInit {
     this.isDisable = this.stocks.length === 0;   
   }
    
-  
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
 
@@ -48,15 +47,6 @@ export class ProductDetailComponent implements OnInit {
 
  
     })
-
-    // this.productsService.getProductDetails(product.id).subscribe( detail => {
-    //   console.log("detail", detail);
-    //   this.detail = detail;
-    //   this.sizes = detail.map((detl: any) => detl.size.label);
-    //   this.getStockBySize(this.selectedSize);
-    // })
-
-    
       
   }
 

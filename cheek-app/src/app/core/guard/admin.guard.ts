@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ERole } from '../enums/role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-
+  isAdmin = false
   constructor(private router: Router, private authService: AuthService){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-      return this.checkLogin(route, state.url)
-  }
- 
-  checkLogin(route: ActivatedRouteSnapshot, url: any) {
-    const role: null | string = this.authService.getRole();
-
-    if (route.data['role'] && route.data['role'].indexOf(role) === -1) {
-      this.router.navigate(['/'])
-      return false;
-    }
-    
-    return true
+    state: RouterStateSnapshot): Observable<boolean>| boolean  {
+      return this.authService.getProfile().pipe(map(
+        profile => {
+          if(profile.role === ERole.ADMIN) {
+            return true
+          } else {
+            this.router.navigate(['connexion'])
+            return false
+          }
+        }
+      ))
   }
   
 }

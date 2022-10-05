@@ -12,7 +12,6 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 
   loginUrl = '/api/auth/login';
-  roleAs: string = '';
 
   constructor() {}
 

@@ -50,16 +50,17 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         if (res.accessToken) {
           localStorage.setItem('token', res.accessToken)
-          localStorage.setItem('role', res.role)
           
           this.isLoggedIn = true;
           this.msgSuccess = res.message as string;
     
           setTimeout( ()=> {
             if(res.role === ERole.ADMIN){
-              this.router.navigate(['dashboard']);
+              this.router.navigate(['admin']);
+            } else {
+              this.router.navigate(['/']);
             }
-            this.router.navigate(['/']);
+           
           }, 3000 )
         } 
       },
