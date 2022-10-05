@@ -4,10 +4,10 @@ import { ProductDetail } from './ProductDetail';
 
 @Entity()
 export class Picture extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ type: "varchar", length:45, unique: true })
   label: string;
 
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 255, unique: true })
   url: string;
 
 

@@ -16,13 +16,13 @@ import { ProductDetail } from './ProductDetail';
 
 @Entity()
 export class Product extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 45, unique: true })
   name: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: "varchar", length: 255})
   description: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 45})
   slug: string;
 
   @ManyToOne(() => Category, (category) => category.products)
