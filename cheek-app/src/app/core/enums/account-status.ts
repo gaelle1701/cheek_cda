@@ -1,4 +1,4 @@
 export enum EAccountStatus {
-    PENDING = 'PENDING',
-    VALID = 'VALID',
+  PENDING = 'PENDING',
+  VALID = 'VALID',
 }

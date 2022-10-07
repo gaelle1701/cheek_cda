@@ -1,52 +1,47 @@
-@import url("~chota");
+@import url('~chota');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gloria+Hallelujah&display=swap');
 
 :root {
-    --bg-color: #ffffff;
-    --color-lightGrey: #E2E2E2;
-    --color-grey: #BBB8AD;
-    --color-black: #000000;
-    --color-error: #FF3232;
-    --color-success: #28bd14;
-    --color-orange: #FA9223;
+  --bg-color: #ffffff;
+  --color-lightGrey: #e2e2e2;
+  --color-grey: #bbb8ad;
+  --color-black: #000000;
+  --color-error: #ff3232;
+  --color-success: #28bd14;
+  --color-orange: #fa9223;
 
-    --grid-maxWidth: 120rem;
-    --grid-gutter: 2rem;
+  --grid-maxWidth: 120rem;
+  --grid-gutter: 2rem;
 
-    --font-size-small: 1rem;
-    --font-size: 1.6rem; 
-  
-    --font-family-courier: 'Courier Prime', monospace;
-    --font-family-gloria: 'Gloria Hallelujah', cursive;
+  --font-size-small: 1rem;
+  --font-size: 1.6rem;
+
+  --font-family-courier: 'Courier Prime', monospace;
+  --font-family-gloria: 'Gloria Hallelujah', cursive;
 }
 
 /* __________________________general style____________________ */
 
-html, body {
-    position: relative; 
-    min-height: 100%;
+html,
+body {
+  position: relative;
+  min-height: 100%;
 }
 svg {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-img{
-    display: block;
-    margin: 0 auto;
+img {
+  display: block;
+  margin: 0 auto;
 }
 main {
-    min-height: calc(100vh - 217px);
+  min-height: calc(100vh - 217px);
 }
 fa-icon {
-    color:var(--color-orange);
-    width: 26px;
-    height: 26px;
+  color: var(--color-orange);
+  width: 26px;
+  height: 26px;
 }
-
-
-
-
-
-

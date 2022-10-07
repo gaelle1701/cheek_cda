@@ -1,46 +1,43 @@
 h1 {
-    font-family: var(--font-family-courier);
-    font-weight: 800;
-    color: var(--color-orange);
-    margin: 0;
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  margin: 0;
 }
 h2 {
-    font-family: var(--font-family-gloria);
-    color: var(--color-black);
-    text-transform: capitalize;
-    margin: 0;
+  font-family: var(--font-family-gloria);
+  color: var(--color-black);
+  text-transform: capitalize;
+  margin: 0;
 }
 h3 {
-    font-family: var(--font-family-gloria);
-    color: var(--color-orange);
-    margin: 0;
+  font-family: var(--font-family-gloria);
+  color: var(--color-orange);
+  margin: 0;
 }
 .main__titles {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 .main__container-card {
-    margin:20px;
+  margin: 20px;
 }
-
 
 /* ___________________TABLET_________________ */
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
-    .main__titles {
-        margin: 0;    
-    }
+  .main__titles {
+    margin: 0;
+  }
 }
-
 
 /* ___________________DESKTOP_________________ */
 
 @media screen and (min-width: 900px) {
+  .main__titles {
+    margin: 20px 0;
+  }
 
-    .main__titles {
-        margin: 20px 0;    
-    }
-
-    .main__container-card {
-        margin: 20px 0;
-    }
+  .main__container-card {
+    margin: 20px 0;
+  }
 }

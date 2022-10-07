@@ -14,12 +14,8 @@ import { ConfirmationComponent } from './auth/pages/confirmation/confirmation.co
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { AccountComponent } from './account/pages/account/account.component';
 
-
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,8 +24,8 @@ import { AccountComponent } from './account/pages/account/account.component';
     CoreModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -9,20 +9,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
-  declarations: [
-    AccountComponent,
-    ProfileComponent,
-    OrdersComponent
-  ],
+  declarations: [AccountComponent, ProfileComponent, OrdersComponent],
   imports: [
     CommonModule,
     AccountRoutingModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    FontAwesomeModule
-  ]
+    FontAwesomeModule,
+  ],
 })
-
-export class AccountModule { }
+export class AccountModule {}

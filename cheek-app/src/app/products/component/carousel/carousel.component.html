@@ -1,21 +1,32 @@
 <section class="carousel">
-    <div class="carousel__slide" *ngFor="let slide of slides; index as i">       
-        <img src="{{ slide.url }}" alt="{{ slide.label }}" *ngIf="i + 1 === currentSlide" [@carouselTransition]>
-    </div>
-    <button class="carousel__previous button clear" (click)='previous()' [disabled]="currentSlide === 1">
-        <fa-icon [icon]="faPrevious"></fa-icon>
-    </button>
-    <button class="carousel__next button clear" (click)='next()' [disabled]="currentSlide === slides.length">
-        <fa-icon [icon]="faNext"></fa-icon>
-    </button>
+  <div class="carousel__slide" *ngFor="let slide of slides; index as i">
+    <img
+      src="{{ slide.url }}"
+      alt="{{ slide.label }}"
+      *ngIf="i + 1 === currentSlide"
+      [@carouselTransition]
+    />
+  </div>
+  <button
+    class="carousel__previous button clear"
+    (click)="previous()"
+    [disabled]="currentSlide === 1"
+  >
+    <fa-icon [icon]="faPrevious"></fa-icon>
+  </button>
+  <button
+    class="carousel__next button clear"
+    (click)="next()"
+    [disabled]="currentSlide === slides.length"
+  >
+    <fa-icon [icon]="faNext"></fa-icon>
+  </button>
 </section>
 <section class="carousel__dots">
-    <ng-container *ngFor="let slide of slides; index as i">
-        <div class="carousel__dot" [ngClass]="currentSlide === i + 1 ? 'caroussel__dot active' : ''"></div>
-    </ng-container>
+  <ng-container *ngFor="let slide of slides; index as i">
+    <div
+      class="carousel__dot"
+      [ngClass]="currentSlide === i + 1 ? 'caroussel__dot active' : ''"
+    ></div>
+  </ng-container>
 </section>
-
-
-    
-
-

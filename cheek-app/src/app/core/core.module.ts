@@ -12,26 +12,22 @@ import { StaticModule } from '../static/static.module';
 import { RouterModule } from '@angular/router';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 
-
-
 @NgModule({
-  declarations: [
-    FooterComponent,
-    HeaderComponent,
-    NavComponent
-  ],
+  declarations: [FooterComponent, HeaderComponent, NavComponent],
   imports: [
     CommonModule,
     FontAwesomeModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-
   // exports des modules voulus et utilisés au démarage de l'appli
-
   exports: [
-    AuthRoutingModule, HeaderComponent, NavComponent, FooterComponent, StaticModule
-  ]
+    AuthRoutingModule,
+    HeaderComponent,
+    NavComponent,
+    FooterComponent,
+    StaticModule,
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -6,15 +6,19 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', canActivate: [AuthGuard] , children: [
-    { path: '',  component: AccountComponent },
-    { path: 'profil',  component: ProfileComponent },
-    { path: 'commande',  component: OrdersComponent }
-  ]},
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: AccountComponent },
+      { path: 'profil', component: ProfileComponent },
+      { path: 'commande', component: OrdersComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AccountRoutingModule { }
+export class AccountRoutingModule {}
