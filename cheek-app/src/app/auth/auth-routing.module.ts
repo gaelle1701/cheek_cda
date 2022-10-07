@@ -7,11 +7,11 @@ import { SignupComponent } from './pages/signup/signup.component';
 const routes: Routes = [
   { path: 'inscription', component: SignupComponent },
   { path: 'connexion', component: LoginComponent },
-  { path: 'confirm/:uniqueString', component: ConfirmationComponent},
+  { path: 'confirm/:uniqueString', component: ConfirmationComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

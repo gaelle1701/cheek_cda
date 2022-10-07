@@ -6,24 +6,27 @@ import { IProducts } from 'src/app/core/interfaces/product';
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
-  styleUrls: ['./list-products.component.css']
+  styleUrls: ['./list-products.component.css'],
 })
 export class ListProductsComponent implements OnInit {
   title: string | null = '';
-  cards: IProducts = []
+  cards: IProducts = [];
 
-  constructor(private route: ActivatedRoute, private categoriesService: CategoriesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private categoriesService: CategoriesService,
+  ) {}
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     this.title = routeParams.get('categoryName');
 
-    this.categoriesService.getCategoryByName(this.title as string).subscribe(category => {      
-      this.cards = category.products.map(product => {  
-        return { ...product }
-      })
-    })
-
+    this.categoriesService
+      .getCategoryByName(this.title as string)
+      .subscribe((category) => {
+        this.cards = category.products.map((product) => {
+          return { ...product };
+        });
+      });
   }
-
 }

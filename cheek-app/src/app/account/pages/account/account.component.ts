@@ -5,20 +5,16 @@ import { faFileLines, faIdCard } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit {
-
-  title = 'Mon compte'
+  title = 'Mon compte';
 
   //icons
   faProfile = faIdCard;
   faOrder = faFileLines;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
