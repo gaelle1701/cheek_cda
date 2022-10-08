@@ -5,9 +5,7 @@ import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
-  declarations: [
-    CartComponent
-  ],
+  declarations: [CartComponent],
   imports: [CommonModule, CartRoutingModule],
 })
 export class CartModule {}

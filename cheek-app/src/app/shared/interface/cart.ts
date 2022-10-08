@@ -1,12 +1,13 @@
 export interface CartItem {
   id: number;
-  quantity: number;
-  price: any;
+  stock: number;
+  price: number;
+  size: string;
 }
 
 export interface ICart {
   items: CartItem[];
-  totalHt: number;
-  totalTtc: number;
+  total_ht: number;
+  total_ttc: number;
   shippingFees: boolean;
 }

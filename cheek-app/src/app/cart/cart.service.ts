@@ -15,14 +15,16 @@ export class CartService {
   }
 
   addProduct(product: CartItem) {
+    console.log(product);
     return this.httpService
-      .post<any>(this._cartUrl, {
+      .post<CartItem>(this._cartUrl, {
         id: product.id,
-        quantity: product.quantity,
+        stock: product.stock,
         price: product.price,
+        size: product.size,
       })
-      .subscribe((c) => {
-        console.log(c);
+      .subscribe((s) => {
+        console.log(s);
       });
   }
 

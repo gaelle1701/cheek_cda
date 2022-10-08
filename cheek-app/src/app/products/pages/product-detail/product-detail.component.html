@@ -10,13 +10,15 @@
         <p class="details">{{ product.details[0]?.price_ttc ?? 0 }} €</p>
       </article>
       <section class="container__select">
-        <select class="custom__select" (change)="onChange($event)">
+        <select class="custom__select" (change)="onSelectSize($event)" >
+          <option value='' selected>Taille</option>
           <option *ngFor="let size of sizes; index as i" [value]="i">
             {{ size }}
           </option>
         </select>
 
-        <select class="custom__select" *ngIf="stocks.length > 0">
+        <select class="custom__select" *ngIf="stocks.length > 0" (change)='onSelectStock($event)'>
+          <option selected>Quantité</option>
           <option *ngFor="let stock of stocks" [value]="stock">
             {{ stock }}
           </option>
@@ -26,7 +28,7 @@
         <p>Oups... Plus de stock disponible pour cette taille !</p>
       </div>
       <section class="is-center">
-        <button>Ajouter</button>
+        <button (click)='addProductToCart(product)'>Ajouter</button>
       </section>
     </section>
   </section>

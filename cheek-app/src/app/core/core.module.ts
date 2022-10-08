@@ -10,7 +10,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { StaticModule } from '../static/static.module';
 import { RouterModule } from '@angular/router';
-import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, NavComponent],
