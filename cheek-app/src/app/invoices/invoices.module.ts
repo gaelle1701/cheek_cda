@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { InvoicesRoutingModule } from './invoices-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    InvoicesRoutingModule
-  ]
+  imports: [CommonModule, InvoicesRoutingModule],
 })
-export class InvoicesModule { }
+export class InvoicesModule {}

@@ -1,55 +1,60 @@
-input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=color]):not([type=button]):not([type=reset]), textarea, textarea[type=text] {
-    background-color: var(--color-lightGrey);  
-    border: 2px solid var(--color-grey);
-    margin-bottom: auto;
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='color']):not([type='button']):not([type='reset']),
+textarea,
+textarea[type='text'] {
+  background-color: var(--color-lightGrey);
+  border: 2px solid var(--color-grey);
+  margin-bottom: auto;
 }
 
-input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=color]):not([type=button]):not([type=reset]):focus, textarea:focus, textarea[type=text]:focus {
-    background-color: var(--bg-color);  
-    border: 2px solid var(--color-orange) !important;
-    margin-bottom: auto;
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='color']):not([type='button']):not([type='reset']):focus,
+textarea:focus,
+textarea[type='text']:focus {
+  background-color: var(--bg-color);
+  border: 2px solid var(--color-orange) !important;
+  margin-bottom: auto;
 }
 
 label {
-    font-family: var(--font-family-courier);
+  font-family: var(--font-family-courier);
 }
 
 button {
-    background-color: var(--bg-color);
-    border: 2px solid var(--color-orange);
-    font-family:  var(--font-family-courier);
-    color: var(--color-orange);
-    margin: 20px 0;
+  background-color: var(--bg-color);
+  border: 2px solid var(--color-orange);
+  font-family: var(--font-family-courier);
+  color: var(--color-orange);
+  margin: 20px 0;
 }
 
 /* ************** CUSTOM ****************** */
 
 .form-input {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
-.form-input-email, .form-input-psw {
-    display: flex;
-    align-items: center;
+.form-input-email,
+.form-input-psw {
+  display: flex;
+  align-items: center;
 }
 
 .container-eye-icon {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .alertSuccess {
-    color: var(--color-success);
-    font-family:  var(--font-family-courier);
+  color: var(--color-success);
+  font-family: var(--font-family-courier);
 }
 
 .alertError {
-    font-family:  var(--font-family-courier);
-    color: var(--color-error);
+  font-family: var(--font-family-courier);
+  color: var(--color-error);
 }
 
 .error {
-    font-family:  var(--font-family-courier);
-    color: var(--color-error);
-    font-size: var(--font-size-small);
-    margin: 0;
+  font-family: var(--font-family-courier);
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+  margin: 0;
 }

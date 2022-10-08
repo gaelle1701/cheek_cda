@@ -8,19 +8,14 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
-  declarations: [
-    SignupComponent,
-    LoginComponent,
-    ConfirmationComponent
-  ],
+  declarations: [SignupComponent, LoginComponent, ConfirmationComponent],
   imports: [
     CommonModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-  ]
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -1,62 +1,60 @@
 <main class="container">
-    <section class="row container-filter">
-        <select   class="col-3 custom-select">
-            <option value="">Filter par catégorie</option>
-            <!-- <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option> -->
-        </select>
-        <select (change)="onChangeSize($event)"  class="col-3 custom-select">
-            <option value="">Filter par taille</option>
-            <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option>
-        </select>
-    </section>
+  <section class="row container-filter">
+    <select class="col-3 custom-select">
+      <option value="">Filter par catégorie</option>
+      <!-- <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option> -->
+    </select>
+    <select (change)="onChangeSize($event)" class="col-3 custom-select">
+      <option value="">Filter par taille</option>
+      <option *ngFor="let size of sizes" [value]="size.id">
+        {{ size.label }}
+      </option>
+    </select>
+  </section>
 
-    
-    <!-- <div *ngIf="isDeleted">
+  <!-- <div *ngIf="isDeleted">
         <p class="alertSuccess is-center">{{msgSuccess}}</p>
     </div> -->
-    
-    <table> 
-        <thead>
-            <tr>
-                <th scope="col">Catégorie</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prix HT</th>
-                <th scope="col">Prix TTC</th>
-                <th scope="col">Taille</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Modifier</th>
-                <th scope="col">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
-                <td data-label="Catégorie">{{product.category.name}}</td>
-                <td data-label="Nom">{{product.name}} </td>
-                <td data-label="Prix HT">{{product.price_ht}} € HT</td>
-                <td data-label="Prix TTC">{{product.price_ttc}} € TTC</td>
-                <td data-label="Taille">{{product.size.label}}</td>
-                <td data-label="Stock">{{product.stock}}</td>
-                <td data-label="Modifier">
-                    <button>
-                        <a routerLink="/dashboard/" >
-                           <fa-icon [icon]="faEdit"></fa-icon>
-                        </a>
-                    </button>  
-                </td>
-                <td data-label="Supprimer">
-                    <button>
-                        <fa-icon [icon]="faDelete"></fa-icon>
-                    </button>  
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="is-center">
-        <button>
-            <a routerLink="/dashboard/produits/ajouter">Ajouter un produit</a>
-        </button>     
-    </div>
-     
-</main>        
 
-
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prix HT</th>
+        <th scope="col">Prix TTC</th>
+        <th scope="col">Taille</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Modifier</th>
+        <th scope="col">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td data-label="Catégorie">{{ product.category.name }}</td>
+        <td data-label="Nom">{{ product.name }}</td>
+        <td data-label="Prix HT">{{ product.price_ht }} € HT</td>
+        <td data-label="Prix TTC">{{ product.price_ttc }} € TTC</td>
+        <td data-label="Taille">{{ product.size.label }}</td>
+        <td data-label="Stock">{{ product.stock }}</td>
+        <td data-label="Modifier">
+          <button>
+            <a routerLink="/dashboard/">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </a>
+          </button>
+        </td>
+        <td data-label="Supprimer">
+          <button>
+            <fa-icon [icon]="faDelete"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="is-center">
+    <button>
+      <a routerLink="/dashboard/produits/ajouter">Ajouter un produit</a>
+    </button>
+  </div>
+</main>

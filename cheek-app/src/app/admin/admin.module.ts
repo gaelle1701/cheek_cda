@@ -10,20 +10,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductFormComponent } from './pages/manage-products/product-form/product-form.component';
 import { ProductsModule } from '../products/products.module';
 
-
 @NgModule({
   declarations: [
     DashboardComponent,
     ManageUsersComponent,
     ManageProductsComponent,
     ManageOrdersComponent,
-    ProductFormComponent
+    ProductFormComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FontAwesomeModule,
-    ProductsModule
-  ]
+    ProductsModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

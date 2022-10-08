@@ -1,17 +1,15 @@
 @import url(../../../../assets/partials/forms.css);
 
 h3 {
-    font-family: var(--font-family-courier);
-    font-weight: 800;
-    color: var(--color-orange);
-    margin: 4rem;
-    text-transform: uppercase;
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  margin: 4rem;
+  text-transform: uppercase;
 }
 .hide {
- display: none;
+  display: none;
 }
-
-
 
 /* ___________________TABLET_________________ */
 

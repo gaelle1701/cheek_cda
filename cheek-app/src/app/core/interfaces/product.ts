@@ -1,16 +1,15 @@
-import { ICategory } from "./category";
-import { IProductDetail, IProductDetails } from "./product-detail";
-
+import { ICategory } from './category';
+import { IProductDetails } from './product-detail';
 
 export interface IProduct {
-    id: number;
-    name: string;
-    description: string;
-    slug: string;
-    category: ICategory;
-    details: IProductDetails;
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+  category: ICategory;
+  details: IProductDetails;
 
-    // orderLines: OrderLines[];
+  // orderLines: OrderLines[];
 }
 
-export type IProducts = IProduct[]
+export type IProducts = IProduct[];

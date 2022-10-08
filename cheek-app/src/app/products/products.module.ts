@@ -9,25 +9,18 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { CarouselComponent } from './component/carousel/carousel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
-
 @NgModule({
   declarations: [
     ProductCardComponent,
     ListProductsComponent,
     ProductDetailComponent,
-    CarouselComponent
+    CarouselComponent,
   ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    ProductsRoutingModule
-  ],
+  imports: [CommonModule, FontAwesomeModule, ProductsRoutingModule],
   exports: [
     ProductCardComponent,
     ListProductsComponent,
-    ProductDetailComponent
-  ]
+    ProductDetailComponent,
+  ],
 })
-
-export class ProductsModule { }
+export class ProductsModule {}

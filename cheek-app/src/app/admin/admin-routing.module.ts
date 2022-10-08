@@ -7,16 +7,20 @@ import { ManageProductsComponent } from './pages/manage-products/manage-products
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
 
 const routes: Routes = [
-  { path: '', canActivate: [AdminGuard], children: [
-    { path: '', component: DashboardComponent },
-    { path: 'gestion-produits', component: ManageProductsComponent },
-    { path: 'gestion-clients', component: ManageUsersComponent },
-    { path: 'gestion-commandes', component: ManageOrdersComponent },
-  ]}
+  {
+    path: '',
+    canActivate: [AdminGuard],
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'gestion-produits', component: ManageProductsComponent },
+      { path: 'gestion-clients', component: ManageUsersComponent },
+      { path: 'gestion-commandes', component: ManageOrdersComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
