@@ -4,6 +4,7 @@ import { AdminGuard } from '../core/guard/admin.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
+import { ProductFormComponent } from './pages/manage-products/product-form/product-form.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'gestion-produits', component: ManageProductsComponent },
+      { path: 'gestion-produits/ajouter', component: ProductFormComponent },
       { path: 'gestion-clients', component: ManageUsersComponent },
       { path: 'gestion-commandes', component: ManageOrdersComponent },
     ],

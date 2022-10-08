@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { ISize, ISizes } from 'src/app/core/interfaces/size'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -10,11 +12,11 @@ export class SizesService {
 
   constructor(private http: HttpClient) {}
 
-  getSizes(): Observable<any> {
-    return this.http.get(this.sizesUrl);
+  getSizes(): Observable<ISizes> {
+    return this.http.get<ISizes>(this.sizesUrl);
   }
 
-  getSizeById(sizeId: number): Observable<any> {
-    return this.http.get(this.sizesUrl + sizeId);
+  getSizeById(sizeId: number): Observable<ISize> {
+    return this.http.get<ISize>(this.sizesUrl + sizeId);
   }
 }

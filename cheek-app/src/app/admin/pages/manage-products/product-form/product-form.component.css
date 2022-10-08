@@ -1,0 +1,51 @@
+@import url(../../../../../assets/partials/forms.css);
+
+h3 {
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  margin: 4rem;
+  text-transform: uppercase;
+}
+
+p{
+  font-family: var(--font-family-courier);
+}
+
+.custom-select, .custom-select__size {
+  background-color: var(--bg-color);
+  font-family: var(--font-family-courier);
+  border: 2px solid var(--color-orange);
+}
+.upload-btn {
+  margin-left: 10px;
+}
+.file-input {
+    display: none !important;
+  }
+
+  
+/* ___________________TABLET_________________ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+
+  .custom-select {
+      width: 60%;
+    }
+}
+
+/* ___________________DESKTOP_________________ */
+
+@media screen and (min-width: 900px) {
+  
+  .custom-select {
+    width: 60%;
+  }
+  /* .custom-select__size{
+    width: 80%;
+  } */
+
+
+  
+
+}
