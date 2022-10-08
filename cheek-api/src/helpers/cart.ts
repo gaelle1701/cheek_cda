@@ -1,7 +1,8 @@
 type CartItem = {
   id: number; // id de quoi ???
-  quantity: number;
-  price: any; // price_ht ou ttc ???
+  stock: number;
+  price: number; // price_ht ou ttc ???
+  size: string;
 };
 
 export interface ICart {
@@ -31,24 +32,22 @@ export class Cart implements ICart {
       cart.items?.push(item);
       this.calculateTotal(cart);
     } else {
-      this.updateProductToCart(item.id, item.quantity, cart);
+      this.updateProductToCart(item.id, item.stock, item.size, cart);
     }
-
     return cart;
   }
 
-  updateProductToCart(productId: number, qty: number, cart) {
+  updateProductToCart(productId: number, stock: number, size: string, cart) {
     cart.items = cart.items.map((item) => {
-      if (item.id === productId) {
+      if (item.id === productId && item.size === size) {
         return {
           ...item,
-          quantity: (item.quantity += qty),
+          stock: (item.stock += stock),
         };
       }
       return item;
     });
     this.calculateTotal(cart);
-
     return cart;
   }
 
@@ -60,15 +59,15 @@ export class Cart implements ICart {
 
   calculateTotal(cart: ICart) {
     const totalHt = cart.items.reduce(
-      (acc, val) => acc + val.price * val.quantity,
+      (acc, val) => acc + val.price * val.stock,
       0,
     );
     const totalTtc = cart.items.reduce(
-      (acc, val) => (acc + val.price * VAT_RATE) * val.quantity,
+      (acc, val) => (acc + val.price * VAT_RATE) * val.stock,
       0,
     );
-    cart.total_ht = this.total_ht;
-    cart.total_ttc = this.total_ht + this.total_ttc;
+    cart.total_ht = totalHt;
+    cart.total_ttc = totalTtc;
     cart.shippingFees = cart.total_ttc >= 70;
 
     if (!cart.items.length) {

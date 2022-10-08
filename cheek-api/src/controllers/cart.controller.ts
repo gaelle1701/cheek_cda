@@ -13,8 +13,9 @@ class CartController {
       Cart.addProductToCart(
         {
           id: parseInt(req.body.id),
-          price: req.body.price,
-          quantity: parseInt(req.body.quantity, 10),
+          price: parseFloat(req.body.price),
+          stock: parseInt(req.body.stock, 10),
+          size: req.body.size,
         },
         req.session.cart,
       );
@@ -37,6 +38,7 @@ class CartController {
       Cart.updateProductToCart(
         parseInt(req.params.id, 10),
         parseInt(req.body.quantity, 10),
+        req.body.size,
         req.session.cart,
       );
 
