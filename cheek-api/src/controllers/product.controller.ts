@@ -10,6 +10,8 @@ class ProductController {
         });
       }
 
+      console.log(req.body);
+      
       const savedProduct = await productRepository.createProduct(req.body);
       return res.send(savedProduct);
     } catch (error) {
