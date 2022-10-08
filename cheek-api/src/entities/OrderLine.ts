@@ -1,11 +1,16 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './Order';
 import { Product } from './Product';
-import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class OrderLine extends BaseEntity {
-  @Column()
+export class OrderLine {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'date', select: false })
+  created_at: Date;
+  
+  @Column({type: 'int'})
   quantity: number;
 
   @ManyToOne(() => Product, (product) => product.orderLines)

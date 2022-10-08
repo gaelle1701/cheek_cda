@@ -14,7 +14,7 @@ export class AuthService {
   editProfileUrl = '/api/auth/edit-profile';
   confirmUrl = 'api/mailer/confirm';
 
-  roleAs: string | null = '';
+  // roleAs: string | null = '';
  
   constructor(private http: HttpClient) {}
 
@@ -34,6 +34,10 @@ export class AuthService {
     });
   }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem("token") !== null ? true : false
+  }
+
   getProfile(): Observable<IUser> {
     return this.http.get<IUser>(this.profileUrl)
   }
@@ -49,10 +53,10 @@ export class AuthService {
       })
   }
 
-  getRole() {
-    this.roleAs = localStorage.getItem('role');
-    return this.roleAs;
- }
+//   getRole() {
+//     this.roleAs = localStorage.getItem('role');
+//     return this.roleAs;
+//  }
 
   getUniqueString(uniqueString: string) {
     return this.http.get(`${this.confirmUrl}/${uniqueString}`)

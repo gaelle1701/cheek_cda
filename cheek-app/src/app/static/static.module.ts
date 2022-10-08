@@ -15,11 +15,9 @@ import { HomeComponent } from './home/home.component';
     CommonModule,
     StaticRoutingModule,
     ProductsModule
-    
   ],
   exports: [
     HomeComponent
-  
   ]
 })
 

@@ -22,7 +22,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     FontAwesomeModule,
     ProductsRoutingModule
-
   ],
   exports: [
     ProductCardComponent,

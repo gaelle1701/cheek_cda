@@ -1,6 +1,5 @@
-import { Entity, Column, OneToOne, BeforeInsert, JoinColumn } from 'typeorm';
+import { Entity, Column, OneToOne, BeforeInsert, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './Order';
-import { BaseEntity } from './BaseEntity';
 
 export enum EPaymentMode {
   DIRECT_DEBIT = 'DIRECT_DEBIT',
@@ -8,7 +7,13 @@ export enum EPaymentMode {
 }
 
 @Entity()
-export class Invoice extends BaseEntity {
+export class Invoice{
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'date', select: false })
+  created_at: Date;
+  
   @Column('enum', { enum: EPaymentMode })
   payment_mode: EPaymentMode;
 

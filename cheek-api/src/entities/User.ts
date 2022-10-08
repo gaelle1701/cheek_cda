@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { Address } from './Address';
 import { BaseEntity } from './BaseEntity';
+import { Order } from './Order';
 
 export enum ERole {
   ADMIN = 'ADMIN',
@@ -18,19 +19,19 @@ export class User extends BaseEntity {
   @Column('enum', { enum: ERole, default: ERole.CUSTOMER, nullable: false })
   role: ERole;
 
-  @Column({ nullable: false })
+  @Column({ type: "varchar", length: 45, nullable: false })
   firstName: string;
 
-  @Column({ nullable: false })
+  @Column({ type: "varchar", length: 45, nullable: false })
   lastName: string;
 
-  @Column({ unique: true, nullable: true})
+  @Column({ type: "varchar", length:45, unique: true, nullable: true})
   phone: string;
 
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 150, unique: true })
   email: string;
 
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 150, unique: true })
   password: string;
 
   @Column({ nullable: true, unique: true })
@@ -42,6 +43,11 @@ export class User extends BaseEntity {
   @OneToOne(() => Address)
   @JoinColumn({ name: 'address_id' })
   address: Address
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
+  
+
 
 
   // created status automatically
