@@ -7,7 +7,7 @@ import { AuthGuard } from './core/guard/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { 
-    path: 'accueil', 
+    path: '', 
     loadChildren:() => import('./static/static.module').then(m => m.StaticModule)
   },
   { 

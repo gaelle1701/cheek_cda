@@ -19,7 +19,7 @@ export class ListProductsComponent implements OnInit {
     this.title = routeParams.get('categoryName');
 
     this.categoriesService.getCategoryByName(this.title as string).subscribe(category => {      
-      this.cards = category.products.map(product => {        
+      this.cards = category.products.map(product => {  
         return { ...product }
       })
     })

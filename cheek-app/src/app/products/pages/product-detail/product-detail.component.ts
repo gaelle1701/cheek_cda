@@ -8,7 +8,6 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
   slides = [];
   detail?: { stock: number }[] = [];
   sizes: string[] = [];
@@ -17,9 +16,7 @@ export class ProductDetailComponent implements OnInit {
   selectedSize: number = 0;
   isDisable: boolean = false;
 
-
   constructor(private route: ActivatedRoute, private productsService: ProductsService) { }
-
 
   onChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
@@ -31,11 +28,14 @@ export class ProductDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
 
     this.productsService.getProductByName(routeParams.get('productName') as string).subscribe( product => {
-      console.log("detail", product.details);
       this.detail = product.details;
       this.sizes = product.details.map((detl: any) => detl.size.label);
       
       this.getStockBySize(this.selectedSize);
+
+
+
+      
       console.log("stockBySize", this.getStockBySize(this.selectedSize));
       
           

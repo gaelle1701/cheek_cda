@@ -8,19 +8,23 @@ import { ERole } from '../enums/role';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  isAdmin = false
-  constructor(private router: Router, private authService: AuthService){}
+  isAdmin = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean>| boolean  {
+      
       return this.authService.getProfile().pipe(map(
         profile => {
           if(profile.role === ERole.ADMIN) {
-            return true
+            return true;
           } else {
             this.router.navigate(['connexion'])
-            return false
+            return false;
           }
         }
       ))

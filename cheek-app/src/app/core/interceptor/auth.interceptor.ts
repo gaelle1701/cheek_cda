@@ -10,7 +10,6 @@ import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   loginUrl = '/api/auth/login';
 
   constructor() {}
@@ -19,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // handle interceptor only on other routes than /login
     if (req.url !== this.loginUrl) {
-
       // This retrieves a token from local storage
       const token: null | string = localStorage.getItem('token');
 

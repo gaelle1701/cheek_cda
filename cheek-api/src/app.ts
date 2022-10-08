@@ -27,6 +27,6 @@ import logger from './config/winston';
       logger.info(`App listen on port, http://localhost:${port}`);
     });
   } catch (err) {
-    logger.error('Data Source has been initialized!', err);
+    logger.error('Data Source has not been initialized!', err);
   }
 })();

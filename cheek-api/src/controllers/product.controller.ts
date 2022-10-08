@@ -39,7 +39,16 @@ class ProductController {
           ],
         });
       } else {
-          getProducts = await productRepository.find()
+          getProducts = await productRepository.find( {
+            relations: [
+              'category',
+              'details',
+              'details.size',
+              'details.pictures'
+            ],
+          }
+           
+          )
         }
       
       return res.send(getProducts);

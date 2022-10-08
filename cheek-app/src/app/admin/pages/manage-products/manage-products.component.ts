@@ -24,39 +24,37 @@ export class ManageProductsComponent implements OnInit {
 
   onChangeSize(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-    this.selectedSize = parseInt(value);
-    this.getSizeById(this.selectedSize);    
+    this.selectedSize = parseInt(value);  
+    // this.getSizeById(this.selectedSize);
   }
 
   ngOnInit(): void {
-    this.getProductsBySize()
-    this.sizesService.getSizes().subscribe(sizes => {
-      this.selectedSize = sizes[0].id;
-      console.log("select getSizes", this.selectedSize);
-      this.sizes = sizes
-      console.log("sizes", this.sizes);
-    })
+    this.getProducts()
+    // this.sizesService.getSizes().subscribe(sizes => {
+    //   this.selectedSize = sizes[0].id;     
+    //   this.sizes = sizes      
+    // })
   }
 
-  getSizeById(sizeId: number){
-    this.sizesService.getSizeById(sizeId).subscribe(size => {
-      this.selectedSize = size.id;
+  // getSizeById(sizeId: number){
+  //   this.sizesService.getSizeById(sizeId).subscribe(size => {
+  //     this.selectedSize = size.id;
+  //     this.products = size.details.map((detail: any) => {
+ 
+  //       return {
+  //         size: { label: size.label }, 
+  //         ...detail, ...detail.product
+  //       }
+  //     })
       
-      this.products = size.details.map((detail: any) => {
-        return {
-          size: { label: size.label }, 
-          ...detail, ...detail.product
-        }
-      })
-      
-    })
-  }
+  //   })
+  // }
 
-  getProductsBySize() {
-    this.productsService.getProducts().subscribe((products) => {
-      products.map(product => {
-        product.details.map((detail) => {
-         this.products?.push({...detail, ...product})
+  getProducts() {
+    this.productsService.getProducts().subscribe((products) => {      
+      products.map(product => {        
+        product?.details?.map((detail) => {
+         this.products?.push({...detail, ...product})    
         })
      })
    })

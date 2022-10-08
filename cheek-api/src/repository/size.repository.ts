@@ -8,8 +8,12 @@ export const sizeRepository = AppDataSource.getRepository(Size).extend({
     return await sizeRepository.save(createSize);
   },
   async findBydId(id: number) {
-    return await sizeRepository.findOneBy({
-      id, 
+    return await sizeRepository.findOne({
+      where: {id},
+      relations: [
+        "details",
+        "details.product"
+      ]
     });
   },
 });
