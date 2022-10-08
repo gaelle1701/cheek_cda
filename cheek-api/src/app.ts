@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
+import * as cloudinary from 'cloudinary';
 
 dotenv.config({
   path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
@@ -10,6 +11,13 @@ import { AppDataSource } from './config/data-source';
 import { addRoutes } from './routes';
 import { addMiddlewares } from './middleware';
 import logger from './config/winston';
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: process.env.NODE_ENV === 'production',
+});
 
 // self invoke
 (async () => {
@@ -23,7 +31,7 @@ import logger from './config/winston';
     addMiddlewares(app);
     addRoutes(app);
 
-    app.listen(port as number,  () => {
+    app.listen(port as number, () => {
       logger.info(`App listen on port, http://localhost:${port}`);
     });
   } catch (err) {

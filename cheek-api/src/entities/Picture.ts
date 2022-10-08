@@ -10,6 +10,9 @@ export class Picture extends BaseEntity {
   @Column({ type: "varchar", length: 255, unique: true })
   url: string;
 
+  @Column({ unique: true })
+  path: string;
+
   // @OneToMany(() => ProductDetail, (detail) => detail.picture)
   // details: ProductDetail[];
   @ManyToOne(() => Picture, (picture) => picture.productDetail)
