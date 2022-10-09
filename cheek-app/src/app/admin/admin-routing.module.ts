@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'gestion-produits', component: ManageProductsComponent },
       { path: 'gestion-produits/ajouter', component: ProductFormComponent },
+      { path: 'gestion-produits/editer/:slug', component: ProductFormComponent },
       { path: 'gestion-clients', component: ManageUsersComponent },
       { path: 'gestion-commandes', component: ManageOrdersComponent },
     ],

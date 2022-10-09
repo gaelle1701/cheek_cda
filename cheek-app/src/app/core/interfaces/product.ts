@@ -15,3 +15,11 @@ export interface IProduct {
 }
 
 export type IProducts = IProduct[];
+
+export type CreateResponse = IProduct & {
+  message?: string;
+};
+
+export type UpdateResponse = IProduct & {
+  message?: string;
+};

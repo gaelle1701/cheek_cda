@@ -39,7 +39,7 @@
         <td data-label="Stock">{{ product.stock }}</td>
         <td data-label="Modifier">
           <button>
-            <a routerLink="/dashboard/">
+            <a routerLink="/admin/gestion-produits/editer/{{product.slug}}">
               <fa-icon [icon]="faEdit"></fa-icon>
             </a>
           </button>

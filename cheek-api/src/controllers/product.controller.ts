@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { productDetailRepository } from '../repository/product-detail.repository';
 import { productRepository } from '../repository/product.repository';
 
 class ProductController {
@@ -87,9 +88,19 @@ class ProductController {
         });
       }
 
+      console.log(req.body);
+      
+
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
+      
+      if(req.body.details.length > 0) {
+        await Promise.all(req.body.details.map(async(detail) => {
+          await productDetailRepository.update(detail.id, detail)
+        }))
+      }
+      
       if (updateProduct.affected === 1) {
         return res.status(200).send({
           message: 'The product with id= ' + product.id + ' has been updated !',

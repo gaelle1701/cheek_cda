@@ -5,6 +5,6 @@ export interface IProductDetail {
   stock: number;
   price_ht: number;
   price_ttc: number;
-  size: ISize[];
+  size: ISize;
 }
 export type IProductDetails = IProductDetail[];

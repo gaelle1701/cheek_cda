@@ -14,8 +14,9 @@
         <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
             <section class="form-input">
                 <section class="is-center">
+                    <label for="category-input">Catégorie*</label>
                     <select class="custom-select" formControlName="category" (change)="onChangeCategory($event)">
-                        <option value="">Catégorie*</option>
+                        <option value=""></option>
                         <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                     </select>
                 </section>
@@ -52,13 +53,13 @@
             </section>
 
             <section class="row is-vertical-align" formArrayName="details">
-                <section class="col-12" *ngFor="let detailsForm of details.controls; let i = index">
+                <section class="col-12" *ngFor="let detailsForm of detailsF.controls; let i = index">
                     <div [formGroupName]="i">
                         <div class="row">
                             <div class="col-4">
-                                <label for="taille-input">Sélctionner la taiile</label>
-                                <select class="custom-select__size" formControlName="size" (change)="onChangeSize($event, i)">
-                                    <option value="">Taille*</option>
+                                <label for="taille-input">Taile</label>
+                                <select class="custom-select__size" formControlName="size" (change)="onChangeSize($event, i, detailsForm)">
+                                    <option value=""></option>
                                     <option *ngFor="let size of sizes" [value]="size.id">{{ size.label }}</option>
                                 </select> 
                             </div>
@@ -107,9 +108,12 @@
                         </button>
                     </div> -->
             </section>
+            <!-- <div class="is-center" *ngIf="i !== 0">
+                <button (click)="removeDetails(i)">Ajouter un détail</button>
+            </div>  -->
             <div class="is-center">
-                <button (click)="addDetails()">Ajouter un détail</button>
-              </div>    
+                <button type="button" (click)="addDetails()">Ajouter un détail</button>
+            </div>    
             <section class="is-center">
                 <button type="submit" [disabled]="productForm.invalid">Valider</button>
             </section>
