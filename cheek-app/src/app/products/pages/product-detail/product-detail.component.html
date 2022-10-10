@@ -1,29 +1,33 @@
 <main class="container">
-    <section class="container__custom">
-        <section class="container__carousel">
-            <app-carousel [slides]='slides'></app-carousel>
-        </section>
-        <section class="container__product">
-            <article class="product__info">
-                <h4>name</h4>
-                <p class="details">description</p>
-                <p class="details">price €</p>
-            </article>
-            <section class="container__select">
-                <select class="custom__select" (change)="onChange($event)">
-                    <option *ngFor="let size of sizes; index as i" [value]="i">{{ size }}</option>
-                </select>
-              
-                <select class="custom__select" *ngIf="stocks.length > 0">
-                    <option *ngFor="let stock of stocks" [value]="stock">{{ stock }}</option>
-                </select>
-            </section>
-            <div class="text-center" *ngIf="stocks.length === 0">
-                <p>Oups... Plus de stock disponible pour cette taille !</p>
-            </div>
-            <section class="is-center">
-                <button>Ajouter</button>
-            </section>
-        </section>
+  <section class="container__custom">
+    <section class="container__carousel">
+      <app-carousel [slides]="slides"></app-carousel>
     </section>
+    <section class="container__product">
+      <article class="product__info">
+        <h4>{{ product.name }}</h4>
+        <p class="details">{{ product.description }}</p>
+        <p class="details">{{ product.details[0]?.price_ttc ?? 0 }} €</p>
+      </article>
+      <section class="container__select">
+        <select class="custom__select" (change)="onChange($event)">
+          <option *ngFor="let size of sizes; index as i" [value]="i">
+            {{ size }}
+          </option>
+        </select>
+
+        <select class="custom__select" *ngIf="stocks.length > 0">
+          <option *ngFor="let stock of stocks" [value]="stock">
+            {{ stock }}
+          </option>
+        </select>
+      </section>
+      <div class="text-center" *ngIf="stocks.length === 0">
+        <p>Oups... Plus de stock disponible pour cette taille !</p>
+      </div>
+      <section class="is-center">
+        <button>Ajouter</button>
+      </section>
+    </section>
+  </section>
 </main>

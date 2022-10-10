@@ -13,24 +13,32 @@ import { BaseEntity } from './BaseEntity';
 import { Category } from './Category';
 import { OrderLine } from './OrderLine';
 import { ProductDetail } from './ProductDetail';
+import { Picture } from './Picture';
 
 @Entity()
 export class Product extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 45, unique: true })
   name: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: "varchar", length: 255})
   description: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 45})
   slug: string;
 
   @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @OneToMany(() => ProductDetail, (detail) => detail.product)
+  @OneToMany(() => ProductDetail, (detail) => detail.product, {
+    cascade: true,
+  })
   details: ProductDetail[];
+
+  @OneToMany(() => Picture, (picture) => picture.product, {
+    cascade: true,
+  })
+  pictures: Picture[];
 
   @OneToMany(() => OrderLine, (orderLine) => orderLine.product)
   orderLines: OrderLine[];
@@ -44,3 +52,6 @@ export class Product extends BaseEntity {
     });
   }
 }
+
+
+

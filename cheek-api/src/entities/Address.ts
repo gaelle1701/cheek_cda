@@ -4,16 +4,16 @@ import { BaseEntity } from './BaseEntity';
 
 @Entity()
 export class Address extends BaseEntity {
-  @Column()
-  number: number;
+  @Column({type: "varchar", length:45})
+  number: string;
 
-  @Column()
+  @Column({type: "varchar", length: 45})
   street: string;
 
-  @Column()
+  @Column({type: "varchar", length: 45})
   city: string;
 
-  @Column()
+  @Column({type: "int"})
   zip_code: number;
 
 }

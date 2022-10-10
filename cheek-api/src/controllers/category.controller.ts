@@ -29,11 +29,11 @@ class CategoryController {
           where: {
             slug: req.query.slug as string
           },
-          relations: ["products"]
+          relations: ["products", "products.details", "products.pictures"]
         })
       } else {
         getCategories = await categoryRepository.find( {
-          relations: ["products"]
+          relations: ["products", "products.details", "products.pictures"]
         })
       }
       return res.send(getCategories);

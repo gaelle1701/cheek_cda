@@ -39,7 +39,7 @@
     "@types/express-session": "^1.17.5",
     "@types/morgan": "^1.9.3",
     "@types/multer": "^1.4.7",
-    "@types/node": "^16.11.10",
+    "@types/node": "^16.11.64",
     "@types/uuid": "^8.3.4",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",

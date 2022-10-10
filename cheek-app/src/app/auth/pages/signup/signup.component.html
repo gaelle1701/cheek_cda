@@ -1,0 +1,119 @@
+<main class="container is-center">
+  <section class="col-10 col-8-md col-8-lg">
+    <h3 class="is-center">{{ title }}</h3>
+
+    <div *ngIf="isRegistered">
+      <p class="alertSuccess is-center">{{ msgSuccess }}</p>
+    </div>
+    <div *ngIf="isExisting">
+      <p class="alertError is-center">{{ msgError }}</p>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <section class="row">
+        <section class="form-input col-6">
+          <label for="lastname-input">Nom*</label>
+          <input
+            type="text"
+            id="lastname-input"
+            formControlName="lastName"
+            minlength="2"
+          />
+          <div *ngIf="f['lastName']?.invalid && f['lastName']?.touched">
+            <div *ngIf="f['lastName'].errors?.['required']">
+              <p class="error">Le nom est requis!</p>
+            </div>
+            <div *ngIf="f['lastName'].errors?.['minlength']">
+              <p class="error">Le nom doit comporter au minimun 2 lettres!</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-input col-6">
+          <label for="firstname-input">Prénom*</label>
+          <input
+            type="text"
+            id="firstname-input"
+            formControlName="firstName"
+            minlength="2"
+          />
+          <div *ngIf="f['firstName']?.invalid && f['firstName']?.touched">
+            <div *ngIf="f['firstName'].errors?.['required']">
+              <p class="error">Le prénom est requis!</p>
+            </div>
+            <div *ngIf="f['firstName'].errors?.['minlength']">
+              <p class="error">
+                Le prénom doit comporter au minimun 2 lettres!
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="form-input">
+        <label for="email-input">Email*</label>
+        <input type="text" id="email-input" formControlName="email" />
+        <div
+          *ngIf="
+            (f['email']?.invalid && f['email']?.dirty) || f['email']?.touched
+          "
+        >
+          <div *ngIf="f['email'].errors?.['required']">
+            <p class="error">L'email est requis!</p>
+          </div>
+          <div *ngIf="f['email'].errors?.['email']">
+            <p class="error">Le champs doit être une adresse email valide!</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-input">
+        <label for="password-input">Mot de passe*</label>
+        <section>
+          <div class="form-input-email">
+            <input
+              class="is-marginless"
+              [type]="showPassword ? 'text' : 'password'"
+              id="password-input"
+              formControlName="password"
+            />
+            <div
+              (click)="showPassword = !this.showPassword"
+              class="container-eye-icon"
+              [class.hide]="showPassword"
+            >
+              <fa-icon [icon]="faEyeSlash"></fa-icon>
+            </div>
+            <div
+              (click)="showPassword = !this.showPassword"
+              class="container-eye-icon"
+              [class.hide]="!showPassword"
+            >
+              <fa-icon [icon]="faEye"></fa-icon>
+            </div>
+          </div>
+          <div
+            *ngIf="
+              (f['password']?.invalid && f['password']?.dirty) ||
+              f['password']?.touched
+            "
+          >
+            <div *ngIf="f['password'].errors?.['required']">
+              <p class="error">Le mot de passe est requis!</p>
+            </div>
+            <div *ngIf="f['password'].errors?.['pattern']">
+              <p class="error">
+                Le mot de passe doit contenir au minimun 8 caractères dont (1
+                majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial)!
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="is-center">
+        <button type="submit" [disabled]="signupForm.invalid">Valider</button>
+      </section>
+    </form>
+  </section>
+</main>

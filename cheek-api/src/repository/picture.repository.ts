@@ -9,8 +9,11 @@ export const pictureRepository = AppDataSource.getRepository(Picture).extend({
     return await pictureRepository.save(createPicture);
   },
   async findBydId(id: number) {
-    return await pictureRepository.findOneBy({
-      id,
+    return await pictureRepository.findOne({
+      where: {id},
+      relations: [
+        'product'
+      ]
     });
   },
 });

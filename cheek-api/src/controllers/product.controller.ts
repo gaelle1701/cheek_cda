@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { productDetailRepository } from '../repository/product-detail.repository';
 import { productRepository } from '../repository/product.repository';
 
 class ProductController {
@@ -8,13 +9,10 @@ class ProductController {
         return res.status(400).send({
           message: 'Content can not be empty!',
         });
-      }
-
+      }      
       const savedProduct = await productRepository.createProduct(req.body);
       return res.send(savedProduct);
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error) {      
       return res.status(500).send({
         message: error.message,
       });
@@ -35,11 +33,20 @@ class ProductController {
             'category',
             'details',
             'details.size',
-            'details.pictures'
+            'pictures'
           ],
         });
       } else {
-          getProducts = await productRepository.find()
+          getProducts = await productRepository.find( {
+            relations: [
+              'category',
+              'details',
+              'details.size',
+              'pictures'
+            ],
+          }
+           
+          )
         }
       
       return res.send(getProducts);
@@ -76,9 +83,19 @@ class ProductController {
         });
       }
 
+      console.log(req.body);
+      
+
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
+      
+      if(req.body.details.length > 0) {
+        await Promise.all(req.body.details.map(async(detail) => {
+          await productDetailRepository.update(detail.id, detail)
+        }))
+      }
+      
       if (updateProduct.affected === 1) {
         return res.status(200).send({
           message: 'The product with id= ' + product.id + ' has been updated !',
@@ -102,14 +119,14 @@ class ProductController {
         });
       }
 
-      const deleteAddress = await productRepository.delete(productDetail.id);
-      if (deleteAddress.affected === 1) {
+      const deleteProduct = await productRepository.delete(productDetail.id);
+      if (deleteProduct.affected === 1) {
         return res.status(200).send({
           message: `The product with id=${productDetail.id} has been deleted successfully !`,
         });
       }
 
-      return res.send(deleteAddress);
+      return res.send(deleteProduct);
     } catch (error) {
       return res.status(500).send({
         message: `Could not delete product with id=${productDetail.id}`,

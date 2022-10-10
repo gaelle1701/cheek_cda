@@ -4,7 +4,7 @@ import { ProductDetail } from './ProductDetail';
 
 @Entity()
 export class Size extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 45, unique: true })
   label: string;
 
   @OneToMany(() => ProductDetail, (detail) => detail.size)

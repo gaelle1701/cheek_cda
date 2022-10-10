@@ -1,64 +1,60 @@
 .navBar__links {
-    list-style: none;
-    margin-left: 50px;
+  list-style: none;
+  margin-left: 50px;
 }
 .navBar__link {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .navBar__subLinks {
-    list-style: none;
+  list-style: none;
 }
 .navBar__subLink {
-    margin-bottom: 20px;
-    padding-top: 10px;
+  margin-bottom: 20px;
+  padding-top: 10px;
 }
 
 a {
-    color: var(--color-black);
-    font-family: var(--font-family-courier);
-    font-size: var(--font-size);
+  color: var(--color-black);
+  font-family: var(--font-family-courier);
+  font-size: var(--font-size);
 }
 
 button {
-    padding: 0;
-    background: none;
-    font-family: var(--font-family-courier);
-    font-size: var(--font-size);
+  padding: 0;
+  background: none;
+  font-family: var(--font-family-courier);
+  font-size: var(--font-size);
 }
- a:hover, button:hover {
-    color: var(--color-orange);
- }
+a:hover,
+button:hover {
+  color: var(--color-orange);
+}
 
 /* ___________________DESKTOP_________________ */
 
 @media screen and (min-width: 900px) {
+  .navBar__links {
+    margin-left: 0px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .navBar__link {
+    margin-top: 0px;
+    padding-right: 40px;
+  }
 
-    .navBar__links {
-        margin-left: 0px;
-        display: flex;
-        justify-content: flex-start;
-    }
-    .navBar__link {
-        margin-top: 0px;
-        padding-right: 40px;
-    }
-
-    .navBar__subLinks {
-       background: var(--color-lightGrey);
-       display: flex;
-       justify-content: center;
-       position: absolute;
-       top: 130px;
-       left: 0;
-       width: 100%;
-      
-    }
-    .navBar__subLink{
-        margin-top: 0px;     
-        padding-right: 40px;
-       
-    }
-    
+  .navBar__subLinks {
+    background: var(--color-lightGrey);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 130px;
+    left: 0;
+    width: 100%;
+  }
+  .navBar__subLink {
+    margin-top: 0px;
+    padding-right: 40px;
+  }
 }
-

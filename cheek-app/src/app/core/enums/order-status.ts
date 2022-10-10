@@ -1,0 +1,5 @@
+export enum EOrderStatus {
+  AVAILABLE = 'AVAILABLE',
+  IN_DELIVERY = 'IN DELIVERY',
+  DELIVERED = 'DELIVERED',
+}

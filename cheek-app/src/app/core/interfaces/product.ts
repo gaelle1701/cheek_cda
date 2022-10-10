@@ -1,17 +1,25 @@
-import { ICategory } from "./category";
-import { IProductDetail } from "./product-detail";
-
+import { ICategory } from './category';
+import { IPictures } from './picture';
+import { IProductDetails } from './product-detail';
 
 export interface IProduct {
-    id: number;
-    name: string;
-    description: string;
-    slug: string;
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+  category: ICategory;
+  pictures: IPictures;
+  details: IProductDetails;
 
-    category: ICategory;
-  
-    details: IProductDetail[];
-
-    // orderLines: OrderLines[];
+  // orderLines: OrderLines[];
 }
-export type IProducts = IProduct[]
+
+export type IProducts = IProduct[];
+
+export type CreateResponse = IProduct & {
+  message?: string;
+};
+
+export type UpdateResponse = IProduct & {
+  message?: string;
+};

@@ -1,9 +1,10 @@
-import { IProduct, IProducts } from "./product";
+import { IProduct, IProducts } from './product';
 
 export interface ICategory {
-    name: string;
-    slug: string;
-    products: IProducts
+  id: number,
+  name: string;
+  slug: string;
+  products: IProducts;
 }
 
-export type ICategories = ICategory[]
+export type ICategories = ICategory[];

@@ -1,0 +1,33 @@
+<main class="container">
+  <h3 class="is-center">{{ title }}</h3>
+
+  <section class="container__icons">
+    <div class="text-center">
+      <h4>Gestion des produits</h4>
+      <a
+        [routerLink]="['/admin/gestion-produits']"
+        routerLinkActive="router-link-active"
+      >
+        <fa-icon [icon]="faShirt" size="7x"></fa-icon>
+      </a>
+    </div>
+    <div class="text-center">
+      <h4>Gestion des clients</h4>
+      <a
+        [routerLink]="['/admin/gestion-clients']"
+        routerLinkActive="router-link-active"
+      >
+        <fa-icon [icon]="faUsers" size="7x"></fa-icon>
+      </a>
+    </div>
+    <div class="text-center">
+      <h4>Gestion des commandes</h4>
+      <a
+        [routerLink]="['/admin/gestion-commandes']"
+        routerLinkActive="router-link-active"
+      >
+        <fa-icon [icon]="faOrder" size="7x"></fa-icon>
+      </a>
+    </div>
+  </section>
+</main>

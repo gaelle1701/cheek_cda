@@ -6,21 +6,9 @@ import { StaticRoutingModule } from './static-routing.module';
 import { ProductsModule } from '../products/products.module';
 import { HomeComponent } from './home/home.component';
 
-
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
-  imports: [
-    CommonModule,
-    StaticRoutingModule,
-    ProductsModule
-    
-  ],
-  exports: [
-    HomeComponent
-  
-  ]
+  declarations: [HomeComponent],
+  imports: [CommonModule, StaticRoutingModule, ProductsModule],
+  exports: [HomeComponent],
 })
-
-export class StaticModule { }
+export class StaticModule {}

@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
-import { EAccountStatus, User } from '../entities/User';
+import { EAccountStatus} from '../entities/User';
 import { userRepository } from '../repository/user.repository';
 import sendMail from '../helpers/mailer';
 import logger from '../config/winston';
 import { addressRepository } from '../repository/address.repository';
+import { generateAccesToken, generateAccesTokenEmail, generateRefreshToken, verifyToken } from '../helpers/token';
+import { UsingJoinTableIsNotAllowedError } from 'typeorm';
 
 class AuthController {
   async signup(req: Request, res: Response) {
@@ -16,19 +17,14 @@ class AuthController {
         });
       }
 
-      const token = jwt.sign(
-        { email: req.body.email },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN },
-      );
+      const token = generateAccesTokenEmail(req.body.email)
+
       await userRepository.createUser({
         lastName: req.body.lastName,
         firstName: req.body.firstName,
         email: req.body.email,
         password: req.body.password,
-        phone: req.body.phone,
-        address: req.body.address,
-        token,
+        token 
       });
 
       sendMail(req.body.email, token);
@@ -39,8 +35,9 @@ class AuthController {
       });
     } catch (error) {
       logger.error("signup user", error)
-      return res.status(400).send({
-        message: 'Cet email ou numéro de téléphone existe déjà!',
+      return res.status(401).send({
+        // message: 'Cet email existe déjà!',
+        message: error.message
       });
     }
   }
@@ -54,7 +51,7 @@ class AuthController {
       });
 
       if (user.account_status === EAccountStatus.PENDING) {
-        return res.status(400).send({
+        return res.status(401).send({
           message:
             'Merci de valider la confirmation envoyée par email avant de vous connecter !',
         });
@@ -65,22 +62,21 @@ class AuthController {
         user.password,
       );
       if (!isValidPassword) {
-        return res.status(400).send({
+        return res.status(401).send({
           message: "Le mot de passe ou l'email est invalide!",
         });
       }
 
-      const accessToken = jwt.sign(
-        { id: user.id, role: user.role },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN },
-      );
+      const accessToken = generateAccesToken(user.id);
+      const refreshAccessToken = generateRefreshToken(user.id)
+
       return res.status(200).send({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         role: user.role,
         accessToken,
+        refreshAccessToken,
         message: 'Vous êtes connecté(e)!',
       });
     } catch (error) {
@@ -88,6 +84,20 @@ class AuthController {
         message: error.message,
       });
     }
+  }
+
+  async refreshToken(req: Request, res: Response) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).send({
+        message: "Ce token 'existe plus"
+        
+      })
+    }
+
+    return verifyToken(res, token)
   }
 
   async getProfile(req: Request, res: Response) {
