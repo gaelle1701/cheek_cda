@@ -5,9 +5,9 @@
     </section>
     <section class="container__product">
       <article class="product__info">
-        <h4>name</h4>
-        <p class="details">description</p>
-        <p class="details">price €</p>
+        <h4>{{ product.name }}</h4>
+        <p class="details">{{ product.description }}</p>
+        <p class="details">{{ product.details[0].price_ttc }} €</p>
       </article>
       <section class="container__select">
         <select class="custom__select" (change)="onChange($event)">

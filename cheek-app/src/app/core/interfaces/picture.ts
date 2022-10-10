@@ -1,10 +1,10 @@
-import { IProductDetail } from './product-detail';
+import { IProduct } from './product';
 
 export interface IPicture {
   label: string;
   url: string;
   path: string;
-  productDetail: IProductDetail;
+  product: IProduct;
 }
 
 export type IPictures = IPicture[];

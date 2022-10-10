@@ -18,21 +18,25 @@ class PictureController {
             folder: 'cheek/products',
           },
         );
+        console.log(req.body);
+        
         if (uploadedPicture) {
           logger.info('Uploaded picture Source');
           const savedPicture = await pictureRepository.createPicture({
             url: uploadedPicture.secure_url,
             label: req.body.label,
             path: uploadedPicture.public_id,
-            productDetail: req.body.productDetailId,
+            product: req.body.product_id,
           });
           logger.info('Saved picture Source');
           return res.send(savedPicture);
         }
       }
     } catch (error) {
+
+      
       return res.status(500).send({
-        message: error.message,
+        message: error
       });
     }
   }

@@ -8,11 +8,12 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  slides = [];
+  slides: any = [];
   detail?: { stock: number }[] = [];
   sizes: string[] = [];
   stocks: number[] = [];
   products = [];
+  product: any;
   selectedSize: number = 0;
   isDisable: boolean = false;
 
@@ -33,21 +34,33 @@ export class ProductDetailComponent implements OnInit {
     this.productsService
       .getProductByName(routeParams.get('productName') as string)
       .subscribe((product) => {
+        console.log("product", product);
+        this.product = product
         this.detail = product.details;
         this.sizes = product.details.map((detl: any) => detl.size.label);
-
         this.getStockBySize(this.selectedSize);
 
-        console.log('stockBySize', this.getStockBySize(this.selectedSize));
-
-        // this.slides = product.pictures.map( picture => {
-        //   return {
-        //     ...picture,
-        //     //url: this.generateUrlPicture(picture.url, 'c_scale,w_300')
-        //   }
-      });
+        this.slides = product.pictures.map(picture => {
+          return {
+            ...picture,
+            url: this.generateUrlPicture(picture.url, 'c_scale,w_300')
+          }
+        });
+    });
   }
 
+  generateUrlPicture(url: string, params: any, position = 50): string {
+    const isHttps = /^https?:\/\//;
+    if(isHttps.test(url)) {
+      position = 50;
+
+      return `${url.slice(0, position)}${params}/${url.slice(position)}`;
+    } else {
+      return `${url.slice(0, position)}${params}/${url.slice(position)}`;
+    }
+  }
+
+  
   getStockBySize(selectedSize: number) {
     const stockBySize = this.detail?.find(
       (_: any, idx: any) => idx === selectedSize,
@@ -56,3 +69,5 @@ export class ProductDetailComponent implements OnInit {
     this.stocks = [...Array(stockBySize).keys()].map((i) => i + 1);
   }
 }
+
+
