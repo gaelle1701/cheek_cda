@@ -13,7 +13,9 @@ export class Picture extends BaseEntity {
   @Column({ unique: true })
   path: string;
 
-  @ManyToOne(() => Product, (product) => product.pictures)
+  @ManyToOne(() => Product, (product) => product.pictures, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'product_id' })
   product: Product;
 }

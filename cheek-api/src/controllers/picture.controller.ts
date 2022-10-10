@@ -18,7 +18,8 @@ class PictureController {
             folder: 'cheek/products',
           },
         );
-        console.log(req.body);
+
+        console.log();
         
         if (uploadedPicture) {
           logger.info('Uploaded picture Source');
@@ -33,7 +34,7 @@ class PictureController {
         }
       }
     } catch (error) {
-
+      console.log(error);
       
       return res.status(500).send({
         message: error

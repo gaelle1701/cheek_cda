@@ -9,15 +9,10 @@ class ProductController {
         return res.status(400).send({
           message: 'Content can not be empty!',
         });
-      }
-
-      console.log(req.body);
-      
+      }      
       const savedProduct = await productRepository.createProduct(req.body);
       return res.send(savedProduct);
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error) {      
       return res.status(500).send({
         message: error.message,
       });

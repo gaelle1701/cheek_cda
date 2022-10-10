@@ -1,9 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from 'src/app/categories/services/categories.service';
+import { IPicture } from 'src/app/core/interfaces/picture';
 import { IProductDetail } from 'src/app/core/interfaces/product-detail';
+import { PictureService } from 'src/app/pictures/services/picture.service';
 import { ProductsService } from 'src/app/products/services/products.service';
 import { SizesService } from 'src/app/products/services/sizes.service';
 
@@ -17,7 +20,7 @@ export class ProductFormComponent implements OnInit {
 
   productForm!: FormGroup
   detailsForm!: FormGroup
-
+  picturesForm!: FormGroup
 
   productId: number = 0;
   productSlug: string = '';
@@ -29,7 +32,7 @@ export class ProductFormComponent implements OnInit {
   msgError: string = '';
   categories: any = [];
   sizes: any = [];
-  file: any;
+  file: any | null;
   fileName: string = '';
 
   constructor(
@@ -37,8 +40,10 @@ export class ProductFormComponent implements OnInit {
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
     private sizesService: SizesService,
+    private pictureService: PictureService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   
@@ -50,13 +55,21 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
+  initPicturesForm(){
+    return this.formBuilder.group({
+      picture: ['', [Validators.required]],
+      label: ['', [Validators.required]]
+    });
+  }
 
   buildForm() {
+    this.picturesForm = this.initPicturesForm()
     this.detailsForm = this.initDetailsForm() 
     this.productForm = this.formBuilder.group({
       category: ['', [Validators.required]],
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      pictures: this.formBuilder.array([]),
       details: this.formBuilder.array([])
     })
   }
@@ -65,7 +78,6 @@ export class ProductFormComponent implements OnInit {
     const value = parseInt((event.target as HTMLSelectElement).value, 10);
       this.productForm.setValue({
         ...this.productForm.value,
-        // @ts-ignore
         category: value
       })
   }
@@ -84,12 +96,31 @@ export class ProductFormComponent implements OnInit {
     })    
   }
 
+
+  // **** uploadFile ****
+  onFileSelected(event: any) {
+    const pictures = event.target.files
+    if(pictures){
+      this.fileName = pictures[0].name
+    }
+   
+    for (let index = 0; index < pictures.length; index++) {
+      const picture = pictures[index];
+      const addPicture = this.formBuilder.group({
+        picture,
+        label: picture.name
+      })
+      this.picturesF.push(addPicture)
+    }
+  }
+
+
+
   ngOnInit(): void {  
     this.productSlug = this.route.snapshot.paramMap.get('slug') as string;
     this.buildForm()
     this.getCategories();
     this.getSizes();
-
 
     if(this.productSlug && this.detailsForm) {
       this.title = "Modifier un produit"
@@ -102,14 +133,17 @@ export class ProductFormComponent implements OnInit {
     return this.productForm.controls;
   }
 
+  get picturesF(){
+    return this.productForm.controls['pictures'] as FormArray;
+  }
+
   get detailsF() {
     return this.productForm.controls['details'] as FormArray;
   }
   
-  // **** methods for detailsForm input ****
-  addDetails(detail?: any, index?: number){    
-    console.log(detail, index);
-    
+ 
+  // **** methods for detailsForm ****
+  addDetails(detail?: any, index?: number){      
     if(this.productSlug) {
       const addDetail = this.formBuilder.group({
         id: [detail.id],
@@ -139,13 +173,13 @@ export class ProductFormComponent implements OnInit {
     this.sizesService.getSizes(). subscribe( sizes => {this.sizes = sizes})
   }
   
-  getProductBySlug(){   
-    
+  getProductBySlug(){      
     this.productsService.getProductByName(this.productSlug).subscribe( product => {
       this.productForm.patchValue({
         category: product.category.id,
         name: product.name,
         description: product.description,
+        picture: product.pictures,
         details: product.details.map((detail, i) => { 
             this.addDetails({ 
               id: detail.id,
@@ -154,11 +188,13 @@ export class ProductFormComponent implements OnInit {
               stock: detail.stock,
               product: product.id
             }, i)
-        })
-        
+        })        
       })
       this.productId = product.id
       this.product = product
+      console.log("product", this.product);
+      console.log("picture in prod", this.product.pictures);
+      
     })
   }
 
@@ -167,10 +203,9 @@ export class ProductFormComponent implements OnInit {
     const formValues = this.productForm.value
     console.log("product",formValues);
     console.log(this.productForm.valid, this.detailsForm.valid);
-    
+
     if(this.productSlug && this.productForm.valid){      
       this.productsService.update(this.productId, formValues as any).subscribe({
-
         next: (res) => {
           this.isUpdated = true;
           this.msgSuccessUpdate = res.message as string;
@@ -182,20 +217,25 @@ export class ProductFormComponent implements OnInit {
         
     } else if(this.productForm.valid) {
       this.productsService.create(formValues as any).subscribe({
+        next: (product) => {
+          if (product.id) {
+            if(formValues.pictures.length >= 0) {
+              formValues.pictures.map((picture: any) => {
+                const formData: any = new FormData();
+                formData.append("picture", picture.picture);
+                formData.append("product_id", product.id);
+                formData.append("label", picture.label);
+               
+                this.pictureService.create(formData).subscribe((uploadRes)=> {
+                  console.log(uploadRes);
+                });
+              })
+            }
 
-        next: (res) => {
-          // if (res.productId) {
-          //   const formData = new FormData();
-          //   console.log("data", formData);
-            
-          //   formData.append("image", this.file);
-          //   formData.append("productId", res.productId);
-          //   formData.append("label", this.fileName);
-          
-          //   const upload = this.http.post(`${environment.baseUrl}/pictures`, formData);
-          //   upload.subscribe((uploadRes)=> uploadRes);
-          // }
-          this.msgSuccessCreate = res.message as string;     
+
+          }
+
+          this.msgSuccessCreate = product.message as string;     
           this.isCreated = true;
         },
         error: (res) => {
