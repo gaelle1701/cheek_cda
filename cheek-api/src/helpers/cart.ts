@@ -68,7 +68,7 @@ export class Cart implements ICart {
     );
     cart.total_ht = totalHt;
     cart.total_ttc = totalTtc;
-    cart.shippingFees = cart.total_ttc >= 70;
+    cart.shippingFees = totalTtc >= 70;
 
     if (!cart.items.length) {
       this.resetCart(cart);

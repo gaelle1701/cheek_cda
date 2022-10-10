@@ -14,12 +14,12 @@
         </div>
       </section>
       <section class="col-6  col-6-lg">
-        <h4>Hoodie University</h4>
+        <h4>{{cartItem?.product?.name}}</h4>
         <section class="container__detail is-vertical-align">
           <p>{{cartItem.price}}€</p>
           <p class="border">{{cartItem.size}}</p>
           <p class="border">{{cartItem.stock}}</p>
-          <button>
+          <button (click)='removeProduct(cartItem.id)'>
             <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.6h18M6 4.6V2.8c0-.477.21-.935.586-1.273A2.118 2.118 0 018 1h4c.53 0 1.04.19 1.414.527.375.338.586.796.586 1.273v1.8m3 0v12.6c0 .477-.21.935-.586 1.273A2.118 2.118 0 0115 19H5c-.53 0-1.04-.19-1.414-.527A1.714 1.714 0 013 17.2V4.6h14zM8 9.1v5.4M12 9.1v5.4" stroke="#FA9223" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </section>

@@ -92,12 +92,16 @@ export class ProductDetailComponent implements OnInit {
       this.detail?.find((_: any, idx: any) => idx === this.selectedSize)?.size,
     );
     console.log(this.detail);
-    this.cartService.addProduct({
-      id: product.id,
-      stock: this.selectedStock === 0 ? 1 : this.selectedStock,
-      size: 's',
-      price: product.details[0].price_ht,
-    });
+    this.cartService
+      .addProduct({
+        id: product.id,
+        stock: this.selectedStock === 0 ? 1 : this.selectedStock,
+        size: 's',
+        price: product.details[0].price_ht,
+      })
+      .subscribe(({ cart }) => {
+        this.cartService.countChange(cart.items.length);
+      });
   }
 }
 

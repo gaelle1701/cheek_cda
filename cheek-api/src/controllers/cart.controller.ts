@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Cart from '../helpers/cart';
+import { productRepository } from '../repository/product.repository';
 
 class CartController {
   async create(req: Request, res: Response) {
@@ -30,7 +31,22 @@ class CartController {
   }
 
   async getCart(req: Request, res: Response) {
-    res.send({ cart: req.session.cart });
+    // aggregate product for each item
+    const items = await Promise.all(
+      req.session.cart.items.map(async (item) => {
+        const product = await productRepository.findBydId(item.id);
+        return {
+          ...item,
+          product,
+        };
+      }),
+    );
+
+    const cart = {
+      ...req.session.cart,
+      items,
+    };
+    res.send({ cart });
   }
 
   async edit(req: Request, res: Response) {

@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4ab89d90-ed98-4842-b73f-0376cb9a05b3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/products/services/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/products/services/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-api/src/controllers/cart.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-api/src/controllers/cart.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-api/src/helpers/cart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-api/src/helpers/cart.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/cart/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/cart/cart.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/cart/pages/cart/cart.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/cart/pages/cart/cart.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/cart/pages/cart/cart.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/cart/pages/cart/cart.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/core/components/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/core/components/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/core/components/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/core/components/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/products/pages/product-detail/product-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/products/pages/product-detail/product-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-app/src/app/shared/interface/cart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-app/src/app/shared/interface/cart.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -18,10 +18,7 @@ export const INITIAL_CART: ICart = {
 export class CartComponent implements OnInit {
   cart: ICart = INITIAL_CART;
 
-  constructor(
-    private cartService: CartService,
-    private productService: ProductsService,
-  ) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.getCart();
@@ -30,6 +27,14 @@ export class CartComponent implements OnInit {
   getCart() {
     this.cartService.getCart().subscribe(({ cart }) => {
       this.cart = cart;
+      this.cartService.countChange(cart.items.length);
+    });
+  }
+
+  removeProduct(id: number) {
+    this.cartService.deleteProduct(id).subscribe(({ cart }) => {
+      this.cart = cart;
+      this.cartService.countChange(cart.items.length);
     });
   }
 

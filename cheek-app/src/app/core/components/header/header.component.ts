@@ -13,6 +13,7 @@ import {
   faCartShopping,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { CartService } from '../../../cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -49,12 +50,18 @@ export class HeaderComponent implements OnInit {
   faLogout = faArrowRightFromBracket;
   faCart = faCartShopping;
   faBars = faBars;
+  countCart = 0;
 
   isOpen: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cartService.count.subscribe((count) => {
+      console.log(count);
+      this.countCart = count;
+    });
+  }
 
   toggle = () => {
     this.isOpen = !this.isOpen;
@@ -64,9 +71,9 @@ export class HeaderComponent implements OnInit {
     this.isOpen = false;
   };
 
-  logout() {
+  async logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    this.router.navigate(['/']);
+    await this.router.navigate(['/']);
   }
 }

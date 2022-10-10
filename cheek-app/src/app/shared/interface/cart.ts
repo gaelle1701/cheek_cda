@@ -1,8 +1,11 @@
+import { IProduct } from '../../core/interfaces/product';
+
 export interface CartItem {
   id: number;
   stock: number;
   price: number;
   size: string;
+  product?: IProduct;
 }
 
 export interface ICart {
