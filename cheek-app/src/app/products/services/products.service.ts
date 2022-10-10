@@ -41,8 +41,10 @@ export class ProductsService implements ICrud<IProduct> {
     return this.http.delete<IProduct>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<IProducts> {
-    return this.http.get<IProducts>(this.baseUrl);
+  findAll(query: {slug: string}): Observable<IProducts> {
+    return this.http.get<IProducts>(this.baseUrl, {
+      params: query
+    });
   }
 
   findOne(id: number): Observable<IProduct> {

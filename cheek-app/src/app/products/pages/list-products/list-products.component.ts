@@ -27,30 +27,14 @@ export class ListProductsComponent implements OnInit {
       .getCategoryByName(this.title as string)
       .subscribe((category) => {
         this.cards = category.products.map((product) => {
-          return { ...product };
+          console.log(product);
+          
+          return product
         });
     });
 
-    this.productsService.getProducts().subscribe(products => {
-      this.cards = products.map(product => { 
-        console.log(this.cards);
-        console.log(product);
-        
-        
-        return {
-          // copy of current product
-          ...product,
-          // add function to object picture
-          picture: {
-
-            //if product exists without picture
-            //if typeof != undefined pictures[0] & typeof != undefined url (optional chaining)
-            url: this.generateUrlPicture(product.pictures?.[0]?.url, 'c_thumb,w_200,g_face'),
-            alt: product.pictures?.[0]?.label || "label"
-          }
-       };
-      });
-    });
+    console.log(this.cards);
+    
   }
 
   generateUrlPicture(url: string | any[], params: any, position = 50): string {
