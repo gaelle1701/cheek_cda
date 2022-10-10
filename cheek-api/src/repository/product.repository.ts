@@ -28,7 +28,7 @@ export const productRepository = AppDataSource.getRepository(Product).extend({
         'category',
         'details',
         'details.size',
-        'details.pictures'
+        'pictures'
       ],
     });
   },

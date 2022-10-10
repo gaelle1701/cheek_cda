@@ -13,6 +13,7 @@ import { BaseEntity } from './BaseEntity';
 import { Category } from './Category';
 import { OrderLine } from './OrderLine';
 import { ProductDetail } from './ProductDetail';
+import { Picture } from './Picture';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -32,6 +33,9 @@ export class Product extends BaseEntity {
   @OneToMany(() => ProductDetail, (detail) => detail.product)
   details: ProductDetail[];
 
+  @OneToMany(() => Picture, (picture) => picture.product)
+  pictures: Picture[];
+
   @OneToMany(() => OrderLine, (orderLine) => orderLine.product)
   orderLines: OrderLine[];
 
@@ -44,3 +48,6 @@ export class Product extends BaseEntity {
     });
   }
 }
+
+
+

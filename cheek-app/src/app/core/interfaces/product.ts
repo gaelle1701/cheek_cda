@@ -1,4 +1,5 @@
 import { ICategory } from './category';
+import { IPictures } from './picture';
 import { IProductDetails } from './product-detail';
 
 export interface IProduct {
@@ -7,6 +8,7 @@ export interface IProduct {
   description: string;
   slug: string;
   category: ICategory;
+  pictures: IPictures;
   details: IProductDetails;
 
   // orderLines: OrderLines[];
