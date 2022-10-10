@@ -1,9 +1,10 @@
-import { IProductDetail } from './product-detail';
+import { IProduct } from './product';
 
 export interface IPicture {
   label: string;
   url: string;
-  productDetail: IProductDetail;
+  path: string;
+  product: IProduct;
 }
 
-export type Pictures = IPicture[];
+export type IPictures = IPicture[];

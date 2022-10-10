@@ -3,33 +3,34 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ICrud } from '../../core/interfaces/crud';
-import { IPicture, Pictures } from '../../core/interfaces/picture';
+import { IPicture, IPictures } from '../../core/interfaces/picture';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class PictureService implements ICrud<IPicture> {
-  baseUrl = '/api/pictures';
+  pictureUrl = '/api/pictures';
 
   constructor(private http: HttpClient) {}
 
   create(data: IPicture): Observable<IPicture> {
-    return this.http.post<IPicture>(this.baseUrl, data);
+    return this.http.post<IPicture>(this.pictureUrl, data);
   }
 
   delete(id: number): Observable<IPicture> {
-    return this.http.delete<IPicture>(`${this.baseUrl}/${id}`);
+    return this.http.delete<IPicture>(`${this.pictureUrl}/${id}`);
   }
 
-  findAll(): Observable<Pictures> {
-    return this.http.get<Pictures>(this.baseUrl);
+  findAll(): Observable<IPictures> {
+    return this.http.get<IPictures>(this.pictureUrl);
   }
 
   findOne(id: number): Observable<IPicture> {
-    return this.http.get<IPicture>(`${this.baseUrl}/${id}`);
+    return this.http.get<IPicture>(`${this.pictureUrl}/${id}`);
   }
 
   update(id: number, data: Partial<IPicture>): Observable<IPicture> {
-    return this.http.put<IPicture>(`${this.baseUrl}/${id}`, data);
+    return this.http.put<IPicture>(`${this.pictureUrl}/${id}`, data);
   }
 }

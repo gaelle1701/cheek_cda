@@ -98,16 +98,16 @@ class ProductDetailController {
         });
       }
 
-      const deleteAddress = await productDetailRepository.delete(
+      const deleteDetails = await productDetailRepository.delete(
         productDetail.id,
       );
-      if (deleteAddress.affected === 1) {
+      if (deleteDetails.affected === 1) {
         return res.status(200).send({
           message: `The product detail with id=${productDetail.id} has been deleted successfully !`,
         });
       }
 
-      return res.send(deleteAddress);
+      return res.send(deleteDetails);
     } catch (error) {
       return res.status(500).send({
         message: `Could not delete product detail with id=${productDetail.id}`,

@@ -1,6 +1,5 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
-import { Picture } from './Picture';
 import { Product } from './Product';
 import { Size } from './Size';
 
@@ -22,13 +21,6 @@ export class ProductDetail extends BaseEntity {
   @ManyToOne(() => Size, (size) => size.details)
   @JoinColumn({ name: 'size_id' })
   size: Size;
-
-  // @ManyToOne(() => Picture, (picture) => picture.details)
-  // @JoinColumn({ name: 'picture_id' })
-  // picture: Picture;
-
-  @OneToMany(() => Picture, (detail) => detail.productDetail)
-   pictures: Picture[];
 
 
    // calculated price_ttc automatically

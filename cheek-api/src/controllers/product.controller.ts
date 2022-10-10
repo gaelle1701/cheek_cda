@@ -37,7 +37,7 @@ class ProductController {
             'category',
             'details',
             'details.size',
-            'details.pictures'
+            'pictures'
           ],
         });
       } else {
@@ -46,7 +46,7 @@ class ProductController {
               'category',
               'details',
               'details.size',
-              'details.pictures'
+              'pictures'
             ],
           }
            
@@ -113,14 +113,14 @@ class ProductController {
         });
       }
 
-      const deleteAddress = await productRepository.delete(productDetail.id);
-      if (deleteAddress.affected === 1) {
+      const deleteProduct = await productRepository.delete(productDetail.id);
+      if (deleteProduct.affected === 1) {
         return res.status(200).send({
           message: `The product with id=${productDetail.id} has been deleted successfully !`,
         });
       }
 
-      return res.send(deleteAddress);
+      return res.send(deleteProduct);
     } catch (error) {
       return res.status(500).send({
         message: `Could not delete product with id=${productDetail.id}`,
