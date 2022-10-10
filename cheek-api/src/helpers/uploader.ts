@@ -1,5 +1,8 @@
+require('dotenv').config()
+
 import * as multer from 'multer';
 import * as path from 'path';
+
 
 const uploader = multer({
   storage: multer.diskStorage({}),
@@ -10,9 +13,10 @@ const uploader = multer({
       callback(new Error('File type is not supported') as any, false);
       return;
     }
-
-    callback(null, true);
+      callback(null, true);
   },
 });
 
 export default uploader;
+
+
