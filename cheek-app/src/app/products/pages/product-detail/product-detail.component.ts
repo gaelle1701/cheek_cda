@@ -41,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
         this.slides = product.pictures.map(picture => {
           return {
             label: picture.label,
-            url: this.generateUrlPicture(picture.url, 'c_scale,w_200')
+            url: this.generateUrlPicture(picture.url, 'c_scale,w_300')
           }
         });
     });

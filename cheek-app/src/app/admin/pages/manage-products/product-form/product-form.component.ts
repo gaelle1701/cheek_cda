@@ -192,17 +192,12 @@ export class ProductFormComponent implements OnInit {
       })
       this.productId = product.id
       this.product = product
-      console.log("product", this.product);
-      console.log("picture in prod", this.product.pictures);
-      
     })
   }
 
   // **** submit forms ****
   onSubmit() {
     const formValues = this.productForm.value
-    console.log("product",formValues);
-    console.log(this.productForm.valid, this.detailsForm.valid);
 
     if(this.productSlug && this.productForm.valid){      
       this.productsService.update(this.productId, formValues as any).subscribe({
@@ -231,8 +226,6 @@ export class ProductFormComponent implements OnInit {
                 });
               })
             }
-
-
           }
 
           this.msgSuccessCreate = product.message as string;     
@@ -242,10 +235,12 @@ export class ProductFormComponent implements OnInit {
           this.msgError = res.error.message;
         }
       })
+      setTimeout( ()=> {
+        this.router.navigate(['admin/gestion-produits']);
+      }, 2000 );
     }
+   
   }
-  // setTimeout( ()=> {
-  //   this.router.navigate(['admin/gestion-produits']);
-  // }, 2000 );
+ 
    
 }
