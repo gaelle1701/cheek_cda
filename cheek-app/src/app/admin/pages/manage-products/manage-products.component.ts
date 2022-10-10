@@ -13,6 +13,8 @@ export class ManageProductsComponent implements OnInit {
   products: any = [];
   sizes: any = [];
   selectedSize: number = 0;
+  msgSuccess: string = "";
+  isDeleted: boolean = false;
 
   //icons
   faEdit = faPenToSquare;
@@ -60,5 +62,15 @@ export class ManageProductsComponent implements OnInit {
         });
       });
     });
+  }
+
+  deleteProduct(productId: number){
+    
+    this.productsService.delete(productId).subscribe(
+      (product: any) => {
+        this.msgSuccess = product.message;
+        this.isDeleted = true;
+      
+    })
   }
 }

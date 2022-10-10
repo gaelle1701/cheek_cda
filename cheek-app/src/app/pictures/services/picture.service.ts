@@ -10,27 +10,32 @@ import { IPicture, IPictures } from '../../core/interfaces/picture';
 })
 
 export class PictureService implements ICrud<IPicture> {
-  pictureUrl = '/api/pictures';
+  baseUrl = '/api/pictures';
 
   constructor(private http: HttpClient) {}
 
   create(data: IPicture): Observable<IPicture> {
-    return this.http.post<IPicture>(this.pictureUrl, data);
+    return this.http.post<IPicture>(this.baseUrl, data, {
+      headers: {
+        Accept: 'application/json',
+        //"Content-Type": "multipart/form-data"
+      }
+    });
   }
 
   delete(id: number): Observable<IPicture> {
-    return this.http.delete<IPicture>(`${this.pictureUrl}/${id}`);
+    return this.http.delete<IPicture>(`${this.baseUrl}/${id}`);
   }
 
   findAll(): Observable<IPictures> {
-    return this.http.get<IPictures>(this.pictureUrl);
+    return this.http.get<IPictures>(this.baseUrl);
   }
 
   findOne(id: number): Observable<IPicture> {
-    return this.http.get<IPicture>(`${this.pictureUrl}/${id}`);
+    return this.http.get<IPicture>(`${this.baseUrl}/${id}`);
   }
 
   update(id: number, data: Partial<IPicture>): Observable<IPicture> {
-    return this.http.put<IPicture>(`${this.pictureUrl}/${id}`, data);
+    return this.http.put<IPicture>(`${this.baseUrl}/${id}`, data);
   }
 }

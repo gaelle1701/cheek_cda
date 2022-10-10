@@ -1,8 +1,8 @@
 <main class="container">
-  <section class="row container-filter">
+  <!-- <section class="row container-filter">
     <select class="col-3 custom-select">
       <option value="">Filter par catégorie</option>
-      <!-- <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option> -->
+      <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option> 
     </select>
     <select (change)="onChangeSize($event)" class="col-3 custom-select">
       <option value="">Filter par taille</option>
@@ -10,7 +10,7 @@
         {{ size.label }}
       </option>
     </select>
-  </section>
+  </section> -->
 
   <!-- <div *ngIf="isDeleted">
         <p class="alertSuccess is-center">{{msgSuccess}}</p>
@@ -39,13 +39,13 @@
         <td data-label="Stock">{{ product.stock }}</td>
         <td data-label="Modifier">
           <button>
-            <a routerLink="/dashboard/">
+            <a routerLink="/admin/gestion-produits/editer/{{product.slug}}">
               <fa-icon [icon]="faEdit"></fa-icon>
             </a>
           </button>
         </td>
         <td data-label="Supprimer">
-          <button>
+          <button (click)="deleteProduct(product.id)">
             <fa-icon [icon]="faDelete"></fa-icon>
           </button>
         </td>

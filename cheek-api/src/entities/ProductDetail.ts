@@ -14,7 +14,9 @@ export class ProductDetail extends BaseEntity {
   @Column({ type: 'float' })
   price_ttc: number;
 
-  @ManyToOne(() => Product, (product) => product.details)
+  @ManyToOne(() => Product, (product) => product.details, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'product_id' })
   product: Product;
 

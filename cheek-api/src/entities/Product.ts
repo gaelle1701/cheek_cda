@@ -30,10 +30,14 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @OneToMany(() => ProductDetail, (detail) => detail.product)
+  @OneToMany(() => ProductDetail, (detail) => detail.product, {
+    cascade: true,
+  })
   details: ProductDetail[];
 
-  @OneToMany(() => Picture, (picture) => picture.product)
+  @OneToMany(() => Picture, (picture) => picture.product, {
+    cascade: true,
+  })
   pictures: Picture[];
 
   @OneToMany(() => OrderLine, (orderLine) => orderLine.product)

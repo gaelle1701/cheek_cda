@@ -2,13 +2,13 @@
   <a routerLink="/boutique/produit/{{ card.slug }}">
     <section class="card">
       <div >
-        <div *ngIf="card.pictures[0]">
-          <img src="{{ card.pictures[0].url }}" alt="{{ card.pictures[0].label }}">
+        <div *ngIf="card.pictures?.length >= 0">
+          <img src="{{ card.pictures[0]?.url }}" alt="{{ card.pictures[0]?.label }}">
         </div>
       </div>
       <article>
         <h3>{{ card.name }}</h3>
-        <p>{{ card.details[0].price_ttc }} €</p>
+        <p>{{ card.details[0]?.price_ttc ?? 0}} €</p>
       </article>
     </section>
   </a>

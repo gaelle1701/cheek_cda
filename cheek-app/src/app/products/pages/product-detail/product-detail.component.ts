@@ -14,8 +14,8 @@ export class ProductDetailComponent implements OnInit {
   stocks: number[] = [];
   products = [];
   product: any;
-  selectedSize: number = 0;
-  isDisable: boolean = false;
+  selectedSize = 0;
+  isDisable = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,19 +31,17 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
 
+    this.getStockBySize(this.selectedSize);
     this.productsService
       .getProductByName(routeParams.get('productName') as string)
       .subscribe((product) => {
-        console.log("product", product);
         this.product = product
         this.detail = product.details;
-        this.sizes = product.details.map((detl: any) => detl.size.label);
-        this.getStockBySize(this.selectedSize);
-
+        this.sizes = product.details.map((detl) => detl.size.label);
         this.slides = product.pictures.map(picture => {
           return {
-            ...picture,
-            url: this.generateUrlPicture(picture.url, 'c_scale,w_300')
+            label: picture.label,
+            url: this.generateUrlPicture(picture.url, 'c_scale,w_200')
           }
         });
     });
