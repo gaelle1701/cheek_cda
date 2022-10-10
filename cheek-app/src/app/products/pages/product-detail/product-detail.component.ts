@@ -38,8 +38,6 @@ export class ProductDetailComponent implements OnInit {
 
         this.getStockBySize(this.selectedSize);
 
-        console.log('stockBySize', this.getStockBySize(this.selectedSize));
-
         // this.slides = product.pictures.map( picture => {
         //   return {
         //     ...picture,
