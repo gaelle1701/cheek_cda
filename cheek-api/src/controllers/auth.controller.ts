@@ -5,8 +5,7 @@ import { userRepository } from '../repository/user.repository';
 import sendMail from '../helpers/mailer';
 import logger from '../config/winston';
 import { addressRepository } from '../repository/address.repository';
-import { generateAccesToken, generateAccesTokenEmail, generateRefreshToken, verifyToken } from '../helpers/token';
-import { UsingJoinTableIsNotAllowedError } from 'typeorm';
+import { generateAccesToken, generateAccesTokenEmail } from '../helpers/token';
 
 class AuthController {
   async signup(req: Request, res: Response) {
@@ -68,7 +67,6 @@ class AuthController {
       }
 
       const accessToken = generateAccesToken(user.id);
-      const refreshAccessToken = generateRefreshToken(user.id)
 
       return res.status(200).send({
         firstName: user.firstName,
@@ -76,7 +74,6 @@ class AuthController {
         email: user.email,
         role: user.role,
         accessToken,
-        refreshAccessToken,
         message: 'Vous êtes connecté(e)!',
       });
     } catch (error) {
@@ -86,20 +83,7 @@ class AuthController {
     }
   }
 
-  async refreshToken(req: Request, res: Response) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (!token) {
-      return res.status(401).send({
-        message: "Ce token 'existe plus"
-        
-      })
-    }
-
-    return verifyToken(res, token)
-  }
-
+ 
   async getProfile(req: Request, res: Response) {
     try {
       const user = await userRepository.findById(req.user.id);

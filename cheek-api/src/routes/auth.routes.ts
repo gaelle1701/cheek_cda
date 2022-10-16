@@ -8,7 +8,6 @@ const authController = new AuthController();
 
 authRoutes.post('/signup', authController.signup);
 authRoutes.post('/login', authController.login);
-authRoutes.post('/refresh-token', authController.refreshToken);
 authRoutes.get('/profile', permit(ERole.CUSTOMER, ERole.ADMIN), authController.getProfile);
 authRoutes.put('/edit-profile/:id', permit(ERole.CUSTOMER, ERole.ADMIN), authController.updateProfile);
 
