@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -10,6 +10,7 @@ import { ProductFormComponent } from './pages/manage-products/product-form/produ
 import { ProductsModule } from '../products/products.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ManageProductsComponent,
     ManageOrdersComponent,
     ProductFormComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,
@@ -27,5 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [
+    { provide: DEFAULT_CURRENCY_CODE, useValue:'EUR'}
+  ]
 })
 export class AdminModule {}

@@ -1,0 +1,46 @@
+<table class="striped">
+    <thead>
+        <tr rowspan="5">
+            <th rowspan="1" *ngFor="let header of headers">
+                {{ header.label }}
+                <table>
+                    <tr rowspan="4">
+                        <th rowspan="1" *ngFor="let item of header?.subHeaders">
+                            {{ item.label }}
+                        </th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of datas">
+            <td *ngFor="let header of headers">
+                <ng-container *ngIf="!header?.subHeaders">
+                    {{ row[header.key] }}
+                </ng-container>
+
+                <ng-container *ngIf="header?.subHeaders">
+                    <table>
+                        <tr *ngFor="let subRow of row.details">
+                            <td *ngFor="let subHeader of header?.subHeaders">
+                                {{ subRow[subHeader.key] }}
+                            </td>       
+                        </tr>      
+                     </table>
+                </ng-container>
+
+                <tr *ngIf="header.key === 'actions'">
+                    <button>
+                        <a routerLink="{{ header.editPath }}/{{ row.id }}">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </a>
+                    </button>
+                    <button (click)="onDelete(row.id)">
+                        <fa-icon [icon]="faDelete"></fa-icon>
+                    </button>
+                </tr>
+            </td>
+        </tr>
+    </tbody>
+  </table>
