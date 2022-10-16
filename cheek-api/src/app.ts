@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
-import * as cloudinary from 'cloudinary';
+import * as cloudinary  from "cloudinary";
 
 dotenv.config({
   path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
@@ -10,7 +10,6 @@ dotenv.config({
 import { AppDataSource } from './config/data-source';
 import { addRoutes } from './routes';
 import { addMiddlewares } from './middleware';
-import * as cloudinary  from "cloudinary";
 import logger from './config/winston';
 
 cloudinary.v2.config({
@@ -24,22 +23,8 @@ cloudinary.v2.config({
 (async () => {
   try {
 
-    // Cloudinary config & connextion
-    cloudinary.v2.config({ 
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-      api_key: process.env.CLOUDINARY_API_KEY, 
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-      secure: true
-    });
-
     const app = express();
     const port = process.env.PORT || 3001;
-
-    // parse application/json
-    // @ts-ignore
-    app.use(bodyParser.urlencoded({ extended: false }));
-    // @ts-ignore
-    app.use(bodyParser.json())
 
     await AppDataSource.initialize();
     logger.info('Data Source has been initialized!');
@@ -54,5 +39,4 @@ cloudinary.v2.config({
     logger.error('Data Source has not been initialized!', err);
   }
 })();
-
 
