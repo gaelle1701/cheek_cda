@@ -213,7 +213,7 @@ export class ProductFormComponent implements OnInit {
       
     } else if(this.productForm.valid) {
       this.productsService.create(productPayload).subscribe({
-        next: (product) => {          
+        next: (product) => {
           if (product.id && pictures.length >= 0) {
             pictures.map((picture: any) => {
               const formData: any = new FormData();
@@ -227,7 +227,6 @@ export class ProductFormComponent implements OnInit {
             this.isCreated = true;
             console.log("product create: ", product);
           }
-
         },
         error: (res) => {
           this.msgError = res.error.message;
