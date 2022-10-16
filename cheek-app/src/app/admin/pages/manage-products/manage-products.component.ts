@@ -78,7 +78,6 @@ export class ManageProductsComponent implements OnInit {
           ...product, 
           category: product.category.name, 
           details: product.details.map((detail) => {
-            
             return {
               ...detail,
               size: detail.size.label
