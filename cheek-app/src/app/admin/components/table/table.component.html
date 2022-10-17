@@ -1,4 +1,4 @@
-<table class="striped">
+<table class="striped table">
     <thead>
         <tr rowspan="5">
             <th rowspan="1" *ngFor="let header of headers">
@@ -20,7 +20,7 @@
                     {{ row[header.key] }}
                 </ng-container>
 
-                <ng-container *ngIf="header?.subHeaders">
+                <ng-container *ngIf="!header?.subHeaders">
                     <table>
                         <tr *ngFor="let subRow of row.details">
                             <td *ngFor="let subHeader of header?.subHeaders">

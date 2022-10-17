@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ICrud } from '../../core/interfaces/crud';
+import { ICrud } from '../../../core/interfaces/crud';
 import {
   IProductDetail,
   IProductDetails,
-} from '../../core/interfaces/product-detail';
+} from '../../../core/interfaces/product-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +23,11 @@ export class ProductDetailService implements ICrud<IProductDetail> {
     return this.http.delete<IProductDetail>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<IProductDetails> {
+  getAll(): Observable<IProductDetails> {
     return this.http.get<IProductDetails>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IProductDetail> {
+  getOne(id: number): Observable<IProductDetail> {
     return this.http.get<IProductDetail>(`${this.baseUrl}/${id}`);
   }
 

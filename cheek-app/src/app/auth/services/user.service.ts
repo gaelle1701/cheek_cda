@@ -19,11 +19,11 @@ export class UserService implements ICrud<IUser> {
     return this.http.delete<IUser>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<IUsers> {
+  getAll(): Observable<IUsers> {
     return this.http.get<IUsers>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IUser> {
+  getOne(id: number): Observable<IUser> {
     return this.http.get<IUser>(`${this.baseUrl}/${id}`);
   }
 

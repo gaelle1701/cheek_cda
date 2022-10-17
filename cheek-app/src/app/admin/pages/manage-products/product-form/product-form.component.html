@@ -1,5 +1,5 @@
 <main class="container is-center">
-    <section class="col-10 col-8-md col-8-lg">        
+    <section class="col-10 col-8-md col-10-lg">        
         <section class="text-center">
             <h3>{{ title }}</h3>
 
@@ -29,7 +29,7 @@
             </section>
             
             <section class="row">
-                <section class="form-input col-6">
+                <section class="form-input col-5">
                     <label for="name-input">Nom du produit*</label>
                     <input type="text" id="name-input" formControlName="name">
 
@@ -40,7 +40,7 @@
                     </div>
                 </section>
 
-                <section class="form-input col-6">
+                <section class="form-input col-7">
                     <label for="description-input">Description*</label>
                     <textarea formControlName="description"></textarea>
     
@@ -53,9 +53,9 @@
             </section>
 
             <section class="col-4">
-                <div *ngIf="product">
+                <!-- <div *ngIf="product">
                     <img src={{product.pictures[0].url}}/>
-                </div>
+                </div> -->
                 
                 <input formArrayName="pictures" type="file" multiple="" class="file-input" (change)="onFileSelected($event)" #fileUpload>
             
@@ -73,7 +73,7 @@
                 <section class="col-12" *ngFor="let detailsForm of detailsF.controls; let i = index">
                     <div [formGroupName]="i">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <label for="taille-input">Taille*</label>
                                 <select class="custom-select__size" formControlName="size" (change)="onChangeSize($event, i, detailsForm)">
                                     <option value=""></option>
@@ -99,7 +99,10 @@
                 <button (click)="removeDetails(i)">Ajouter un détail</button>
             </div>  -->
             <div class="is-center">
-                <button type="button" (click)="addDetails()">Ajouter un détail</button>
+                <button type="button" (click)="addDetails()">
+                    <fa-icon [icon]="faAdd"></fa-icon>
+                    Détail
+                </button>
             </div>    
             <section class="is-center">
                 <button type="submit" [disabled]="productForm.invalid">Valider</button>

@@ -1,0 +1,23 @@
+<section class="text-center">
+    <div *ngIf="isCreated">
+        <p class="alertSuccess is-center">{{ msgSuccessCreate }}</p>
+    </div>
+    <div *ngIf="isUpdated">
+        <p class="alertSuccess is-center">{{ msgSuccessUpdate }}</p>
+    </div>
+</section>
+<div>
+    <form [formGroup]="sizeForm" (ngSubmit)="onSubmit()">
+        <label for="label-input">Label*</label>
+        <input type="text" id="label-input" formControlName="label">
+    
+        <div *ngIf="f['label']?.invalid && f['label']?.touched">
+            <div *ngIf="f['label'].errors?.['required']">
+                <p class="error">Le label est requis!</p>
+            </div>
+        </div>
+        <section class="is-center">
+            <button type="submit" [disabled]="sizeForm.invalid">Valider</button>
+        </section>
+    </form>
+</div>

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ICrud } from '../../core/interfaces/crud';
-import { IPicture, IPictures } from '../../core/interfaces/picture';
+import { ICrud } from '../../../core/interfaces/crud';
+import { IPicture, IPictures } from '../../../core/interfaces/picture';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +26,11 @@ export class PictureService implements ICrud<IPicture> {
     return this.http.delete<IPicture>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<IPictures> {
+  getAll(): Observable<IPictures> {
     return this.http.get<IPictures>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IPicture> {
+  getOne(id: number): Observable<IPicture> {
     return this.http.get<IPicture>(`${this.baseUrl}/${id}`);
   }
 

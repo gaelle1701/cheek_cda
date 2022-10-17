@@ -20,11 +20,11 @@ export class AddressService implements ICrud<IAddress> {
     return this.http.delete<IAddress>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<IAddresses> {
+  getAll(): Observable<IAddresses> {
     return this.http.get<IAddresses>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IAddress> {
+  getOne(id: number): Observable<IAddress> {
     return this.http.get<IAddress>(`${this.baseUrl}/${id}`);
   }
 

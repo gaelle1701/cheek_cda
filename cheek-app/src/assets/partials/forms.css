@@ -23,7 +23,8 @@ button {
   border: 2px solid var(--color-orange);
   font-family: var(--font-family-courier);
   color: var(--color-orange);
-  margin: 20px 0;
+  margin: 2rem 0;
+  padding: 1rem;
 }
 
 /* ************** CUSTOM ****************** */

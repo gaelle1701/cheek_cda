@@ -16,36 +16,17 @@ p{
   background-color: var(--bg-color);
   font-family: var(--font-family-courier);
   border: 2px solid var(--color-orange);
+  width: 30%;
+  margin-left: 1rem;
 }
+
+.custom-select__size {
+  width: 100%;
+}
+
 .upload-btn {
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 .file-input {
     display: none !important;
   }
-
-  
-/* ___________________TABLET_________________ */
-
-@media screen and (min-width: 600px) and (max-width: 900px) {
-
-  .custom-select {
-      width: 60%;
-    }
-}
-
-/* ___________________DESKTOP_________________ */
-
-@media screen and (min-width: 900px) {
-  
-  .custom-select {
-    width: 60%;
-  }
-  /* .custom-select__size{
-    width: 80%;
-  } */
-
-
-  
-
-}

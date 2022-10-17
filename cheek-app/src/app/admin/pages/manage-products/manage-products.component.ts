@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import { ProductsService } from 'src/app/products/services/products.service';
-import { SizesService } from 'src/app/products/services/sizes.service';
+import { faPenToSquare, faTrashCan, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { ProductsService } from 'src/app/products/services/products/products.service';
+import { SizesService } from 'src/app/products/services/sizes/sizes.service';
 import { ITableHeader } from '../../components/table/table.component';
 
 @Component({
@@ -17,11 +17,12 @@ export class ManageProductsComponent implements OnInit {
   msgSuccess: string = "";
   isDeleted: boolean = false;
 
-  //icons
+  /**** ICONS ****/
   faEdit = faPenToSquare;
   faDelete = faTrashCan;
+  faAdd = faCirclePlus;
 
-  //table
+  /**** TABLE ****/
   headers?: ITableHeader[] = [
     { label: 'Catégorie', key: "category" },
     { label: "Slug", key: "slug"},
@@ -78,7 +79,6 @@ export class ManageProductsComponent implements OnInit {
           ...product, 
           category: product.category.name, 
           details: product.details.map((detail) => {
-            
             return {
               ...detail,
               size: detail.size.label
