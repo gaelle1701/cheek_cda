@@ -18,7 +18,6 @@ export class PictureService implements ICrud<IPicture> {
     return this.http.post<IPicture>(this.baseUrl, data, {
       headers: {
         Accept: 'application/json',
-        //"Content-Type": "multipart/form-data"
       }
     });
   }

@@ -10,6 +10,7 @@ import { ProductFormComponent } from './pages/manage-products/product-form/produ
 import { ProductsModule } from '../products/products.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ManageProductsComponent,
     ManageOrdersComponent,
     ProductFormComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProductsModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
+  ]
 })
 export class AdminModule {}

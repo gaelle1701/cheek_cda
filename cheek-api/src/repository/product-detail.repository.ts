@@ -18,13 +18,4 @@ export const productDetailRepository = AppDataSource.getRepository(
       ]
     });
   },
-  // async createPrice(price: DeepPartial<Price>) {
-  //   const createPrice = priceRepository.create(price);
-  //   return await priceRepository.save(createPrice);
-  // },
-  // async findBydId(id: number) {
-  //   return await priceRepository.findOneBy({
-  //     id,
-  //   });
-  // },
 });

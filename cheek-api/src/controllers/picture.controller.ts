@@ -18,8 +18,6 @@ class PictureController {
             folder: 'cheek/products',
           },
         );
-
-        console.log();
         
         if (uploadedPicture) {
           logger.info('Uploaded picture Source');

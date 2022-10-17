@@ -18,7 +18,7 @@ export function addMiddlewares(app: Application) {
   app.use(corsMiddleware);
   app.use(morganMiddleware);
   app.use(cartMiddleware);
-
+ 
   if (process.env.NODE_ENV === 'production') {
     app.disable('x-powered-by');
     app.use(compression());

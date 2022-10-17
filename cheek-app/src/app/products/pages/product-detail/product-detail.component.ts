@@ -25,6 +25,8 @@ export class ProductDetailComponent implements OnInit {
   onChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.getStockBySize(parseInt(value));
+    console.log(value);
+    
     this.isDisable = this.stocks.length === 0;
   }
 
@@ -32,6 +34,8 @@ export class ProductDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
 
     this.getStockBySize(this.selectedSize);
+    console.log(this.selectedSize);
+    
     this.productsService
       .getProductByName(routeParams.get('productName') as string)
       .subscribe((product) => {
@@ -58,13 +62,14 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  
   getStockBySize(selectedSize: number) {
     const stockBySize = this.detail?.find(
       (_: any, idx: any) => idx === selectedSize,
     )?.stock;
     this.selectedSize = selectedSize;
     this.stocks = [...Array(stockBySize).keys()].map((i) => i + 1);
+    console.log(this.stocks);
+    
   }
 }
 

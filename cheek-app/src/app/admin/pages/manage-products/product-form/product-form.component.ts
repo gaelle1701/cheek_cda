@@ -154,7 +154,7 @@ export class ProductFormComponent implements OnInit {
       });
       this.detailsF.push(addDetail)
     } else {
-      this.detailsF.push(this.initDetailsForm())  
+      this.detailsF.push(this.initDetailsForm())        
     }
   }
 
@@ -197,10 +197,11 @@ export class ProductFormComponent implements OnInit {
 
   // **** submit forms ****
   onSubmit() {
-    const formValues = this.productForm.value
+    const formValues = this.productForm.value  
+    const { pictures, ...productPayload } = formValues
 
     if(this.productSlug && this.productForm.valid){      
-      this.productsService.update(this.productId, formValues as any).subscribe({
+      this.productsService.update(this.productId, productPayload).subscribe({
         next: (res) => {
           this.isUpdated = true;
           this.msgSuccessUpdate = res.message as string;
@@ -209,27 +210,24 @@ export class ProductFormComponent implements OnInit {
           this.msgError = res.error.message;
         }
       });
-        
+      
     } else if(this.productForm.valid) {
-      this.productsService.create(formValues as any).subscribe({
-        next: (product) => {
-          if (product.id) {
-            if(formValues.pictures.length >= 0) {
-              formValues.pictures.map((picture: any) => {
-                const formData: any = new FormData();
-                formData.append("picture", picture.picture);
-                formData.append("product_id", product.id);
-                formData.append("label", picture.label);
-               
-                this.pictureService.create(formData).subscribe((uploadRes)=> {
-                  console.log(uploadRes);
-                });
-              })
-            }
+      this.productsService.create(productPayload).subscribe({
+        next: (product) => {          
+          if (product.id && pictures.length >= 0) {
+            pictures.map((picture: any) => {
+              const formData: any = new FormData();
+              formData.append("picture", picture.picture);
+              formData.append("product_id", product.id);
+              formData.append("label", picture.label);
+              
+              this.pictureService.create(formData).subscribe();             
+            })
+            this.msgSuccessCreate = product.message as string;     
+            this.isCreated = true;
+            console.log("product create: ", product);
           }
 
-          this.msgSuccessCreate = product.message as string;     
-          this.isCreated = true;
         },
         error: (res) => {
           this.msgError = res.error.message;
