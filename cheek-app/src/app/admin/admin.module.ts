@@ -1,4 +1,4 @@
-import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -28,9 +28,6 @@ import { TableComponent } from './components/table/table.component';
     ProductsModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
-  providers: [
-    { provide: DEFAULT_CURRENCY_CODE, useValue:'EUR'}
   ]
 })
 export class AdminModule {}

@@ -1,4 +1,3 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
@@ -30,7 +29,7 @@ export class ManageProductsComponent implements OnInit {
     { label: "", key: "details",
       subHeaders: [
         { label: 'Prix HT', key:"price_ht"},
-        { label: 'Prix TTC', key: "price_ttc", pipe: "currency" },
+        { label: 'Prix TTC', key: "price_ttc" },
         { label: 'Taille', key: "size" },
         { label: 'Stock', key: "stock" },
       ]},
@@ -40,8 +39,7 @@ export class ManageProductsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private sizesService: SizesService,
-    private currencyPipe: CurrencyPipe
+    private sizesService: SizesService
   ) {}
 
   onChangeSize(event: Event) {
@@ -79,7 +77,8 @@ export class ManageProductsComponent implements OnInit {
         this.products?.push({  
           ...product, 
           category: product.category.name, 
-          details: product.details.map(detail => {
+          details: product.details.map((detail) => {
+            
             return {
               ...detail,
               size: detail.size.label
@@ -88,9 +87,6 @@ export class ManageProductsComponent implements OnInit {
         });
       });      
     });
-
-   
-    
   }
 
   deleteProduct(productId: number){        
@@ -98,7 +94,6 @@ export class ManageProductsComponent implements OnInit {
       (product: any) => {
         this.msgSuccess = product.message;
         this.isDeleted = true;
-      
     })
   }
 }

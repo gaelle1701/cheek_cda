@@ -3,16 +3,14 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 export interface ITableHeader{
   key: string;
-  label: string
-  editPath?: string
+  label: string;
+  editPath?: string;
   subHeaders?: ITableSubHeader[]
 }
 
 export interface ITableSubHeader{
   key: string;
-  label: string
-  pipe?: any,
-  value?: (value: any) => void
+  label: string;
 }
 
 @Component({
@@ -32,7 +30,7 @@ export class TableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.datas, this.headers);
+    console.log( "data: ",this.datas);
   }
 
   onDelete(id: number) {

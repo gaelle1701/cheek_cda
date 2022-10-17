@@ -154,7 +154,7 @@ export class ProductFormComponent implements OnInit {
       });
       this.detailsF.push(addDetail)
     } else {
-      this.detailsF.push(this.initDetailsForm())  
+      this.detailsF.push(this.initDetailsForm())        
     }
   }
 
@@ -213,7 +213,7 @@ export class ProductFormComponent implements OnInit {
       
     } else if(this.productForm.valid) {
       this.productsService.create(productPayload).subscribe({
-        next: (product) => {
+        next: (product) => {          
           if (product.id && pictures.length >= 0) {
             pictures.map((picture: any) => {
               const formData: any = new FormData();
@@ -221,11 +221,13 @@ export class ProductFormComponent implements OnInit {
               formData.append("product_id", product.id);
               formData.append("label", picture.label);
               
-              this.pictureService.create(formData).subscribe();
+              this.pictureService.create(formData).subscribe();             
             })
+            this.msgSuccessCreate = product.message as string;     
+            this.isCreated = true;
+            console.log("product create: ", product);
           }
-          this.msgSuccessCreate = product.message as string;     
-          this.isCreated = true;
+
         },
         error: (res) => {
           this.msgError = res.error.message;
