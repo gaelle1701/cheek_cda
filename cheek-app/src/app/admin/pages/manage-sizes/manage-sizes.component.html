@@ -1,0 +1,12 @@
+<main class="container">
+    <button (click)="openModal()" data-custom-open="modal-1">
+        <fa-icon [icon]="faAdd"></fa-icon>
+        Taille
+    </button>
+    <app-table [headers]="headers" [datas]="sizes" (deleteAction)="deleteSize($event)"></app-table>
+
+    <app-modal [title]="title">
+        <app-size-form (sizeAction)="onCreate($event)"></app-size-form>
+    </app-modal>
+
+</main>

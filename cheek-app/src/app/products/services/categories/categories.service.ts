@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ICategories, ICategory } from 'src/app/core/interfaces/category';
-import { ICrud } from '../../core/interfaces/crud';
+import { ICrud } from '../../../core/interfaces/crud';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class CategoriesService implements ICrud<ICategory> {
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<ICategories> {
+  getAll(): Observable<ICategories> {
     return this.http.get<ICategories>(this.baseUrl);
   }
 
@@ -33,7 +33,7 @@ export class CategoriesService implements ICrud<ICategory> {
     return this.http.delete<ICategory>(`${this.baseUrl}/${id}`);
   }
 
-  findOne(id: number): Observable<ICategory> {
+  getOne(id: number): Observable<ICategory> {
     return this.http.get<ICategory>(`${this.baseUrl}/${id}`);
   }
 

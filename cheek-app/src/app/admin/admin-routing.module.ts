@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
 import { ProductFormComponent } from './pages/manage-products/product-form/product-form.component';
+import { ManageSizesComponent } from './pages/manage-sizes/manage-sizes.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
 
 const routes: Routes = [
@@ -15,7 +16,10 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'gestion-produits', component: ManageProductsComponent },
       { path: 'gestion-produits/ajouter', component: ProductFormComponent },
-      { path: 'gestion-produits/editer/:slug', component: ProductFormComponent },
+      { path: 'gestion-produits/editer/:id', component: ProductFormComponent },
+      { path: 'gestion-tailles', component: ManageSizesComponent },
+      { path: 'gestion-tailles/ajouter', component: ManageSizesComponent },
+      { path: 'gestion-tailles/editer/:id', component: ManageSizesComponent },
       { path: 'gestion-clients', component: ManageUsersComponent },
       { path: 'gestion-commandes', component: ManageOrdersComponent },
     ],

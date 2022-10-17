@@ -17,9 +17,24 @@
     </div> -->
   <app-table [headers]="headers" [datas]="products" (deleteAction)="deleteProduct($event)"></app-table>
 
-  <div class="is-center">
+  <div class="is-center container-btn">
     <button>
-      <a routerLink="/admin/gestion-produits/ajouter">Ajouter un produit</a>
+      <a routerLink="/admin/gestion-produits/ajouter">
+        <fa-icon [icon]="faAdd"></fa-icon>
+        Produit
+      </a>
+    </button>
+    <button>
+      <a routerLink="/admin/gestion-tailles/ajouter">
+        <fa-icon [icon]="faAdd"></fa-icon>
+        Taille
+      </a>
+    </button>
+    <button>
+      <a routerLink="/admin/gestion-produits/ajouter">
+        <fa-icon [icon]="faAdd"></fa-icon>
+        Catégorie
+      </a>
     </button>
   </div>
 </main>

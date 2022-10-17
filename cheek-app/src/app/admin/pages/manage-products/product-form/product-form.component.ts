@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoriesService } from 'src/app/categories/services/categories.service';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { CategoriesService } from 'src/app/products/services/categories/categories.service';
 import { IPicture } from 'src/app/core/interfaces/picture';
 import { IProductDetail } from 'src/app/core/interfaces/product-detail';
-import { PictureService } from 'src/app/pictures/services/picture.service';
-import { ProductsService } from 'src/app/products/services/products.service';
-import { SizesService } from 'src/app/products/services/sizes.service';
+import { PictureService } from 'src/app/products/services/pictures/picture.service';
+import { ProductsService } from 'src/app/products/services/products/products.service';
+import { SizesService } from 'src/app/products/services/sizes/sizes.service';
 
 @Component({
   selector: 'app-product-form',
@@ -18,12 +18,16 @@ import { SizesService } from 'src/app/products/services/sizes.service';
 export class ProductFormComponent implements OnInit {
   title = "Ajouter un produit";
 
+  /**** ICONS ****/
+  faAdd = faCirclePlus;
+  
+  /**** FORMS ****/
   productForm!: FormGroup
   detailsForm!: FormGroup
   picturesForm!: FormGroup
 
+  /********/
   productId: number = 0;
-  productSlug: string = '';
   product: any;
   isCreated: boolean = false;
   isUpdated: boolean = false;
@@ -46,7 +50,6 @@ export class ProductFormComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  
   initDetailsForm() {
     return this.formBuilder.group({
       price_ht: [0, [Validators.required, Validators.minLength(1)]],
@@ -74,6 +77,7 @@ export class ProductFormComponent implements OnInit {
     })
   }
 
+  /************* ONCHANGE *************/
   onChangeCategory(event: Event) {
     const value = parseInt((event.target as HTMLSelectElement).value, 10);
       this.productForm.setValue({
@@ -92,12 +96,11 @@ export class ProductFormComponent implements OnInit {
         product: detailForm.value.product,
         id: detailForm.value.id
       } : undefined)
-
     })    
   }
 
 
-  // **** uploadFile ****
+  /************* UPLOAD FILE *************/
   onFileSelected(event: any) {
     const pictures = event.target.files
     if(pictures){
@@ -114,21 +117,21 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-
-
   ngOnInit(): void {  
-    this.productSlug = this.route.snapshot.paramMap.get('slug') as string;
+    this.route.paramMap.subscribe(param => {
+      this.productId = parseInt(param.get('id') as string, 10)
+    })
     this.buildForm()
     this.getCategories();
     this.getSizes();
 
-    if(this.productSlug && this.detailsForm) {
+    if(this.productId && this.detailsForm) {
       this.title = "Modifier un produit"
-      this.getProductBySlug();
+      this.getProductById();
     }
   }
 
-  // **** get forms ****
+  /************* GET FORMS *************/
   get f() {
     return this.productForm.controls;
   }
@@ -142,9 +145,9 @@ export class ProductFormComponent implements OnInit {
   }
   
  
-  // **** methods for detailsForm ****
+  /************* DETAILS FORM *************/
   addDetails(detail?: any, index?: number){      
-    if(this.productSlug) {
+    if(this.productId) {      
       const addDetail = this.formBuilder.group({
         id: [detail.id],
         price_ht: [detail.price_ht],
@@ -163,18 +166,18 @@ export class ProductFormComponent implements OnInit {
   //   control.removeAt(i);
   // }
 
-  // **** methods get of services ****
+  /************* GET METHODS *************/
   getCategories(){
-    this.categoriesService.findAll().subscribe(categories =>
+    this.categoriesService.getAll().subscribe(categories =>
       { this.categories = categories })
    }
 
   getSizes(){
-    this.sizesService.getSizes(). subscribe( sizes => {this.sizes = sizes})
+    this.sizesService.getAll(). subscribe( sizes => {this.sizes = sizes})
   }
   
-  getProductBySlug(){      
-    this.productsService.getProductByName(this.productSlug).subscribe( product => {
+  getProductById(){      
+    this.productsService.getOne(this.productId).subscribe( product => {
       this.productForm.patchValue({
         category: product.category.id,
         name: product.name,
@@ -195,12 +198,12 @@ export class ProductFormComponent implements OnInit {
     })
   }
 
-  // **** submit forms ****
+  /************* SUBMIT FORM *************/
   onSubmit() {
     const formValues = this.productForm.value  
     const { pictures, ...productPayload } = formValues
 
-    if(this.productSlug && this.productForm.valid){      
+    if(this.productId && this.productForm.valid){      
       this.productsService.update(this.productId, productPayload).subscribe({
         next: (res) => {
           this.isUpdated = true;
@@ -210,7 +213,6 @@ export class ProductFormComponent implements OnInit {
           this.msgError = res.error.message;
         }
       });
-      
     } else if(this.productForm.valid) {
       this.productsService.create(productPayload).subscribe({
         next: (product) => {          
@@ -225,7 +227,6 @@ export class ProductFormComponent implements OnInit {
             })
             this.msgSuccessCreate = product.message as string;     
             this.isCreated = true;
-            console.log("product create: ", product);
           }
         },
         error: (res) => {
@@ -236,7 +237,6 @@ export class ProductFormComponent implements OnInit {
         this.router.navigate(['admin/gestion-produits']);
       }, 2000 );
     }
-   
   }
  
    

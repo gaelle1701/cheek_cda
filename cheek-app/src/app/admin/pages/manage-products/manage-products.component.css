@@ -5,7 +5,7 @@ p {
 }
 
 a {
-  color: var(--color-black);
+  color: var(--color-orange);
   font-family: var(--font-family-courier);
 }
 
@@ -24,19 +24,16 @@ p {
   font-family: var(--font-family-courier);
 }
 
+.container-btn {
+  margin-bottom: 4rem;
+}
 button {
   background-color: var(--bg-color);
   border: 2px solid var(--color-orange);
   font-family: var(--font-family-courier);
   color: var(--color-orange);
-}
-
-.btn {
-  display: inline-block;
-  background-color: var(--bg-color);
-  border: 2px solid var(--color-orange);
-  padding: 10px;
-  margin: 15px 0;
+  padding: 0.8rem;
+  margin: 0 2rem;
 }
 
 .alertSuccess {
@@ -50,18 +47,3 @@ button {
   font-size: var(--font-size-small);
 }
 
-/* ___________________TABLET_________________ */
-
-@media screen and (min-width: 600px) and (max-width: 900px) {
-  .custom-select {
-    width: 50%;
-  }
-}
-
-/* ___________________DESKTOP_________________ */
-
-@media screen and (min-width: 900px) {
-  .custom-select {
-    width: 30%;
-  }
-}

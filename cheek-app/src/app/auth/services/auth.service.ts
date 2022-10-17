@@ -18,8 +18,6 @@ export class AuthService {
   editProfileUrl = '/api/auth/edit-profile';
   confirmUrl = 'api/mailer/confirm';
 
-  // roleAs: string | null = '';
-
   constructor(private http: HttpClient) {}
 
   signup({
@@ -28,7 +26,6 @@ export class AuthService {
     email,
     password,
   }: {
-    roleAs: string;
     lastName: string;
     firstName: string;
     email: string;
@@ -87,11 +84,6 @@ export class AuthService {
       address,
     });
   }
-
-  //   getRole() {
-  //     this.roleAs = localStorage.getItem('role');
-  //     return this.roleAs;
-  //  }
 
   getUniqueString(uniqueString: string) {
     return this.http.get(`${this.confirmUrl}/${uniqueString}`);

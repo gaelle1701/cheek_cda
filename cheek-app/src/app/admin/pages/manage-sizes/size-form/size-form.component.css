@@ -1,18 +1,13 @@
+@import url(../../../../../assets/partials/forms.css);
+
 h3 {
   font-family: var(--font-family-courier);
   font-weight: 800;
   color: var(--color-orange);
-  margin-bottom: 4rem;
+  margin: 4rem;
   text-transform: uppercase;
 }
 
-h4 {
+p{
   font-family: var(--font-family-courier);
-  color: var(--color-black);
 }
-
-.container__icons {
-  display: flex;
-  justify-content: space-around;
-}
-

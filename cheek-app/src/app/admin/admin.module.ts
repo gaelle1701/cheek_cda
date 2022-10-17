@@ -11,6 +11,9 @@ import { ProductsModule } from '../products/products.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TableComponent } from './components/table/table.component';
+import { ManageSizesComponent } from './pages/manage-sizes/manage-sizes.component';
+import { SizeFormComponent } from './../admin/pages/manage-sizes/size-form/size-form.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { TableComponent } from './components/table/table.component';
     ManageOrdersComponent,
     ProductFormComponent,
     TableComponent,
+    ManageSizesComponent,
+    SizeFormComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,

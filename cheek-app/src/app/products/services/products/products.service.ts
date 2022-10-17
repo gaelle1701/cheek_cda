@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CreateResponse, IProduct, IProducts, UpdateResponse } from 'src/app/core/interfaces/product';
-import { ICrud } from '../../core/interfaces/crud';
+import { ICrud } from '../../../core/interfaces/crud';
 
 @Injectable({
   providedIn: 'root',
@@ -37,21 +37,22 @@ export class ProductsService implements ICrud<IProduct> {
     return this.http.post<IProduct>(this.baseUrl, data);
   }
 
-  delete(id: number): Observable<IProduct> {
-    return this.http.delete<IProduct>(`${this.baseUrl}/${id}`);
-  }
-
-  findAll(query: {slug: string}): Observable<IProducts> {
+  getAll(query: {slug: string}): Observable<IProducts> {
     return this.http.get<IProducts>(this.baseUrl, {
       params: query
     });
   }
 
-  findOne(id: number): Observable<IProduct> {
+  getOne(id: number): Observable<IProduct> {
     return this.http.get<IProduct>(`${this.baseUrl}/${id}`);
   }
 
+  
   update(id: number, data: Partial<IProduct>): Observable<UpdateResponse> {
     return this.http.put<IProduct>(`${this.baseUrl}/${id}`, data);
+  }
+
+  delete(id: number): Observable<IProduct> {
+    return this.http.delete<IProduct>(`${this.baseUrl}/${id}`);
   }
 }
