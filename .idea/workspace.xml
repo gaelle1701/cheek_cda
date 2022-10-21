@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b6e2b41-465d-4805-83d2-63f3f58b0484" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/api.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-api/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheek-api/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/cheek-api/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,13 +36,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/vincentvade/Codes/cheek_cda/cheek-api/src/routes",
+    "last_opened_file_path": "C:/Users/gaell/OneDrive/Bureau/Simplon/CDA/cheek2/cheek_cda",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/vincentvade/Codes/cheek_cda/cheek-api/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.intentionPowerPack",
-    "ts.external.directory.path": "/Users/vincentvade/Codes/cheek_cda/cheek-api/node_modules/typescript/lib",
+    "settings.editor.selected.configurable": "terminal",
+    "ts.external.directory.path": "C:\\Users\\gaell\\OneDrive\\Bureau\\Simplon\\CDA\\cheek2\\cheek_cda\\cheek-app\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,6 +75,7 @@
       <workItem from="1661850139727" duration="1104000" />
       <workItem from="1661851251626" duration="96113000" />
       <workItem from="1662745031025" duration="10446000" />
+      <workItem from="1666364751397" duration="296000" />
     </task>
     <servers />
   </component>
