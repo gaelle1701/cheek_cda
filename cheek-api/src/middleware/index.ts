@@ -7,12 +7,14 @@ import corsMiddleware from './cors.middleware';
 import authMiddleware from './auth.middleware';
 import sessionMiddleware from './session.middleware';
 import cartMiddleware from './cart.middleware';
+import helmet from 'helmet';
 
 export function addMiddlewares(app: Application) {
   // parse application/json
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
+  app.use(helmet());
   app.use(sessionMiddleware);
   app.use(authMiddleware);
   app.use(corsMiddleware);

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as cloudinary  from "cloudinary";
-import helmet from "helmet"
+
 
 dotenv.config({
   path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
@@ -33,8 +33,6 @@ cloudinary.v2.config({
     addMiddlewares(app);
     addRoutes(app);
 
-    app.use(helmet());
-    
     app.listen(port as number, () => {
       logger.info(`App listen on port, http://localhost:${port}`);
     });
