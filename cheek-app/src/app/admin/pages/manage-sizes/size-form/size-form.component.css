@@ -11,3 +11,7 @@ h3 {
 p{
   font-family: var(--font-family-courier);
 }
+
+#label-input {
+  width: 80%;
+}
