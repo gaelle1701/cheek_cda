@@ -18,8 +18,6 @@ const routes: Routes = [
       { path: 'gestion-produits/ajouter', component: ProductFormComponent },
       { path: 'gestion-produits/editer/:id', component: ProductFormComponent },
       { path: 'gestion-tailles', component: ManageSizesComponent },
-      { path: 'gestion-tailles/ajouter', component: ManageSizesComponent },
-      { path: 'gestion-tailles/editer/:id', component: ManageSizesComponent },
       { path: 'gestion-clients', component: ManageUsersComponent },
       { path: 'gestion-commandes', component: ManageOrdersComponent },
     ],

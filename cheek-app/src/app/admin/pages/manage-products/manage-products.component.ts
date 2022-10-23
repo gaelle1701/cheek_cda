@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faPenToSquare, faTrashCan, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { ProductsService } from 'src/app/products/services/products/products.service';
 import { SizesService } from 'src/app/products/services/sizes/sizes.service';
@@ -13,6 +13,7 @@ import { ITableHeader } from '../../components/table/table.component';
 export class ManageProductsComponent implements OnInit {
   products: any = [];
   sizes: any = [];
+  size!: number;
   selectedSize: number = 0;
   msgSuccess: string = "";
   isDeleted: boolean = false;
@@ -25,20 +26,21 @@ export class ManageProductsComponent implements OnInit {
   /**** TABLE ****/
   headers?: ITableHeader[] = [
     { label: 'Catégorie', key: "category" },
-    { label: "Slug", key: "slug"},
+    { label: "Slug", key: "slug" },
     { label: 'Nom', key: "name" },
     { label: "", key: "details",
       subHeaders: [
-        { label: 'Prix HT', key:"price_ht"},
+        { label: 'Prix HT', key:"price_ht" },
         { label: 'Prix TTC', key: "price_ttc" },
         { label: 'Taille', key: "size" },
         { label: 'Stock', key: "stock" },
-      ]},
-    { label: 'Actions', key: "actions", editPath: "/admin/gestion-produits/editer" }
+      ]
+    },
+    { label: 'Actions', key: "actions" }
   ]
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private productsService: ProductsService,
     private sizesService: SizesService
   ) {}
@@ -51,6 +53,8 @@ export class ManageProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+    console.log(this.products);
+    
 
     // this.sizesService.getSizes().subscribe(sizes => {
     //   this.selectedSize = sizes[0].id;
@@ -78,7 +82,7 @@ export class ManageProductsComponent implements OnInit {
         this.products?.push({  
           ...product, 
           category: product.category.name, 
-          details: product.details.map((detail) => {
+          details: product.details.map((detail) => {           
             return {
               ...detail,
               size: detail.size.label
@@ -87,6 +91,10 @@ export class ManageProductsComponent implements OnInit {
         });
       });      
     });
+  }
+
+  editProduct(productId: number) {
+    this.router.navigate([`admin/gestion-produits/editer/${productId}`])
   }
 
   deleteProduct(productId: number){        

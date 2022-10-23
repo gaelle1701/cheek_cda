@@ -1,4 +1,17 @@
 <main class="container">
+  <div class="is-center container-btn">
+    <button>
+      <a routerLink="/admin/gestion-tailles">
+        Tailles
+      </a>
+    </button>
+    <button>
+      <a routerLink="/admin/gestion-produits">
+        Catégories
+      </a>
+    </button>
+  </div>
+
   <!-- <section class="row container-filter">
     <select class="col-3 custom-select">
       <option value="">Filter par catégorie</option>
@@ -12,28 +25,22 @@
     </select>
   </section> -->
 
-  <!-- <div *ngIf="isDeleted">
-        <p class="alertSuccess is-center">{{msgSuccess}}</p>
-    </div> -->
-  <app-table [headers]="headers" [datas]="products" (deleteAction)="deleteProduct($event)"></app-table>
+  <div *ngIf="isDeleted">
+        <p class="alertSuccess is-center">{{ msgSuccess }}</p>
+  </div>
+  
+  <app-table
+    [headers]="headers"
+    [datas]="products" 
+    (updateAction)="editProduct($event)"
+    (deleteAction)="deleteProduct($event)">
+  </app-table>
 
   <div class="is-center container-btn">
     <button>
       <a routerLink="/admin/gestion-produits/ajouter">
         <fa-icon [icon]="faAdd"></fa-icon>
         Produit
-      </a>
-    </button>
-    <button>
-      <a routerLink="/admin/gestion-tailles/ajouter">
-        <fa-icon [icon]="faAdd"></fa-icon>
-        Taille
-      </a>
-    </button>
-    <button>
-      <a routerLink="/admin/gestion-produits/ajouter">
-        <fa-icon [icon]="faAdd"></fa-icon>
-        Catégorie
       </a>
     </button>
   </div>

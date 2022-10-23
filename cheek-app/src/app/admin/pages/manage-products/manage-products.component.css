@@ -25,8 +25,9 @@ p {
 }
 
 .container-btn {
-  margin-bottom: 4rem;
+  margin: 4rem 0;
 }
+
 button {
   background-color: var(--bg-color);
   border: 2px solid var(--color-orange);

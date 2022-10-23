@@ -1,12 +1,27 @@
 <main class="container">
-    <button (click)="openModal()" data-custom-open="modal-1">
-        <fa-icon [icon]="faAdd"></fa-icon>
-        Taille
-    </button>
-    <app-table [headers]="headers" [datas]="sizes" (deleteAction)="deleteSize($event)"></app-table>
+    
+    <div class="row is-center">
+        <app-table class="col-8"
+            [headers]="headers" 
+            [datas]="sizes" 
+            (updateAction)="editSize($event)" 
+            (deleteAction)="deleteSize($event)">
+        </app-table>
+    </div>
 
-    <app-modal [title]="title">
-        <app-size-form (sizeAction)="onCreate($event)"></app-size-form>
-    </app-modal>
-
+    <div class="is-center container-btn">
+        <button (click)="openModal()" data-custom-open="modal-1">
+            <fa-icon [icon]="faAdd"></fa-icon>
+            Taille
+        </button>
+        <app-modal [title]="title" [id]="999">
+            <app-size-form (sizeAction)="onCreate($event)"></app-size-form>
+        </app-modal>
+    </div>
+   
+    <ng-container *ngFor="let size of sizes">
+        <app-modal [title]="title" [id]="size.id || 0">
+            <app-size-form (sizeAction)="onCreate($event)" [sizeId]="size.id || 0"></app-size-form>
+        </app-modal>
+    </ng-container>
 </main>
