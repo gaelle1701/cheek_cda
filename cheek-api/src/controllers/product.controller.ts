@@ -77,18 +77,16 @@ class ProductController {
   async update(req: Request, res: Response) {
     try {
       const product = await productRepository.findBydId(+req.params.id);
-      if (!product) {
+      if (!product) {        
         return res.status(400).send({
           message: "This product doesn't exist !",
         });
       }
-
-      console.log(req.body);
-      
-
+    
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
+      console.log(updateProduct);
       
       if(req.body.details.length > 0) {
         await Promise.all(req.body.details.map(async(detail) => {
@@ -96,9 +94,10 @@ class ProductController {
         }))
       }
       
-      if (updateProduct.affected === 1) {
+      if (updateProduct.id) {
         return res.status(200).send({
           message: 'The product with id= ' + product.id + ' has been updated !',
+          ...updateProduct
         });
       }
 

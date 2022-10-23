@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { ISize } from 'src/app/core/interfaces/size';
@@ -12,6 +13,7 @@ import { SizesService } from 'src/app/products/services/sizes/sizes.service';
 export class SizeFormComponent implements OnInit {
   title = "Ajouter une taille";
 
+  @Input() sizeId!: number
   @Output() sizeAction = new EventEmitter<ISize>()
 
   /**** ICONS ****/
@@ -21,23 +23,30 @@ export class SizeFormComponent implements OnInit {
     label: new FormControl('')
   });
 
-  sizeId: number = 0;
   isCreated: boolean = false;
   isUpdated: boolean = false;
   msgSuccessCreate: string = '';
   msgSuccessUpdate: string = '';
   msgError: string = '';
 
-
   constructor(
     private formBuilder: FormBuilder,
     private sizeService: SizesService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.sizeForm = this.formBuilder.group({
       label: ['', [Validators.required]]
     })
+    
+    if(this.sizeId){    
+      this.sizeService.getOne(this.sizeId).subscribe(size => {
+        this.sizeForm = this.formBuilder.group({
+          label: [size.label, [Validators.required]]
+        })
+      })
+    }
+
   }
 
   get f() {
@@ -50,9 +59,6 @@ export class SizeFormComponent implements OnInit {
     if(this.sizeId && this.sizeForm.valid) {
       this.sizeService.update(this.sizeId, formValues).subscribe({    
         next: (res) => {
-          console.log(this.sizeId);
-          console.log(formValues);
-          
           this.isUpdated = true;
           this.msgSuccessUpdate = res.message as string;
         },

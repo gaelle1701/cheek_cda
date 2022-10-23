@@ -20,7 +20,7 @@
                     {{ row[header.key] }}
                 </ng-container>
 
-                <ng-container *ngIf="!header?.subHeaders">
+                <ng-container *ngIf="header.subHeaders">
                     <table>
                         <tr *ngFor="let subRow of row.details">
                             <td *ngFor="let subHeader of header?.subHeaders">
@@ -31,10 +31,8 @@
                 </ng-container>
 
                 <tr *ngIf="header.key === 'actions'">
-                    <button>
-                        <a routerLink="{{ header.editPath }}/{{ row.id }}">
-                            <fa-icon [icon]="faEdit"></fa-icon>
-                        </a>
+                    <button (click)="onEdit(row.id)" [attr.data-custom-open]="'modal-{{row.id}}'">
+                        <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
                     <button (click)="onDelete(row.id)">
                         <fa-icon [icon]="faDelete"></fa-icon>

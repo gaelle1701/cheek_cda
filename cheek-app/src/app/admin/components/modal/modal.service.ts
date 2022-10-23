@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import MicroModal from 'micromodal';
 
+MicroModal.init({
+  onShow: modal => console.info(`${modal?.id} is shown`), 
+  onClose: modal => console.info(`${modal?.id} is hidden`),
+})
+
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
   constructor() {
-    MicroModal.init({
-      onClose: this.onClose,
-      onShow: this.onShow
-    })
+
   }
 
-  show(targetId: string) {    
-    return MicroModal.show(targetId)
+  show(targetId: string) {  
+    console.log(targetId)  
+    MicroModal.show(targetId)
   }
 
   close() {
-    return MicroModal.close()
+    MicroModal.close()
   }
 
   onShow(modal: any) {

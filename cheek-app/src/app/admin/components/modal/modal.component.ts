@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() title: string = ""
-  
+  @Input() title: string = "";
+  @Input() id: number = 999;
+
   constructor() { }
 
   ngOnInit(): void {

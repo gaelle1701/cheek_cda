@@ -1,19 +1,23 @@
 button {
-    background-color: var(--bg-color);
-    border: 2px solid var(--color-orange);
-    font-family: var(--font-family-courier);
-    color: var(--color-orange);
-    padding: 0.8rem;
-    margin: 0 2rem;
-  }
-  
-  .alertSuccess {
-    font-family: var(--font-family-courier);
-    color: var(--color-success);
-  }
-  
-  .error {
-    font-family: var(--font-family-courier);
-    color: var(--color-error);
-    font-size: var(--font-size-small);
-  }
+  background-color: var(--bg-color);
+  border: 2px solid var(--color-orange);
+  font-family: var(--font-family-courier);
+  color: var(--color-orange);
+  padding: 0.8rem;
+  margin: 0 2rem;
+}
+
+.alertSuccess {
+  font-family: var(--font-family-courier);
+  color: var(--color-success);
+}
+
+.error {
+  font-family: var(--font-family-courier);
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+}
+
+.container-btn {
+  margin: 4rem 0;
+}

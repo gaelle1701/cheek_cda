@@ -207,7 +207,7 @@ export class ProductFormComponent implements OnInit {
       this.productsService.update(this.productId, productPayload).subscribe({
         next: (res) => {
           this.isUpdated = true;
-          this.msgSuccessUpdate = res.message as string;
+          this.msgSuccessUpdate = res.message as string;          
         },
         error: (res) => {
           this.msgError = res.error.message;
@@ -225,18 +225,20 @@ export class ProductFormComponent implements OnInit {
               
               this.pictureService.create(formData).subscribe();             
             })
-            this.msgSuccessCreate = product.message as string;     
             this.isCreated = true;
+            this.msgSuccessCreate = product.message as string; 
+            console.log(this.msgSuccessCreate);
+            
           }
         },
         error: (res) => {
           this.msgError = res.error.message;
         }
       })
-      setTimeout( ()=> {
-        this.router.navigate(['admin/gestion-produits']);
-      }, 2000 );
     }
+    setTimeout( ()=> {
+      this.router.navigate(['admin/gestion-produits']);
+    }, 3000 );
   }
  
    
