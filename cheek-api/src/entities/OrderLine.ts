@@ -4,6 +4,7 @@ import {
   ManyToOne,
   JoinColumn,
   PrimaryGeneratedColumn,
+  BeforeInsert,
 } from 'typeorm';
 import { Order } from './Order';
 import { Product } from './Product';
@@ -29,4 +30,9 @@ export class OrderLine {
   @ManyToOne(() => Order, (order) => order.orderLines)
   @JoinColumn({ name: 'order_id' })
   order: Order;
+
+  @BeforeInsert()
+  createOrder() {
+    this.created_at = new Date();
+  }
 }

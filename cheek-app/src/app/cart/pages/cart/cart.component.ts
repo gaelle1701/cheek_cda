@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../cart.service';
-import { ICart } from '../../../shared/interface/cart';
-import { ProductsService } from '../../../products/services/products.service';
+import { ICart } from '../../../core/interfaces/cart';
 
 export const INITIAL_CART: ICart = {
   items: [],
-  total_ht: 0.0,
-  total_ttc: 0.0,
+  totalHt: 0.0,
+  totalTtc: 0.0,
   shippingFees: false,
 };
 
@@ -16,7 +15,7 @@ export const INITIAL_CART: ICart = {
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cart: ICart = INITIAL_CART;
+  cart: any = INITIAL_CART;
 
   constructor(private cartService: CartService) {}
 
@@ -31,17 +30,17 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeProduct(id: number) {
-    this.cartService.deleteProduct(id).subscribe(({ cart }) => {
-      this.cart = cart;
-      this.cartService.countChange(cart.items.length);
+  removeProduct(productId: number, sizeId: number) {
+    this.cartService.deleteProduct(productId, sizeId).subscribe(({ msg }) => {
+      if (msg === 'ok') {
+        this.getCart();
+      }
     });
   }
 
   clearCart() {
-    this.cartService.resetCart().subscribe((c) => {
-      // @ts-ignore
-      if (c.msg === 'ok') {
+    this.cartService.resetCart().subscribe(({ msg }) => {
+      if (msg === 'ok') {
         this.getCart();
       }
     });

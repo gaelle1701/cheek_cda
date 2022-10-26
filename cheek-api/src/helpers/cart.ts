@@ -1,45 +1,38 @@
-type CartItem = {
-  id: number; // id de quoi ???
-  stock: number;
-  price: number; // price_ht ou ttc ???
-  size: string;
-};
-
-export interface ICart {
-  items: CartItem[];
-  total_ht: number;
-  total_ttc: number;
-  shippingFees: boolean;
-}
+import { CartItem, ICart } from './interfaces/cart.interface';
 
 export const INITIAL_CART: ICart = {
   items: [],
-  total_ht: 0.0,
-  total_ttc: 0.0,
+  totalHt: 0.0,
+  totalTtc: 0.0,
   shippingFees: false,
 };
 
-const VAT_RATE = 0.2; // ????
+const VAT_RATE = 20; // TAX FOR FRENCH COUNTRY
 
 export class Cart implements ICart {
   items: CartItem[];
-  total_ht: number;
-  total_ttc: number;
+  totalHt: number;
+  totalTtc: number;
   shippingFees: boolean;
 
   addProductToCart(item: CartItem, cart: ICart) {
-    if (!this.productIsInCart(item.id, cart)) {
+    if (!this.productIsInCart(item.productId, item.size, cart)) {
       cart.items?.push(item);
       this.calculateTotal(cart);
     } else {
-      this.updateProductToCart(item.id, item.stock, item.size, cart);
+      this.updateProductToCart(item.productId, item.stock, item.size, cart);
     }
     return cart;
   }
 
-  updateProductToCart(productId: number, stock: number, size: string, cart) {
+  updateProductToCart(
+    productId: number,
+    stock: number,
+    size: number,
+    cart: ICart,
+  ) {
     cart.items = cart.items.map((item) => {
-      if (item.id === productId && item.size === size) {
+      if (item.productId === productId && item.size === size) {
         return {
           ...item,
           stock: (item.stock += stock),
@@ -51,24 +44,22 @@ export class Cart implements ICart {
     return cart;
   }
 
-  deleteProductToCart(productId: number, cart: ICart) {
-    cart.items = cart.items?.filter((item) => item.id !== productId);
+  deleteProductToCart(productId: number, sizeId: number, cart: ICart) {
+    const itemToDelete = cart.items.findIndex(
+      (item) => item.productId === productId && item.size === sizeId,
+    );
+    cart.items.splice(itemToDelete, 1);
     this.calculateTotal(cart);
     return cart;
   }
 
   calculateTotal(cart: ICart) {
-    const totalHt = cart.items.reduce(
-      (acc, val) => acc + val.price * val.stock,
+    cart.totalHt = cart.items.reduce(
+      (acc, val) => acc + val.priceHt * val.stock,
       0,
     );
-    const totalTtc = cart.items.reduce(
-      (acc, val) => (acc + val.price * VAT_RATE) * val.stock,
-      0,
-    );
-    cart.total_ht = totalHt;
-    cart.total_ttc = totalTtc;
-    cart.shippingFees = totalTtc >= 70;
+    cart.totalTtc = cart.totalHt * (1 + VAT_RATE / 100);
+    cart.shippingFees = cart.totalTtc >= 70;
 
     if (!cart.items.length) {
       this.resetCart(cart);
@@ -79,14 +70,18 @@ export class Cart implements ICart {
 
   resetCart(cart: ICart) {
     cart.items = [];
-    cart.total_ht = 0;
-    cart.total_ttc = 0;
+    cart.totalHt = 0;
+    cart.totalTtc = 0;
     cart.shippingFees = false;
     return cart;
   }
 
-  private productIsInCart(productId: number, cart) {
-    return cart.items?.find((itm) => itm.id === productId) ? 1 : 0;
+  private productIsInCart(productId: number, sizeId: number, cart: ICart) {
+    return cart.items?.find(
+      (itm) => itm.productId === productId && itm.size === sizeId,
+    )
+      ? 1
+      : 0;
   }
 }
 

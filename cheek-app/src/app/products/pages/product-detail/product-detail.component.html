@@ -10,10 +10,10 @@
         <p class="details">{{ product.details[0]?.price_ttc ?? 0 }} €</p>
       </article>
       <section class="container__select">
-        <select class="custom__select" (change)="onSelectSize($event)" >
+        <select class="custom__select" (change)="onChange($event)" >
           <option value='' selected>Taille</option>
-          <option *ngFor="let size of sizes; index as i" [value]="i">
-            {{ size }}
+          <option *ngFor="let size of sizes; index as i" [value]="size.id">
+            {{ size.label }}
           </option>
         </select>
 

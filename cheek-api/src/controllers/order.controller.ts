@@ -32,7 +32,7 @@ class OrderController {
 
   async getById(req: Request, res: Response) {
     try {
-      const order = await orderRepository.findBydId(+req.params.id);
+      const order = await orderRepository.findById(+req.params.id);
       if (!order) {
         return res.status(400).send({
           message: "This order doesn't exist",
@@ -48,7 +48,7 @@ class OrderController {
 
   async update(req: Request, res: Response) {
     try {
-      const order = await orderRepository.findBydId(+req.params.id);
+      const order = await orderRepository.findById(+req.params.id);
       if (!order) {
         return res.status(400).send({
           message: "This order doesn't exist !",
@@ -73,7 +73,7 @@ class OrderController {
   }
 
   async destroy(req: Request, res: Response) {
-    const order = await orderRepository.findBydId(+req.params.id);
+    const order = await orderRepository.findById(+req.params.id);
     try {
       if (!order) {
         return res.status(400).send({

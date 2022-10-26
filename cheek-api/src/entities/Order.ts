@@ -1,4 +1,12 @@
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderLine } from './OrderLine';
 import { User } from './User';
@@ -16,7 +24,7 @@ export class Order {
 
   @Column({ type: 'date', select: false })
   created_at: Date;
-  
+
   @Column({ type: 'uuid', unique: true })
   reference: string;
 
@@ -33,6 +41,7 @@ export class Order {
   // created date & ref & status automatically
   @BeforeInsert()
   createOrder() {
+    this.created_at = new Date();
     this.reference = uuidv4();
     this.order_status = EOrderStatus.AVAILABLE;
   }

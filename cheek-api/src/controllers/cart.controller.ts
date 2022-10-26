@@ -13,17 +13,16 @@ class CartController {
 
       Cart.addProductToCart(
         {
-          id: parseInt(req.body.id),
-          price: parseFloat(req.body.price),
+          productId: parseInt(req.body.productId, 10),
+          priceHt: parseFloat(req.body.priceHt),
           stock: parseInt(req.body.stock, 10),
-          size: req.body.size,
+          size: parseInt(req.body.size, 10),
         },
         req.session.cart,
       );
 
-      res.send({ msg: 'ok', cart: req.session.cart });
+      res.send({ msg: 'ok' });
     } catch (error) {
-      console.log(error);
       res.status(500).send({
         message: error,
       });
@@ -34,9 +33,14 @@ class CartController {
     // aggregate product for each item
     const items = await Promise.all(
       req.session.cart.items.map(async (item) => {
-        const product = await productRepository.findBydId(item.id);
+        const product = await productRepository.findBydId(item.productId);
+        const size = product.details?.find(
+          (detail) => detail.size.id === item.size,
+        ).size;
+
         return {
           ...item,
+          size,
           product,
         };
       }),
@@ -52,13 +56,13 @@ class CartController {
   async edit(req: Request, res: Response) {
     try {
       Cart.updateProductToCart(
-        parseInt(req.params.id, 10),
-        parseInt(req.body.quantity, 10),
+        parseInt(req.params.productId, 10),
+        parseInt(req.body.stock, 10),
         req.body.size,
         req.session.cart,
       );
 
-      res.send({ msg: 'ok', cart: req.session.cart });
+      res.send({ msg: 'ok' });
     } catch (error) {
       res.status(500).send({
         message: error,
@@ -68,8 +72,12 @@ class CartController {
 
   async destroy(req: Request, res: Response) {
     try {
-      Cart.deleteProductToCart(parseInt(req.params.id, 10), req.session.cart);
-      res.send({ msg: 'ok', cart: req.session.cart });
+      Cart.deleteProductToCart(
+        parseInt(req.params.id, 10),
+        parseInt(req.body.sizeId),
+        req.session.cart,
+      );
+      res.send({ msg: 'ok' });
     } catch (error) {
       res.status(500).send({
         message: error,

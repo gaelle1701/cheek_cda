@@ -8,7 +8,6 @@ import corsMiddleware from './cors.middleware';
 import authMiddleware from './auth.middleware';
 import sessionMiddleware from './session.middleware';
 import cartMiddleware from './cart.middleware';
-import { INITIAL_CART } from '../helpers/cart';
 
 export function addMiddlewares(app: Application) {
   // parse application/json
@@ -23,7 +22,6 @@ export function addMiddlewares(app: Application) {
   app.use(cartMiddleware);
 
   if (process.env.NODE_ENV === 'production') {
-    app.disable('x-powered-by');
     app.use(compression());
   }
 }

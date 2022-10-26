@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
@@ -22,5 +22,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ListProductsComponent,
     ProductDetailComponent,
   ],
+  providers: [{ provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }],
 })
 export class ProductsModule {}
