@@ -7,17 +7,17 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
-import { CartModule } from './cart/cart.module';
+import { SiteLayoutComponent } from './layout/site-layout/site-layout.component';
+import { CheckoutLayoutComponent } from './layout/checkout-layout/checkout-layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SiteLayoutComponent, CheckoutLayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    CartModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

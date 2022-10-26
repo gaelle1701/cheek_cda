@@ -1,0 +1,15 @@
+<main class="container">
+  <div class='row'>
+  <section class="col-6 p-4">
+    <h3>Déjà client</h3>
+    <p>Ravis de vous retrouver ! Identifiez-vous pour passer votre commande plus rapidement.</p>
+    <app-login-form (onConnected)='onConnected($event)'></app-login-form>
+  </section>
+
+  <section class='col-6 p-4'>
+    <h3>NOUVEAU CLIENT</h3>
+    <p>Devenez membre dès aujourd'hui – C'est rapide et gratuit !</p>
+    <a class='button  text-center' routerLink='/checkout/register'>Créer un compte</a>
+  </section>
+  </div>
+</main>

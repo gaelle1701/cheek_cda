@@ -4,29 +4,36 @@ import {
   CanActivate,
   Router,
   RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { ERole } from '../enums/role';
+import { catchError, map, Observable } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard implements CanActivate {
+export class CheckoutGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Observable<boolean> | boolean {
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     return this.authService.getProfile().pipe(
       map((profile) => {
-        if (profile.role === ERole.ADMIN) {
+        if (profile) {
           return true;
         } else {
-          this.router.navigate(['connexion']);
+          this.router.navigate(['checkout/login']);
           return false;
         }
+      }),
+      catchError((err) => {
+        // if the token has expired redirect to login
+        return this.router.navigate(['checkout/login']);
       }),
     );
   }
