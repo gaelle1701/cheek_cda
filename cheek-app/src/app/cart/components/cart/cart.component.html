@@ -13,10 +13,7 @@
       <table>
         <thead>
           <tr>
-            <th>Nom</th>
-            <th>Prix HT</th>
-            <th>Taille</th>
-            <th>Qté</th>
+            <th *ngFor='let tableHeader of tableHeaders'>{{tableHeader}}</th>
           </tr>
         </thead>
         <tfoot>
@@ -49,8 +46,8 @@
       </table>
     </section>
     <footer class="cart-footer">
-      <a routerLink="/"  class='button clear is-full-width'>Retour</a>
-      <a class='button is-full-width bg-primary buy-btn'>Acheter</a>
+      <button type='button' (click)='togglePanel()' title='Fermer le panier' class='button clear is-full-width'>Retour</button>
+      <a routerLink="/" class='button is-full-width bg-primary buy-btn'>Acheter</a>
     </footer>
   </div>
 </ng-container>

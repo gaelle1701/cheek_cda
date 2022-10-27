@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   animate,
   state,
@@ -33,7 +33,7 @@ import { CartService } from '../../services/cart.service';
   ],
 })
 export class CartPanelComponent implements OnInit {
-  menuState = 'out';
+  panelState = 'out';
   countCart = 0;
 
   faClose = faClose;
@@ -47,7 +47,7 @@ export class CartPanelComponent implements OnInit {
     });
   }
 
-  togglePanel(): void {
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
-  }
+  togglePanel = () => {
+    this.panelState = this.panelState === 'out' ? 'in' : 'out';
+  };
 }

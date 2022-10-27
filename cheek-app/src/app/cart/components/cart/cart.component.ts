@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { CartService } from '../../services/cart.service';
@@ -17,10 +17,12 @@ export const INITIAL_CART: ICart = {
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  @Input() onToggle!: () => void;
+  @Input() togglePanel!: () => void;
 
   cart: any = INITIAL_CART;
   faTrash = faTrashAlt;
+
+  tableHeaders = ['Nom', 'Prix HT', 'Taille', 'Qté'];
 
   constructor(private cartService: CartService) {}
 

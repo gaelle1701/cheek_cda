@@ -1,11 +1,11 @@
-<div class='cart-panel-overlay' *ngIf='menuState === "in"'></div>
+<div class='cart-panel-overlay' *ngIf='panelState === "in"'></div>
 
-<aside [@openCloseCart]="menuState" class="cart-panel-container" >
+<aside [@openCloseCart]="panelState" class="cart-panel-container" >
     <button type='button' class='button clear' (click)='togglePanel()'>
       <fa-icon [icon]="faClose" size='xl'></fa-icon>
     </button>
     <div class='cart-panel-content'>
-      <ng-content></ng-content>
+      <app-cart [togglePanel]='togglePanel'></app-cart>
     </div>
 </aside>
 
