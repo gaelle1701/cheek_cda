@@ -1,0 +1,23 @@
+<div class='cart-panel-overlay' *ngIf='menuState === "in"'></div>
+
+<aside [@openCloseCart]="menuState" class="cart-panel-container" >
+    <button type='button' class='button clear' (click)='togglePanel()'>
+      <fa-icon [icon]="faClose" size='xl'></fa-icon>
+    </button>
+    <div class='cart-panel-content'>
+      <ng-content></ng-content>
+    </div>
+</aside>
+
+<button
+  title="Panier"
+  type='button'
+  class='trigger-panel-cart'
+  (click)='togglePanel()'
+>
+  <fa-icon [icon]="faCartShopping"></fa-icon>
+  <ng-container *ngIf='countCart > 0'>
+    <span>{{countCart}}</span>
+  </ng-container>
+</button>
+

@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container" *ngIf='product'>
   <section class="container__custom">
     <section class="container__carousel">
       <app-carousel [slides]="slides"></app-carousel>
@@ -7,7 +7,7 @@
       <article class="product__info">
         <h4>{{ product.name }}</h4>
         <p class="details">{{ product.description }}</p>
-        <p class="details">{{ product.details[0]?.price_ttc ?? 0 }} €</p>
+        <p class="details">{{ product.details[0].price_ttc | currency }}</p>
       </article>
       <section class="container__select">
         <select class="custom__select" (change)="onChange($event)" >

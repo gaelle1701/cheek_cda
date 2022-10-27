@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { CartItem, CartResponse, ICart } from '../core/interfaces/cart';
+import { CartItem, CartResponse, ICart } from '../../core/interfaces/cart';
+import { INITIAL_CART } from '../components/cart/cart.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   private _cartUrl = '/api/cart';
-  private countSource = new BehaviorSubject<number>(0);
-  count: Observable<number> = this.countSource.asObservable();
+  private countSource = new BehaviorSubject<ICart>(INITIAL_CART);
+  cart$: Observable<ICart> = this.countSource.asObservable();
 
   constructor(private httpService: HttpClient) {}
 
-  countChange(count: number) {
-    this.countSource.next(count);
+  countChange(cart: ICart) {
+    this.countSource.next(cart);
   }
 
   getCart() {
