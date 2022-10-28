@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { StaticModule } from '../static/static.module';
 import { RouterModule } from '@angular/router';
+import { CartModule } from '../cart/cart.module';
 
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, NavComponent],
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    CartModule,
   ],
   // exports des modules voulus et utilisés au démarage de l'appli
   exports: [

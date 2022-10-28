@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
-import { CartService } from '../../../cart/cart.service';
+import { CartService } from '../../../cart/services/cart.service';
 import { IProduct } from '../../../core/interfaces/product';
 import { IProductDetail } from '../../../core/interfaces/product-detail';
 
@@ -92,7 +92,7 @@ export class ProductDetailComponent implements OnInit {
       .subscribe(({ msg }) => {
         if (msg === 'ok') {
           this.cartService.getCart().subscribe(({ cart }) => {
-            this.cartService.countChange(cart.items.length);
+            this.cartService.countChange(cart);
           });
         }
       });

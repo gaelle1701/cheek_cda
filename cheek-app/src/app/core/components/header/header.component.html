@@ -36,15 +36,7 @@
         >
           <fa-icon [icon]="faLogout"></fa-icon>
         </a>
-        <a
-          [routerLink]="['/panier']"
-          routerLinkActive="router-link-active"
-          title="Panier"
-          class="header__container-icon-cart"
-        >
-          {{countCart}}
-          <fa-icon [icon]="faCart"></fa-icon>
-        </a>
+        <app-cart-panel></app-cart-panel>
         <button class="header__container-icon-menu" (click)="toggle()">
           <fa-icon [icon]="faBars"></fa-icon>
         </button>

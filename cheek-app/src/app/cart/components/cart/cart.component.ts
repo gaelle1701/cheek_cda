@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../cart.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
+import { CartService } from '../../services/cart.service';
 import { ICart } from '../../../core/interfaces/cart';
 
 export const INITIAL_CART: ICart = {
@@ -15,18 +17,27 @@ export const INITIAL_CART: ICart = {
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  @Input() togglePanel!: () => void;
+
   cart: any = INITIAL_CART;
+  faTrash = faTrashAlt;
+
+  tableHeaders = ['Nom', 'Prix HT', 'Taille', 'Qté'];
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.getCart();
+
+    this.cartService.cart$.subscribe((cart) => {
+      this.cart = cart;
+    });
   }
 
   getCart() {
     this.cartService.getCart().subscribe(({ cart }) => {
       this.cart = cart;
-      this.cartService.countChange(cart.items.length);
+      this.cartService.countChange(cart);
     });
   }
 
