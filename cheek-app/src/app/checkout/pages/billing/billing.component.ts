@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faArrowLeft, faLock } from '@fortawesome/free-solid-svg-icons';
 
-import { CartService } from '../../../cart/cart.service';
+import { CartService } from '../../../cart/services/cart.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { IUser } from '../../../core/interfaces/user';
-import { INITIAL_CART } from '../../../cart/pages/cart/cart.component';
+import { INITIAL_CART } from '../../../cart/components/cart/cart.component';
+import { OrderService } from '../../../orders/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billing',
@@ -33,8 +35,10 @@ export class BillingComponent implements OnInit {
   });
 
   constructor(
+    private router: Router,
     private cartService: CartService,
     private authService: AuthService,
+    private orderService: OrderService,
   ) {}
 
   ngOnInit(): void {
@@ -60,13 +64,41 @@ export class BillingComponent implements OnInit {
     return this.shippingAddressForm.controls;
   }
 
-  onCreateShippingAddress() {
-    const formValues = this.shippingAddressForm.value;
-    console.log(formValues);
-    this.authService
-      .editProfile(this.user.id, formValues)
-      .subscribe((profile) => {
-        console.log(profile);
+  createOrder() {
+    this.orderService
+      .create({
+        orderLines: this.cart.items.map((item: any) => {
+          return {
+            product: item.product.id,
+            quantity: item.stock,
+            size: item.size.label,
+            price: item.priceHt,
+          };
+        }),
+        user: this.user.id,
+      })
+      .subscribe((order) => {
+        if (order.reference) {
+          this.router.navigate(['/checkout/confirmation'], {
+            queryParams: { id: order.id },
+          });
+        }
       });
+  }
+
+  onCreateShippingAddress() {
+    if (!this.user.address) {
+      const formValues = this.shippingAddressForm.value;
+      this.authService
+        .editProfile(this.user.id, formValues)
+        .subscribe((profile) => {
+          this.user = profile;
+          if (profile.address) {
+            this.createOrder();
+          }
+        });
+    } else {
+      this.createOrder();
+    }
   }
 }

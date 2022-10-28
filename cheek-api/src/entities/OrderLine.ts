@@ -23,6 +23,9 @@ export class OrderLine {
   @Column()
   size: string;
 
+  @Column({ type: 'float' })
+  price: number;
+
   @ManyToOne(() => Product, (product) => product.orderLines)
   @JoinColumn({ name: 'product_id' })
   product: Product;

@@ -111,14 +111,16 @@
             </div>
           </section>
         </section>
+        <div class='is-center mt-2 p-2'>
+          <a routerLink='/panier' class='back-to-cart'>
+            <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+            Retour au panier
+          </a>
+          <button class='button text-right buy-btn'>
+            Procéder au paiement <fa-icon [icon]="faLock" size="sm"></fa-icon>
+          </button>
+        </div>
       </form>
-      <div class='row is-center mt-2 p-2'>
-        <a routerLink='/panier' class='back-to-cart'>
-          <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
-          Retour au panier
-        </a>
-        <a routerLink='/checkout/payment' class='button text-right buy-btn'>Procéder au paiement <fa-icon [icon]="faLock" size="sm"></fa-icon></a>
-      </div>
     </div>
     <div class='col-3'>
       <section>

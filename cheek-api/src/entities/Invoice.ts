@@ -31,6 +31,7 @@ export class Invoice {
   // created date & mode automatically
   @BeforeInsert()
   createInvoice() {
+    this.created_at = new Date();
     this.payment_mode = EPaymentMode.DIRECT_DEBIT;
   }
 }

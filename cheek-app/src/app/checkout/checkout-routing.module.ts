@@ -5,6 +5,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CheckoutGuard } from '../core/guard/checkout.guard';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'payment',
         component: PaymentComponent,
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationComponent,
       },
     ],
   },

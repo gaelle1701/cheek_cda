@@ -9,6 +9,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthModule } from '../auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BillingComponent,
     LoginComponent,
     RegisterComponent,
+    ConfirmationComponent,
   ],
   imports: [
     CommonModule,

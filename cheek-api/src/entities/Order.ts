@@ -22,7 +22,7 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'date', select: false })
+  @Column({ type: 'date' })
   created_at: Date;
 
   @Column({ type: 'uuid', unique: true })
