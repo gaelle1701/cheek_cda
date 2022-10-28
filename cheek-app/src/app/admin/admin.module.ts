@@ -27,6 +27,7 @@ import { ModalComponent } from './components/modal/modal.component';
     SizeFormComponent,
     ModalComponent,
   ],
+  exports: [TableComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -34,6 +35,6 @@ import { ModalComponent } from './components/modal/modal.component';
     ProductsModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
 export class AdminModule {}

@@ -9,6 +9,6 @@ const orderController = new OrderController();
 orderRoutes.get('/', orderController.getOrders);
 orderRoutes.get('/:id', orderController.getById);
 
-orderRoutes.post('/', permit(ERole.ADMIN), orderController.create);
+orderRoutes.post('/', permit(ERole.CUSTOMER), orderController.create);
 
 export default orderRoutes;

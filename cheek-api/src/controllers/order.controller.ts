@@ -21,7 +21,16 @@ class OrderController {
 
   async getOrders(req: Request, res: Response) {
     try {
-      const getOrders = await orderRepository.find();
+      let query = {};
+
+      if (req.query.userId) {
+        query = { user: { id: req.query.userId } };
+      }
+
+      const getOrders = await orderRepository.find({
+        where: query,
+        relations: ['user', 'orderLines', 'orderLines.product'],
+      });
       return res.send(getOrders);
     } catch (error) {
       return res.status(500).send({

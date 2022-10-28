@@ -21,8 +21,8 @@ export class OrderService implements ICrud<IOrder> {
     return this.http.delete<IOrder>(`${this.baseUrl}/${id}`);
   }
 
-  getAll(): Observable<Orders> {
-    return this.http.get<Orders>(this.baseUrl);
+  getAll(query?: { userId?: number }): Observable<Orders> {
+    return this.http.get<Orders>(this.baseUrl, { params: query });
   }
 
   getOne(id: number): Observable<IOrder> {

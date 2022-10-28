@@ -1,0 +1,149 @@
+<main class="container">
+  <div class='row'>
+    <div class='col-9 p-2'>
+      <h3>Adresse de livraison</h3>
+      <form [formGroup]="shippingAddressForm" (ngSubmit)="onCreateShippingAddress()">
+        <section class='row'>
+          <section class="form-input col-4">
+            <label for="number-input">Prénom</label>
+            <input type="text"  formControlName="firstName" />
+            <div *ngIf="f['firstName']?.invalid && f['firstName']?.touched">
+              <div *ngIf="f['firstName'].errors?.['required']">
+                <p class="error">Le prénom est requis !</p>
+              </div>
+            </div>
+          </section>
+          <section class="form-input col-4">
+            <label for="number-input">Nom *</label>
+            <input type="text"  formControlName="lastName" />
+            <div *ngIf="f['lastName']?.invalid && f['lasttName']?.touched">
+              <div *ngIf="f['lastName'].errors?.['required']">
+                <p class="error">Le nom est requis!</p>
+              </div>
+            </div>
+          </section>
+          <section class="form-input col-4">
+            <label for="zip_code-input">Numéro *</label>
+            <input
+              type="text"
+              formControlName="phone"
+              minlength="5"
+              maxlength="5"
+            />
+            <div *ngIf="f['phone']?.invalid && f['phone']?.touched">
+              <div *ngIf="f['phone'].errors?.['phone']">
+                <p class="error">Le code postal est requise!</p>
+              </div>
+              <div
+                *ngIf="f['phone'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength'] && f['zip_code'].errors?.['pattern']"
+              >
+                <p class="error">Le code postal doit être de type: 75001</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="row" formGroupName="address">
+          <section class="form-input col-4">
+            <label for="number-input">N°*</label>
+            <input type="text" id="number-input" formControlName="number" />
+            <div *ngIf="f['number']?.invalid && f['number']?.touched">
+              <div *ngIf="f['number'].errors?.['required']">
+                <p class="error">Le numéro de rue est requis!</p>
+              </div>
+            </div>
+          </section>
+          <section class="form-input col-8">
+            <label for="street-input">Rue*</label>
+            <input
+              type="text"
+              id="street-input"
+              formControlName="street"
+              minlength="2"
+            />
+            <div *ngIf="f['street']?.invalid && f['street']?.touched">
+              <div *ngIf="f['street'].errors?.['required']">
+                <p class="error">La rue est requise!</p>
+              </div>
+              <div *ngIf="f['street'].errors?.['minlength']">
+                <p class="error">La rue doit contenir au minimun 2 lettres!</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="row" formGroupName="address">
+          <section class="form-input col-4">
+            <label for="city-input">Ville*</label>
+            <input
+              type="text"
+              id="city-input"
+              formControlName="city"
+              minlength="2"
+            />
+            <div *ngIf="f['city']?.invalid && f['city']?.touched">
+              <div *ngIf="f['city'].errors?.['required']">
+                <p class="error">La ville est requise!</p>
+              </div>
+              <div *ngIf="f['city'].errors?.['minlength']">
+                <p class="error">La ville doit contenir au minimun 2 lettres!</p>
+              </div>
+            </div>
+          </section>
+          <section class="form-input col-4">
+            <label for="zip_code-input">Code postal*</label>
+            <input
+              type="text"
+              id="zip_code-input"
+              formControlName="zip_code"
+              minlength="5"
+              maxlength="5"
+            />
+            <div *ngIf="f['zip_code']?.invalid && f['zip_code']?.touched">
+              <div *ngIf="f['zip_code'].errors?.['required']">
+                <p class="error">Le code postal est requise!</p>
+              </div>
+              <div
+                *ngIf="f['zip_code'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength'] && f['zip_code'].errors?.['pattern']"
+              >
+                <p class="error">Le code postal doit être de type: 75001</p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <div class='is-center mt-2 p-2'>
+          <a routerLink='/panier' class='back-to-cart'>
+            <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+            Retour au panier
+          </a>
+          <button class='button text-right buy-btn'>
+            Procéder au paiement <fa-icon [icon]="faLock" size="sm"></fa-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class='col-3'>
+      <section>
+        <div *ngFor='let item of cart.items' class='items'>
+          <div class='item'>
+            <p class='mb-0'>{{item.product.name}}</p>
+            <span class='item-detail'>Qté: {{item.stock}} / {{item.size.label}}</span>
+          </div>
+          <div class='item-price'>
+            <p>{{item.priceHt | currency}}</p>
+          </div>
+        </div>
+      </section>
+      <div class='d-flex'>
+        <p class='mb-0'>
+          Sous-total:
+        </p>
+       <span>{{cart.totalHt | currency}}</span>
+      </div>
+      <div class='d-flex'>
+        <p class='mb-0'>Total:</p>
+         <span class='font-bold total'>{{cart.totalTtc |currency}}</span>
+      </div>
+    </div>
+  </div>
+</main>
