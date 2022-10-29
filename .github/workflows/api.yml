@@ -4,7 +4,7 @@ name: Deploy api
 #    branches: [main]
 on:
   push:
-    branches: [ ci/add_ci_for_cheekapp ]
+    branches: [ feat/cart-angular ]
 
 jobs:
   build:
