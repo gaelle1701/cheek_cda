@@ -58,5 +58,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "./cheek-app/dist/cheek-app"
-        target: "/home/gcoue/cheek/cheek-front"
+        target: "/home/gcoue/cheek/cheek-app"
 
