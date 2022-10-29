@@ -1,7 +1,7 @@
 name: Deploy front
 on: 
   push:
-    branches: [ feat/cart-angular ]
+    branches: [main]
 
 jobs:
   test:
