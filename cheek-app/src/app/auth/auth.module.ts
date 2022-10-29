@@ -7,9 +7,17 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
-  declarations: [SignupComponent, LoginComponent, ConfirmationComponent],
+  declarations: [
+    SignupComponent,
+    LoginComponent,
+    ConfirmationComponent,
+    LoginFormComponent,
+    RegisterFormComponent,
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -17,5 +25,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     AuthRoutingModule,
   ],
+  exports: [LoginComponent, LoginFormComponent, RegisterFormComponent],
 })
 export class AuthModule {}

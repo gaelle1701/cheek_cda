@@ -1,0 +1,55 @@
+<ng-container *ngIf='cart.items.length === 0'>
+  <div class='cart-empty'>
+    <div class='text-center'>
+      <h3>The cart is empty!</h3>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf='cart.items.length > 0'>
+  <div class='cart-container'>
+    <section class='cart-content'>
+      <h3>Panier</h3>
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor='let tableHeader of tableHeaders'>{{tableHeader}}</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th colspan='4'>
+              <p>Frais de livraison</p>
+              <P>Sous-total</P>
+              <p>Total</p>
+            </th>
+            <th class='text-right'>
+              <p>{{cart.shippingFees ? "Offert" : "5"}}</p>
+              <p>{{cart.totalHt | currency}}</p>
+              <p>{{cart.totalTtc | currency}}</p>
+            </th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor='let cartItem of cart.items'>
+            <td>{{cartItem?.product?.name}}</td>
+            <td>{{cartItem.priceHt | currency}}</td>
+            <td>{{ cartItem.size.label}}</td>
+            <td>{{cartItem.stock}}</td>
+            <td>
+              <button type='button' class='delete-item button clear' (click)='removeProduct(cartItem.productId, cartItem.size.id)'>
+                <fa-icon [icon]="faTrash" size='sm'></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer class="cart-footer">
+      <button type='button' (click)='togglePanel()' title='Fermer le panier' class='button clear is-full-width'>Retour</button>
+      <a routerLink="/checkout/billing" class='button is-full-width bg-primary buy-btn'>Acheter</a>
+    </footer>
+  </div>
+</ng-container>
+
+

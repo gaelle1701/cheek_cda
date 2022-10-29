@@ -1,7 +1,7 @@
-import { ICart } from '../../helpers/cart';
+import { Cart } from '../../helpers/cart';
 
 declare module 'express-session' {
   interface SessionData {
-    cart: ICart;
+    cart: Cart;
   }
 }

@@ -1,7 +1,7 @@
 name: Deploy front
 on: 
   push:
-    branches: [ ci/add_ci_for_cheekapp ]
+    branches: [main]
 
 jobs:
   test:
@@ -58,5 +58,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: "./cheek-app/dist/cheek-app"
-        target: "/home/vvade/cheek-static"
+        target: "/home/gcoue/cheek/cheek-app"
 

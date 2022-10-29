@@ -7,11 +7,13 @@ import { ManageProductsComponent } from './pages/manage-products/manage-products
 import { ProductFormComponent } from './pages/manage-products/product-form/product-form.component';
 import { ManageSizesComponent } from './pages/manage-sizes/manage-sizes.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
+import { SiteLayoutComponent } from '../layout/site-layout/site-layout.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AdminGuard],
+    component: SiteLayoutComponent,
     children: [
       { path: '', component: DashboardComponent },
       { path: 'gestion-produits', component: ManageProductsComponent },

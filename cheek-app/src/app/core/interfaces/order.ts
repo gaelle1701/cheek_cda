@@ -1,10 +1,14 @@
 import { EOrderStatus } from '../enums/order-status';
 import { IOrderLine } from './order-line';
+import { IUser } from './user';
 
 export interface IOrder {
-  reference: string;
-  order_status: EOrderStatus;
-  orderLine: IOrderLine[];
+  id?: number;
+  user: IUser['id'];
+  orderLines: IOrderLine[];
+  order_status?: EOrderStatus;
+  reference?: string;
+  created_at?: Date;
 }
 
 export type Orders = IOrder[];

@@ -9,10 +9,10 @@ class ProductController {
         return res.status(400).send({
           message: 'Content can not be empty!',
         });
-      }    
+      }
       const savedProduct = await productRepository.createProduct(req.body);
       return res.send(savedProduct);
-    } catch (error) {      
+    } catch (error) {
       return res.status(500).send({
         message: error.message,
       });
@@ -45,12 +45,11 @@ class ProductController {
               'pictures'
             ],
           }
-           
+
           )
         }
-      
-      return res.send(getProducts);
 
+      return res.send(getProducts);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -77,24 +76,23 @@ class ProductController {
   async update(req: Request, res: Response) {
     try {
       const product = await productRepository.findBydId(+req.params.id);
-      if (!product) {        
+      if (!product) {
         return res.status(400).send({
           message: "This product doesn't exist !",
         });
       }
-    
+
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
-      console.log(updateProduct);
-      
+
       if(req.body.details.length > 0) {
         await Promise.all(req.body.details.map(async(detail) => {
           await productDetailRepository.update(detail.id, detail)
         }))
       }
-      
-      if (updateProduct.id) {
+
+      if (updateProduct.affected === 1) {
         return res.status(200).send({
           message: 'The product with id= ' + product.id + ' has been updated !',
           ...updateProduct

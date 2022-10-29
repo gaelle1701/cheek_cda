@@ -1,4 +1,11 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 import { Product } from './Product';
 import { Size } from './Size';
@@ -24,7 +31,6 @@ export class ProductDetail extends BaseEntity {
   @JoinColumn({ name: 'size_id' })
   size: Size;
 
-
    // calculated price_ttc automatically
   @BeforeInsert()
   @BeforeUpdate()
@@ -32,6 +38,3 @@ export class ProductDetail extends BaseEntity {
     this.price_ttc = this.price_ht + this.price_ht * 0.2;
   }
 }
-
-
-

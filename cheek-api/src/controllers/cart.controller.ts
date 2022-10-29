@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Cart from '../helpers/cart';
+import { productRepository } from '../repository/product.repository';
 
 class CartController {
   async create(req: Request, res: Response) {
@@ -12,14 +13,15 @@ class CartController {
 
       Cart.addProductToCart(
         {
-          id: parseInt(req.body.id),
-          price: req.body.price,
-          quantity: parseInt(req.body.quantity, 10),
+          productId: parseInt(req.body.productId, 10),
+          priceHt: parseFloat(req.body.priceHt),
+          stock: parseInt(req.body.stock, 10),
+          size: parseInt(req.body.size, 10),
         },
         req.session.cart,
       );
 
-      res.send({ msg: 'ok', cart: req.session.cart });
+      res.send({ msg: 'ok' });
     } catch (error) {
       res.status(500).send({
         message: error,
@@ -28,22 +30,39 @@ class CartController {
   }
 
   async getCart(req: Request, res: Response) {
-    if (!req.session.cart.items.length) {
-      return res.send({ cart: req.session.cart });
-    }
+    // aggregate product for each item
+    const items = await Promise.all(
+      req.session.cart.items.map(async (item) => {
+        const product = await productRepository.findBydId(item.productId);
+        const size = product.details?.find(
+          (detail) => detail.size.id === item.size,
+        ).size;
 
-    res.send({ cart: req.session.cart });
+        return {
+          ...item,
+          size,
+          product,
+        };
+      }),
+    );
+
+    const cart = {
+      ...req.session.cart,
+      items,
+    };
+    res.send({ cart });
   }
 
   async edit(req: Request, res: Response) {
     try {
       Cart.updateProductToCart(
-        parseInt(req.params.id, 10),
-        parseInt(req.body.quantity, 10),
+        parseInt(req.params.productId, 10),
+        parseInt(req.body.stock, 10),
+        req.body.size,
         req.session.cart,
       );
 
-      res.send({ msg: 'ok', cart: req.session.cart });
+      res.send({ msg: 'ok' });
     } catch (error) {
       res.status(500).send({
         message: error,
@@ -53,8 +72,12 @@ class CartController {
 
   async destroy(req: Request, res: Response) {
     try {
-      Cart.deleteProductToCart(parseInt(req.params.id, 10), req.session.cart);
-      res.send({ msg: 'ok', cart: req.session.cart });
+      Cart.deleteProductToCart(
+        parseInt(req.params.id, 10),
+        parseInt(req.body.sizeId),
+        req.session.cart,
+      );
+      res.send({ msg: 'ok' });
     } catch (error) {
       res.status(500).send({
         message: error,

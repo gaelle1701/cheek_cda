@@ -23,7 +23,7 @@ export function addRoutes(app: Application) {
 
   app.use('/api/auth', authRoutes);
   app.use('/api/addresses', addressRoutes);
-  app.use('/api/carts', cartRoutes);
+  app.use('/api/cart', cartRoutes);
   app.use('/api/categories', categoryRoutes);
   app.use('/api/invoices', invoiceRoutes);
   app.use('/api/mailer', mailerRoutes);

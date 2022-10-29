@@ -8,7 +8,7 @@
       </div>
       <article>
         <h3>{{ card.name }}</h3>
-        <p>{{ card.details[0]?.price_ttc ?? 0}} €</p>
+        <p>{{ card.details[0]?.price_ttc ?? 0 | currency}}</p>
       </article>
     </section>
   </a>
