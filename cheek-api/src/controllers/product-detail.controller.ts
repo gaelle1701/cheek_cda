@@ -6,14 +6,17 @@ class ProductDetailController {
   async create(req: Request, res: Response) {
     try {
       if (!req.body) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: 'Content can not be empty!',
         });
       }
       logger.info(req.body)
       const savedProductDetail =
         await productDetailRepository.createProductDetail(req.body);
-      return res.send(savedProductDetail);
+      return res.status(201).send({
+        savedProductDetail,
+        message: 'This detail was succefully created !'
+      });
     } catch (error) {
       logger.error('Error in productdetail create!', error);
       
@@ -28,7 +31,7 @@ class ProductDetailController {
       const getProductDetails = await productDetailRepository.find({
         relations: ["product", "size"]
       });
-      return res.send(getProductDetails);
+      return res.status(200).send(getProductDetails);
     } catch (error) {
       console.log(error);
       
@@ -44,11 +47,11 @@ class ProductDetailController {
         +req.params.id,
       );
       if (!productDetail) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product detail doesn't exist",
         });
       }
-      return res.send(productDetail);
+      return res.status(200).send(productDetail);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -62,7 +65,7 @@ class ProductDetailController {
         +req.params.id,
       );
       if (!productDetail) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product detail doesn't exist !",
         });
       }
@@ -76,6 +79,7 @@ class ProductDetailController {
             'The product detail with id= ' +
             productDetail.id +
             ' has been updated !',
+            ...updateProductDetail
         });
       }
 
@@ -93,7 +97,7 @@ class ProductDetailController {
     );
     try {
       if (!productDetail) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product detail doesn't exist",
         });
       }
@@ -102,8 +106,8 @@ class ProductDetailController {
         productDetail.id,
       );
       if (deleteDetails.affected === 1) {
-        return res.status(200).send({
-          message: `The product detail with id=${productDetail.id} has been deleted successfully !`,
+        return res.status(204).send({
+          message: `The product detail with id=${productDetail.id} has been deleted successfully !`
         });
       }
 

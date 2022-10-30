@@ -6,12 +6,15 @@ class ProductController {
   async create(req: Request, res: Response) {
     try {
       if (!req.body) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: 'Content can not be empty!',
         });
       }    
       const savedProduct = await productRepository.createProduct(req.body);
-      return res.send(savedProduct);
+      return res.status(201).send({
+        savedProduct,
+        message: 'This product was succefully created !'
+      });
     } catch (error) {      
       return res.status(500).send({
         message: error.message,
@@ -49,7 +52,7 @@ class ProductController {
           )
         }
       
-      return res.send(getProducts);
+      return res.status(200).send(getProducts);
 
     } catch (error) {
       return res.status(500).send({
@@ -62,11 +65,11 @@ class ProductController {
     try {
       const product = await productRepository.findBydId(+req.params.id);
       if (!product) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product doesn't exist",
         });
       }
-      return res.send(product);
+      return res.status(200).send(product);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -78,7 +81,7 @@ class ProductController {
     try {
       const product = await productRepository.findBydId(+req.params.id);
       if (!product) {        
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product doesn't exist !",
         });
       }
@@ -86,9 +89,8 @@ class ProductController {
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
-      console.log(updateProduct);
       
-      if(req.body.details.length > 0) {
+      if(req.body.details > 0) {
         await Promise.all(req.body.details.map(async(detail) => {
           await productDetailRepository.update(detail.id, detail)
         }))
@@ -96,13 +98,15 @@ class ProductController {
       
       if (updateProduct.id) {
         return res.status(200).send({
-          message: 'The product with id= ' + product.id + ' has been updated !',
-          ...updateProduct
+          ...updateProduct,
+          message: 'The product with id= ' + product.id + ' has been updated !'
         });
       }
 
       return res.send(updateProduct);
     } catch (error) {
+      console.log(error);
+      
       return res.status(500).send({
         message: error.message,
       });
@@ -113,7 +117,7 @@ class ProductController {
     const productDetail = await productRepository.findBydId(+req.params.id);
     try {
       if (!productDetail) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This product doesn't exist",
         });
       }

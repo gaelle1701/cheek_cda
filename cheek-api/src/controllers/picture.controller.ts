@@ -7,7 +7,7 @@ class PictureController {
   async create(req: Request, res: Response) {
     try {
       if (!req.body) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: 'Content can not be empty!',
         });
       }
@@ -28,7 +28,10 @@ class PictureController {
             product: req.body.product_id,
           });
           logger.info('Saved picture Source');
-          return res.send(savedPicture);
+          return res.status(201).send({
+            savedPicture,
+            message: 'This picture was succefully uploaded and created !'
+          });
         }
       }
     } catch (error) {
@@ -43,7 +46,7 @@ class PictureController {
   async getPictures(req: Request, res: Response) {
     try {
       const getPictures = await pictureRepository.find();
-      return res.send(getPictures);
+      return res.status(200).send(getPictures);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -55,11 +58,11 @@ class PictureController {
     try {
       const picture = await pictureRepository.findBydId(+req.params.id);
       if (!picture) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This picture doesn't exist",
         });
       }
-      return res.send(picture);
+      return res.status(200).send(picture);
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -70,8 +73,9 @@ class PictureController {
   async update(req: Request, res: Response) {
     try {
       const picture = await pictureRepository.findBydId(+req.params.id);
+      
       if (!picture) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This picture doesn't exist !",
         });
       }
@@ -96,6 +100,7 @@ class PictureController {
             return res.status(200).send({
               message:
                 'The picture with id= ' + picture.id + ' has been updated !',
+                ...updatedPicture
             });
           }
           return res.send(updatedPicture);
@@ -112,14 +117,14 @@ class PictureController {
     const picture = await pictureRepository.findBydId(+req.params.id);
     try {
       if (!picture) {
-        return res.status(400).send({
+        return res.status(404).send({
           message: "This picture doesn't exist",
         });
       }
       await cloudinary.v2.uploader.destroy(picture.path);
       const deletePicture = await pictureRepository.delete(picture.id);
       if (deletePicture.affected === 1) {
-        return res.status(200).send({
+        return res.status(204).send({
           message: `The picture with id=${picture.id} has been deleted successfully !`,
         });
       }
