@@ -8,6 +8,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   declarations: [AccountComponent, ProfileComponent, OrdersComponent],
@@ -17,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     AuthRoutingModule,
     FontAwesomeModule,
+    AdminModule,
   ],
 })
 export class AccountModule {}

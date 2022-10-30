@@ -1,0 +1,17 @@
+@import url(../../../../assets/partials/forms.css);
+
+
+.link-signup {
+  margin-top: 40px;
+}
+
+a {
+  color: var(--color-black);
+  font-family: var(--font-family-courier);
+}
+a:hover {
+  color: var(--color-orange);
+}
+.hide {
+  display: none;
+}

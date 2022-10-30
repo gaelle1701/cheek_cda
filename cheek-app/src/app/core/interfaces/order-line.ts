@@ -5,6 +5,7 @@ export interface IOrderLine {
   quantity: number;
   order: IOrder;
   product: IProduct;
+  price: number;
 }
 
 export type OrderLines = IOrderLine[];

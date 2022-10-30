@@ -1,4 +1,11 @@
-import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+} from 'typeorm';
 import { Order } from './Order';
 import { Product } from './Product';
 
@@ -9,9 +16,15 @@ export class OrderLine {
 
   @Column({ type: 'date', select: false })
   created_at: Date;
-  
-  @Column({type: 'int'})
+
+  @Column({ type: 'int' })
   quantity: number;
+
+  @Column()
+  size: string;
+
+  @Column({ type: 'float' })
+  price: number;
 
   @ManyToOne(() => Product, (product) => product.orderLines)
   @JoinColumn({ name: 'product_id' })
@@ -20,4 +33,9 @@ export class OrderLine {
   @ManyToOne(() => Order, (order) => order.orderLines)
   @JoinColumn({ name: 'order_id' })
   order: Order;
+
+  @BeforeInsert()
+  createOrder() {
+    this.created_at = new Date();
+  }
 }

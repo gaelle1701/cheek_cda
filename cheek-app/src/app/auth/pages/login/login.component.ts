@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { LoginResponse } from '../../../core/interfaces/user';
 import { Router } from '@angular/router';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ERole } from 'src/app/core/enums/role';
-import { AuthService } from '../../services/auth.service';
+import { ERole } from '../../../core/enums/role';
 
 @Component({
   selector: 'app-login',
@@ -17,69 +10,19 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   title = 'Connexion';
+  showRegisterLink = true;
 
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+  constructor(private router: Router) {}
 
-  submitted: boolean = false;
-  isLoggedIn: boolean = false;
-  isInvalidPwd: boolean = false;
-  msgSuccess: string = '';
-  msgError: string = '';
-  showPassword: boolean = false;
+  ngOnInit() {}
 
-  //icons
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
-
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private formBuilder: FormBuilder,
-  ) {}
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
-  }
-
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  onSubmit() {
-    const formValues = this.loginForm.value;
-
-    this.submitted = true;
-    this.isInvalidPwd = false;
-
-    this.authService.login(formValues).subscribe({
-      next: (res) => {
-        if (res.accessToken) {
-          localStorage.setItem('token', res.accessToken);
-
-          this.isLoggedIn = true;
-          this.msgSuccess = res.message as string;
-
-          setTimeout(() => {
-            if (res.role === ERole.ADMIN) {
-              this.router.navigate(['admin']);
-            } else {
-              this.router.navigate(['/']);
-            }
-          }, 3000);
-        }
-      },
-      error: (res) => {
-        this.msgError = res.error.message;
-        console.log(this.msgError);
-
-        this.isInvalidPwd = true;
-      },
-    });
+  onConnected(user: LoginResponse) {
+    setTimeout(() => {
+      if (user.role === ERole.ADMIN) {
+        this.router.navigate(['admin']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    }, 3000);
   }
 }

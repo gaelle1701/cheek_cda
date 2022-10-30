@@ -19,11 +19,11 @@ export class InvoiceService implements ICrud<IInvoice> {
     return this.http.delete<IInvoice>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<Invoices> {
+  getAll(): Observable<Invoices> {
     return this.http.get<Invoices>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IInvoice> {
+  getOne(id: number): Observable<IInvoice> {
     return this.http.get<IInvoice>(`${this.baseUrl}/${id}`);
   }
 

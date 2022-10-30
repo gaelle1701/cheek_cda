@@ -8,7 +8,7 @@ import { IOrderLine, OrderLines } from '../../core/interfaces/order-line';
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService implements ICrud<IOrderLine> {
+export class OrderLineService implements ICrud<IOrderLine> {
   baseUrl = '/api/orders';
 
   constructor(private http: HttpClient) {}
@@ -21,11 +21,11 @@ export class OrderService implements ICrud<IOrderLine> {
     return this.http.delete<IOrderLine>(`${this.baseUrl}/${id}`);
   }
 
-  findAll(): Observable<OrderLines> {
+  getAll(): Observable<OrderLines> {
     return this.http.get<OrderLines>(this.baseUrl);
   }
 
-  findOne(id: number): Observable<IOrderLine> {
+  getOne(id: number): Observable<IOrderLine> {
     return this.http.get<IOrderLine>(`${this.baseUrl}/${id}`);
   }
 

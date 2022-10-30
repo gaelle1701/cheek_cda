@@ -4,7 +4,6 @@ import {
   CanActivate,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -14,8 +13,6 @@ import { ERole } from '../enums/role';
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
-  isAdmin = false;
-
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(

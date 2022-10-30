@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit {
   faLogout = faArrowRightFromBracket;
   faCart = faCartShopping;
   faBars = faBars;
-
   isOpen: boolean = false;
 
   constructor(private router: Router) {}
@@ -64,9 +63,9 @@ export class HeaderComponent implements OnInit {
     this.isOpen = false;
   };
 
-  logout() {
+  async logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    this.router.navigate(['/']);
+    await this.router.navigate(['/']);
   }
 }

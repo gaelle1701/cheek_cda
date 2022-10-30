@@ -9,7 +9,7 @@ class ProductController {
         return res.status(404).send({
           message: 'Content can not be empty!',
         });
-      }    
+      }
       const savedProduct = await productRepository.createProduct(req.body);
       return res.status(201).send({
         savedProduct,
@@ -48,7 +48,7 @@ class ProductController {
               'pictures'
             ],
           }
-           
+
           )
         }
       
@@ -85,7 +85,7 @@ class ProductController {
           message: "This product doesn't exist !",
         });
       }
-    
+
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
@@ -95,7 +95,7 @@ class ProductController {
           await productDetailRepository.update(detail.id, detail)
         }))
       }
-      
+
       if (updateProduct.id) {
         return res.status(200).send({
           ...updateProduct,

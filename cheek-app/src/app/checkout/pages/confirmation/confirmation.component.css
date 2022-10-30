@@ -1,0 +1,6 @@
+h3 {
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  text-transform: uppercase;
+}
