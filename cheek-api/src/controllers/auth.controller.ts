@@ -23,20 +23,22 @@ class AuthController {
         firstName: req.body.firstName,
         email: req.body.email,
         password: req.body.password,
-        token 
+        token: process.env.NODE_ENV !== 'test' ? token : null,
       });
-
-      sendMail(req.body.email, token);
-
-      return res.status(200).send({
+      
+      if(process.env.NODE_ENV !== 'test'){
+        sendMail(req.body.email, token);
+      }
+     
+      return res.status(201).send({
         message:
           'Votre inscription a bien été enregistée! Vérrifiez vos mails pour confirmez votre inscription!',
       });
     } catch (error) {
       logger.error("signup user", error)
       return res.status(401).send({
-        // message: 'Cet email existe déjà!',
-        message: error.message
+        message: 'Cet email existe déjà!',
+        //message: error.message
       });
     }
   }
@@ -73,7 +75,7 @@ class AuthController {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        accessToken,
+        accessToken: process.env.NODE_ENV !== 'test' ? accessToken : null,
         message: 'Vous êtes connecté(e)!',
       });
     } catch (error) {

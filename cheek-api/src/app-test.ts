@@ -4,13 +4,12 @@ import * as express from 'express';
 import * as cloudinary  from "cloudinary";
 
 dotenv.config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
+  path: '.env.test'
 });
 
-import { AppDataSource } from './config/data-source';
 import { addRoutes } from './routes';
 import { addMiddlewares } from './middleware';
-import logger from './config/winston';
+
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -19,14 +18,6 @@ cloudinary.v2.config({
   secure: process.env.NODE_ENV === 'production',
 });
 
-AppDataSource.initialize().then(() => {
-  logger.info('Data Source has been initialized!');
-  app.listen(port as number, () => {
-    logger.info(`App listen on port, http://localhost:${port}`);
-  });
-}).catch((err) => {    
-  logger.error('Data Source has not been initialized!', err);
-})
 
 const app = express();
 const port = process.env.PORT || 3001;
