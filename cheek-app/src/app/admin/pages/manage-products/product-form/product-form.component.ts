@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { CategoriesService } from 'src/app/products/services/categories/categories.service';
-import { IPicture } from 'src/app/core/interfaces/picture';
-import { IProductDetail } from 'src/app/core/interfaces/product-detail';
 import { PictureService } from 'src/app/products/services/pictures/picture.service';
 import { ProductsService } from 'src/app/products/services/products/products.service';
 import { SizesService } from 'src/app/products/services/sizes/sizes.service';
@@ -46,8 +43,7 @@ export class ProductFormComponent implements OnInit {
     private sizesService: SizesService,
     private pictureService: PictureService,
     private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient
+    private route: ActivatedRoute
   ) {}
 
   initDetailsForm() {
