@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthService } from '../../services/auth.service';
@@ -40,7 +39,6 @@ export class LoginFormComponent implements OnInit {
   faEyeSlash = faEyeSlash;
 
   constructor(
-    private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder,
   ) {}
