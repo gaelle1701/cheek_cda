@@ -101,7 +101,7 @@ describe('ProductFormComponent', () => {
     expect(descriptionInput.errors).toBeNull();
   });
 
-  it('should show size M as option in category select', () => {
+  it('should show name category T-shirt as option in category select', () => {
     fixture.whenStable().then(() => {
       spyOn(component, 'onChangeCategory');
       const categorySelect = fixture.debugElement.nativeElement.querySelector('select');
