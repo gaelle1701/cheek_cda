@@ -23,19 +23,19 @@
             </div>
           </section>
           <section class="form-input col-4">
-            <label for="zip_code-input">Numéro *</label>
+            <label for="phone-input">Numéro *</label>
             <input
               type="text"
               formControlName="phone"
-              minlength="5"
-              maxlength="5"
+              minlength="10"
+              maxlength="10"
             />
             <div *ngIf="f['phone']?.invalid && f['phone']?.touched">
               <div *ngIf="f['phone'].errors?.['phone']">
                 <p class="error">Le code postal est requise!</p>
               </div>
               <div
-                *ngIf="f['phone'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength'] && f['zip_code'].errors?.['pattern']"
+                *ngIf="f['phone'].errors?.['minlength'] && f['phone'].errors?.['maxlength']"
               >
                 <p class="error">Le code postal doit être de type: 75001</p>
               </div>
@@ -104,7 +104,7 @@
                 <p class="error">Le code postal est requise!</p>
               </div>
               <div
-                *ngIf="f['zip_code'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength'] && f['zip_code'].errors?.['pattern']"
+                *ngIf="f['zip_code'].errors?.['minlength'] && f['zip_code'].errors?.['maxlength']"
               >
                 <p class="error">Le code postal doit être de type: 75001</p>
               </div>

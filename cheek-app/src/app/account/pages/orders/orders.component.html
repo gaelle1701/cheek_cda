@@ -1,4 +1,8 @@
 <main class="container">
   <h3 class="is-center">{{ title }}</h3>
   <app-table [headers]='headers' [datas]='orders'></app-table>
+  <a routerLink='/compte'>
+    <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+    Retour
+  </a>
 </main>

@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -14,6 +15,9 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  faArrowLeft = faArrowLeft;
+
+  
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),

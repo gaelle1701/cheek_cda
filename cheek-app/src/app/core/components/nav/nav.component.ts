@@ -64,8 +64,8 @@ export class NavComponent implements OnInit {
         { title: 'Autres', link: 'boutique/autres' },
       ],
     },
-    { title: 'A propos', link: 'a-propos' },
-    { title: 'Mon compte', link: 'compte' },
+    { title: 'A propos', link: '/a-propos' },
+    { title: 'Mon compte', link: '/compte' },
   ];
 
   isOpenSubNav: boolean = false;

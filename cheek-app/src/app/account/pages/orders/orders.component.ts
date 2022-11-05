@@ -8,6 +8,7 @@ import {
 } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { AuthService } from '../../../auth/services/auth.service';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 registerLocaleData(localeFr);
 
 @Component({
@@ -17,6 +18,8 @@ registerLocaleData(localeFr);
 })
 export class OrdersComponent implements OnInit {
   title = 'Mes commandes';
+  
+  faArrowLeft = faArrowLeft;
 
   headers?: ITableHeader[] = [
     { label: 'Date', key: 'date' },

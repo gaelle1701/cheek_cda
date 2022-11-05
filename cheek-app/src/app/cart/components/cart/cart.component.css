@@ -68,11 +68,10 @@ img {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between;
 }
 
 .cart-content {
-  padding: 5rem 2rem;
+  padding: 2rem;
 }
 
 .cart-footer {
@@ -82,12 +81,17 @@ img {
 }
 
 .buy-btn {
-  padding: 2.5rem 1.8rem;
-  border-radius: 0;
+  padding: 1.8rem;
+  border-radius: 8;
   color: white;
   font-weight: bold;
 }
 
+.cadre-table-scroll {
+  height: 20em;
+  overflow-y: scroll;
+  margin-bottom: 4rem;
+}
 /* ___________________DESKTOP_________________ */
 
 @media screen and (min-width: 900px) {
