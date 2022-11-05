@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CategoriesService } from 'src/app/products/services/categories/categories.service';
-import { IPicture } from 'src/app/core/interfaces/picture';
-import { IProductDetail } from 'src/app/core/interfaces/product-detail';
 import { PictureService } from 'src/app/products/services/pictures/picture.service';
 import { ProductsService } from 'src/app/products/services/products/products.service';
 import { SizesService } from 'src/app/products/services/sizes/sizes.service';
@@ -20,6 +18,8 @@ export class ProductFormComponent implements OnInit {
 
   /**** ICONS ****/
   faAdd = faCirclePlus;
+  faArrowLeft = faArrowLeft;
+  faTrash = faTrash
   
   /**** FORMS ****/
   productForm!: FormGroup
@@ -155,16 +155,15 @@ export class ProductFormComponent implements OnInit {
         stock: [detail.stock],
         product: [detail.product ?? undefined]
       });
-      this.detailsF.push(addDetail)
+      this.detailsF.push(addDetail)      
     } else {
-      this.detailsF.push(this.initDetailsForm())        
+      this.detailsF.push(this.initDetailsForm());           
     }
   }
 
-  // removeDetails(i: number) {
-  //   const control = this.details.controls['details']
-  //   control.removeAt(i);
-  // }
+  removeDetails(i: any) {
+    this.detailsF.removeAt(i);
+  }
 
   /************* GET METHODS *************/
   getCategories(){
@@ -195,6 +194,8 @@ export class ProductFormComponent implements OnInit {
       })
       this.productId = product.id
       this.product = product
+      console.log("get product", this.product);
+      
     })
   }
 
@@ -203,7 +204,7 @@ export class ProductFormComponent implements OnInit {
     const formValues = this.productForm.value  
     const { pictures, ...productPayload } = formValues
 
-    if(this.productId && this.productForm.valid){      
+    if(this.productId && this.productForm.valid){            
       this.productsService.update(this.productId, productPayload).subscribe({
         next: (res) => {
           this.isUpdated = true;
@@ -216,19 +217,19 @@ export class ProductFormComponent implements OnInit {
     } else if(this.productForm.valid) {
       this.productsService.create(productPayload).subscribe({
         next: (product) => {          
-          if (product.id && pictures.length >= 0) {
+          // @ts-ignore
+          if (product.savedProduct.id && pictures.length >= 0) {
             pictures.map((picture: any) => {
               const formData: any = new FormData();
               formData.append("picture", picture.picture);
-              formData.append("product_id", product.id);
+              // @ts-ignore
+              formData.append("product_id", product.savedProduct.id);
               formData.append("label", picture.label);
               
               this.pictureService.create(formData).subscribe();             
             })
             this.isCreated = true;
             this.msgSuccessCreate = product.message as string; 
-            console.log(this.msgSuccessCreate);
-            
           }
         },
         error: (res) => {
@@ -236,6 +237,7 @@ export class ProductFormComponent implements OnInit {
         }
       })
     }
+    
     setTimeout( ()=> {
       this.router.navigate(['admin/gestion-produits']);
     }, 3000 );

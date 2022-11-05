@@ -13,7 +13,7 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="scroll">
         <tr *ngFor="let row of datas">
             <td *ngFor="let header of headers">
                 <ng-container *ngIf="!header?.subHeaders">

@@ -64,6 +64,7 @@ class ProductDetailController {
       const productDetail = await productDetailRepository.findById(
         +req.params.id,
       );
+
       if (!productDetail) {
         return res.status(404).send({
           message: "This product detail doesn't exist !",
@@ -73,12 +74,14 @@ class ProductDetailController {
       const updateProductDetail = await productDetailRepository.save(
         Object.assign(productDetail, req.body),
       );
+      const createPrice = productDetail.createPrice()
       if (updateProductDetail.affected === 1) {
         return res.status(200).send({
           message:
             'The product detail with id= ' +
             productDetail.id +
             ' has been updated !',
+            createPrice,
             ...updateProductDetail
         });
       }

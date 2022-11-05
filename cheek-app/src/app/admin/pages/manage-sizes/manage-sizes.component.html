@@ -1,5 +1,5 @@
 <main class="container">
-    
+    <h3 class="is-center">{{ title }}</h3>
     <div class="row is-center">
         <app-table class="col-8"
             [headers]="headers" 
@@ -9,11 +9,17 @@
         </app-table>
     </div>
 
+    <a routerLink='/admin'>
+        <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+        Retour
+    </a>
+
     <div class="is-center container-btn">
         <button (click)="openModal()" data-custom-open="modal-1">
             <fa-icon [icon]="faAdd"></fa-icon>
             Taille
         </button>
+
         <app-modal [title]="title" [id]="999">
             <app-size-form (sizeAction)="onCreate($event)"></app-size-form>
         </app-modal>
@@ -24,4 +30,5 @@
             <app-size-form (sizeAction)="onCreate($event)" [sizeId]="size.id || 0"></app-size-form>
         </app-modal>
     </ng-container>
+
 </main>

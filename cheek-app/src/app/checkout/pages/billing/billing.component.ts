@@ -42,19 +42,16 @@ export class BillingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getProfile().subscribe((user) => {
+    this.authService.getProfile().subscribe((user) => { 
       this.user = user;
-
-      if (user.address) {
-        this.shippingAddressForm.patchValue({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phone: user.phone,
-          address: user.address,
-        });
-      }
+      this.shippingAddressForm.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        address: user?.address ? user.address : null,
+      });
     });
-
+    
     this.cartService.getCart().subscribe(({ cart }) => {
       this.cart = cart;
     });
@@ -86,19 +83,19 @@ export class BillingComponent implements OnInit {
       });
   }
 
-  onCreateShippingAddress() {
-    if (!this.user.address) {
-      const formValues = this.shippingAddressForm.value;
-      this.authService
-        .editProfile(this.user.id, formValues)
-        .subscribe((profile) => {
-          this.user = profile;
-          if (profile.address) {
-            this.createOrder();
-          }
-        });
-    } else {
-      this.createOrder();
-    }
+  onCreateShippingAddress() {    
+    const formValues = this.shippingAddressForm.value;
+    this.authService
+      .editProfile(this.user.id, formValues)
+      .subscribe((user) => {
+        if(user.message === "Votre profile a bien été mis à jour!") {
+            this.authService.getProfile().subscribe(user => {
+              this.user = user;          
+              if (user.address) {
+                this.createOrder();
+              }
+            })
+        }
+      });
   }
 }

@@ -86,13 +86,22 @@ class ProductController {
         });
       }
 
+
       const updateProduct = await productRepository.save(
         Object.assign(product, req.body),
       );
       
-      if(req.body.details > 0) {
+      
+      if(req.body.details.length > 0) {
         await Promise.all(req.body.details.map(async(detail) => {
-          await productDetailRepository.update(detail.id, detail)
+
+          
+          await productDetailRepository.update(detail.id, {
+            ...detail,
+            price_ttc: detail.price_ht + detail.price_ht * 0.2,
+            updated_at: new Date()
+          })
+          
         }))
       }
 

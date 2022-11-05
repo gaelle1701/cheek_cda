@@ -21,3 +21,11 @@ button {
 .container-btn {
   margin: 4rem 0;
 }
+
+h3 {
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
