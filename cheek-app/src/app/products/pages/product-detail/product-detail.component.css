@@ -4,7 +4,7 @@ p {
   color: var(--color-orange);
 }
 
-button {
+button, .button {
   margin: 20px 0 40px 0;
   color: var(--color-orange);
   background: var(--bg-color);

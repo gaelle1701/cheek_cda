@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPenToSquare, faTrashCan, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faTrashCan, faCirclePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { ProductsService } from 'src/app/products/services/products/products.service';
 import { SizesService } from 'src/app/products/services/sizes/sizes.service';
 import { ITableHeader } from '../../components/table/table.component';
@@ -11,6 +11,8 @@ import { ITableHeader } from '../../components/table/table.component';
   styleUrls: ['./manage-products.component.css'],
 })
 export class ManageProductsComponent implements OnInit {
+
+  title = "Liste des produits"
   products: any = [];
   sizes: any = [];
   size!: number;
@@ -22,6 +24,7 @@ export class ManageProductsComponent implements OnInit {
   faEdit = faPenToSquare;
   faDelete = faTrashCan;
   faAdd = faCirclePlus;
+  faArrowLeft = faArrowLeft;
 
   /**** TABLE ****/
   headers?: ITableHeader[] = [

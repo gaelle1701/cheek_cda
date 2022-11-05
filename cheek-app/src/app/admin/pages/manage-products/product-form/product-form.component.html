@@ -53,10 +53,7 @@
             </section>
 
             <section class="col-4">
-                <!-- <div *ngIf="product">
-                    <img src={{product.pictures[0].url}}/>
-                </div> -->
-                
+
                 <input formArrayName="pictures" type="file" multiple="" class="file-input" (change)="onFileSelected($event)" #fileUpload>
             
                 <div class="file-upload">{{fileName || "Aucun fichier selectionné"}}
@@ -88,25 +85,33 @@
                                 <label for="price-input">Prix_ht*</label>
                                 <input type="number" id="price-input" formControlName="price_ht">
                             </div>
+                            
+                            <div class="col-1">
+                                <button (click)="removeDetails(i)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                            </div> 
                         </div>
                     </div>
-                        
+              
                 </section>
 
               
             </section>
-            <!-- <div class="is-center" *ngIf="i !== 0">
-                <button (click)="removeDetails(i)">Ajouter un détail</button>
-            </div>  -->
+   
             <div class="is-center">
                 <button type="button" (click)="addDetails()">
                     <fa-icon [icon]="faAdd"></fa-icon>
                     Détail
                 </button>
-            </div>    
-            <section class="is-center">
+            </div>
+            
+            <div class="is-center">
                 <button type="submit" [disabled]="productForm.invalid">Valider</button>
-            </section>
+            </div>
+
+            <a routerLink='/admin'>
+                <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+                Retour
+            </a>  
         </form>
     </section>    
 </main>

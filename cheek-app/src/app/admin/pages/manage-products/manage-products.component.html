@@ -1,41 +1,32 @@
 <main class="container">
-  <div class="is-center container-btn">
-    <button>
+  <h3 class="is-center">{{ title }}</h3>
+  <div class="is-center container-links">
       <a routerLink="/admin/gestion-tailles">
-        Tailles
+        Voir les tailles
       </a>
-    </button>
-    <button>
-      <a routerLink="/admin/gestion-produits">
-        Catégories
-      </a>
-    </button>
-  </div>
 
-  <!-- <section class="row container-filter">
-    <select class="col-3 custom-select">
-      <option value="">Filter par catégorie</option>
-      <option *ngFor="let size of sizes" [value]="size.id">{{size.label}}</option> 
-    </select>
-    <select (change)="onChangeSize($event)" class="col-3 custom-select">
-      <option value="">Filter par taille</option>
-      <option *ngFor="let size of sizes" [value]="size.id">
-        {{ size.label }}
-      </option>
-    </select>
-  </section> -->
+      <a routerLink="/admin/gestion-produits">
+         Voir les catégories
+      </a>
+  </div>
 
   <div *ngIf="isDeleted">
         <p class="alertSuccess is-center">{{ msgSuccess }}</p>
   </div>
   
-  <app-table
-    [headers]="headers"
-    [datas]="products" 
-    (updateAction)="editProduct($event)"
-    (deleteAction)="deleteProduct($event)">
-  </app-table>
+  <div class="cadre-table-scroll">
+      <app-table
+        [headers]="headers"
+        [datas]="products" 
+        (updateAction)="editProduct($event)"
+        (deleteAction)="deleteProduct($event)">
+    </app-table>
+  </div>
 
+  <a routerLink='/admin'>
+    <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+    Retour
+  </a>
   <div class="is-center container-btn">
     <button>
       <a routerLink="/admin/gestion-produits/ajouter">

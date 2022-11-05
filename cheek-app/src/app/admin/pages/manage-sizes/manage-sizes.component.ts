@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCirclePlus, faEye, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faEye, faPenToSquare, faTrashCan, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import MicroModal from 'micromodal';
 
 import { ISize, ISizes } from 'src/app/core/interfaces/size';
@@ -12,7 +12,7 @@ import { ITableHeader } from '../../components/table/table.component';
   styleUrls: ['./manage-sizes.component.css']
 })
 export class ManageSizesComponent implements OnInit {
-  title = "";
+  title = "Tailles";
   sizes: ISizes = [];
 
   sizeId!: number;
@@ -25,6 +25,7 @@ export class ManageSizesComponent implements OnInit {
   faDelete = faTrashCan;
   faAdd = faCirclePlus;
   faEye = faEye;
+  faArrowLeft = faArrowLeft;
 
   //table
   headers?: ITableHeader[] = [
@@ -41,9 +42,6 @@ export class ManageSizesComponent implements OnInit {
       MicroModal.init({openTrigger: 'data-custom-open'})
     }
 
-    if(!this.sizeId) {
-      this.title = "Ajouter une taille"
-    }
   }
 
   getSizes(){

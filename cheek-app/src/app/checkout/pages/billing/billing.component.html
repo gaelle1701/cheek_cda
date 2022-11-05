@@ -1,7 +1,7 @@
 <main class="container">
   <div class='row'>
     <div class='col-9 p-2'>
-      <h3>Adresse de livraison</h3>
+      <h4>Adresse de livraison</h4>
       <form [formGroup]="shippingAddressForm" (ngSubmit)="onCreateShippingAddress()">
         <section class='row'>
           <section class="form-input col-4">
@@ -112,7 +112,7 @@
           </section>
         </section>
         <div class='is-center mt-2 p-2'>
-          <a routerLink='/panier' class='back-to-cart'>
+          <a routerLink='/panier' class='button'>
             <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
             Retour au panier
           </a>

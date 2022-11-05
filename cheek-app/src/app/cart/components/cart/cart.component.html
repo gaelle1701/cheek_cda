@@ -20,11 +20,11 @@
           <tr>
             <th colspan='4'>
               <p>Frais de livraison</p>
-              <P>Sous-total</P>
-              <p>Total</p>
+              <P>Sous-total HT</P>
+              <p>Total TTC</p>
             </th>
             <th class='text-right'>
-              <p>{{cart.shippingFees ? "Offert" : "5"}}</p>
+              <p>{{cart.shippingFees ? "Offert" : 5 | currency}}</p>
               <p>{{cart.totalHt | currency}}</p>
               <p>{{cart.totalTtc | currency}}</p>
             </th>

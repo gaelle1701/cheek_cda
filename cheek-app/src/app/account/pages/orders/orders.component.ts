@@ -16,7 +16,7 @@ registerLocaleData(localeFr);
   styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent implements OnInit {
-  title = 'Commandes';
+  title = 'Mes commandes';
 
   headers?: ITableHeader[] = [
     { label: 'Date', key: 'date' },

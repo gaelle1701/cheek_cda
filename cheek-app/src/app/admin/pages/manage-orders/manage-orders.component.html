@@ -1,1 +1,15 @@
-<p>manage-orders works!</p>
+<main class="container">
+    <h3 class="is-center">{{ title }}</h3>
+    <div class="row is-center">
+        <app-table class="col-8"
+            [headers]="headers" 
+            [datas]="orders" 
+            (updateAction)="editOrder()" 
+            (deleteAction)="deleteOrder()">
+        </app-table>
+    </div>
+    <a routerLink='/admin'>
+        <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+        Retour
+    </a>
+</main>

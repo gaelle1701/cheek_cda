@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       }),
     });
 
-    this.authService.getProfile().subscribe((user) => {
+    this.authService.getProfile().subscribe((user) => {      
       this.userId = user.id;
 
       this.profileForm.patchValue({
@@ -94,10 +94,10 @@ export class ProfileComponent implements OnInit {
         email: user.email,
         phone: user.phone,
         address: {
-          number: user.address.number,
-          street: user.address.street,
-          city: user.address.city,
-          zip_code: user.address.zip_code,
+          number: user?.address?.number,
+          street: user?.address?.street,
+          city: user?.address?.city,
+          zip_code: user?.address?.zip_code,
         },
       });
     });

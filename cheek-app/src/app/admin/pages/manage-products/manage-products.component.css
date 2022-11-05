@@ -19,14 +19,29 @@ a {
   border: 2px solid var(--color-orange);
 }
 
+.cadre-table-scroll {
+  height: 20em;
+  overflow-y: scroll;
+  margin-bottom: 4rem;
+}
+
 label,
 p {
   font-family: var(--font-family-courier);
 }
 
-.container-btn {
+.container-links {
   margin: 4rem 0;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+.container-btn {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
 
 button {
   background-color: var(--bg-color);
@@ -47,4 +62,10 @@ button {
   color: var(--color-error);
   font-size: var(--font-size-small);
 }
-
+h3 {
+  font-family: var(--font-family-courier);
+  font-weight: 800;
+  color: var(--color-orange);
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}

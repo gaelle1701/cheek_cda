@@ -8,7 +8,7 @@ import { ICrud } from '../../core/interfaces/crud';
   providedIn: 'root',
 })
 export class UserService implements ICrud<IUser> {
-  baseUrl = '/api/user';
+  baseUrl = '/api/users';
   constructor(private http: HttpClient) {}
 
   create(data: IUser): Observable<IUser> {
